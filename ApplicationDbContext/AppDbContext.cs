@@ -36,6 +36,9 @@ namespace MyGoldenFood.ApplicationDbContext
             // Tablo isimlendirme kuralları
             modelBuilder.Entity<Product>().ToTable("Products");
             modelBuilder.Entity<User>().ToTable("Users");
+            modelBuilder.Entity<RecipeCategory>().ToTable("RecipeCategories"); // Tarif kategorileri tablosu
+            modelBuilder.Entity<Recipe>().ToTable("Recipes"); // Tarif tablosu
+            modelBuilder.Entity<Benefit>().ToTable("Benefits"); // Fayda tablosu
 
             base.OnModelCreating(modelBuilder);
         }
@@ -43,5 +46,8 @@ namespace MyGoldenFood.ApplicationDbContext
         // Veritabanı Tabloları
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<RecipeCategory> RecipeCategories { get; set; } // Tarif kategorileri
+        public DbSet<Recipe> Recipes { get; set; } // Tarifler
+        public DbSet<Benefit> Benefits { get; set; } // Faydalar
     }
 }
