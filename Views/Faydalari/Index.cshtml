@@ -1,0 +1,20 @@
+﻿@model IEnumerable<MyGoldenFood.Models.Benefit>
+
+@{
+    ViewData["Title"] = "Ürünlerin Faydaları";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center text-white mb-4">Ürünlerin Faydaları</h1>
+    <div class="row">
+        @foreach (var benefit in Model)
+        {
+            <div class="col-md-4 text-center mb-4">
+                <img src="@benefit.ImagePath" alt="@benefit.Name" class="img-fluid" />
+                <h3 class="mt-3 text-white">@benefit.Name</h3>
+                <p class="text-white">@benefit.Content</p>
+            </div>
+        }
+    </div>
+</div>

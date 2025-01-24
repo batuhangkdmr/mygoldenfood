@@ -2,9 +2,7 @@ using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using MyGoldenFood.ApplicationDbContext;
-using MyGoldenFood.Models;
 using MyGoldenFood.Services;
 using System.Threading.RateLimiting;
 
@@ -13,9 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container
 builder.Services.AddControllersWithViews();
 
-// Database Connection (Using Environment Variables)
+// Database Connection (Using appsettings.json)
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Authentication
 builder.Services.AddAuthentication("AdminCookie")
@@ -25,13 +23,14 @@ builder.Services.AddAuthentication("AdminCookie")
         options.AccessDeniedPath = "/Admin/Index";
     });
 
-// Cloudinary Configuration (Using Environment Variables)
+// Cloudinary Configuration (Using appsettings.json)
 builder.Services.AddSingleton(sp =>
 {
+    var cloudinaryConfig = builder.Configuration.GetSection("CloudinarySettings");
     var account = new Account(
-        Environment.GetEnvironmentVariable("CLOUDINARY_CLOUD_NAME"),
-        Environment.GetEnvironmentVariable("CLOUDINARY_API_KEY"),
-        Environment.GetEnvironmentVariable("CLOUDINARY_API_SECRET")
+        cloudinaryConfig["CloudName"],
+        cloudinaryConfig["ApiKey"],
+        cloudinaryConfig["ApiSecret"]
     );
     return new Cloudinary(account);
 });
