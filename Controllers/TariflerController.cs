@@ -7,7 +7,7 @@ using MyGoldenFood.Services;
 
 namespace MyGoldenFood.Controllers
 {
-    [Authorize(AuthenticationSchemes = "AdminCookie", Roles = "Admin")]
+    
     public class TariflerController : Controller
     {
         private readonly AppDbContext _context;
@@ -19,11 +19,14 @@ namespace MyGoldenFood.Controllers
             _cloudinaryService = cloudinaryService;
         }
         [HttpGet]
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            var categories = _context.RecipeCategories.ToListAsync();
-            return PartialView("_CreateRecipePartial");
+            // Tarif kategorilerini listeleme
+            var categories = await _context.RecipeCategories.ToListAsync();
+            return View(categories); // categories değişkenini view'e gönderiyoruz
         }
+
 
         // Tarif Kategorileri Listeleme
         [HttpGet]
@@ -136,5 +139,25 @@ namespace MyGoldenFood.Controllers
 
             return Json(new { success = true, message = "Tarif başarıyla silindi!" });
         }
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var recipes = await _context.Recipes
+                .Where(r => r.RecipeCategoryId == id) // Seçilen kategoriye ait tarifleri getir
+                .ToListAsync();
+
+            if (!recipes.Any())
+            {
+                return NotFound(); // Eğer tarif bulunamazsa 404 döndür
+            }
+
+            ViewBag.CategoryName = _context.RecipeCategories
+                .Where(c => c.Id == id)
+                .Select(c => c.Name)
+                .FirstOrDefault();
+
+            return View(recipes); // Tarifleri view'e gönder
+        }
+
     }
 }
