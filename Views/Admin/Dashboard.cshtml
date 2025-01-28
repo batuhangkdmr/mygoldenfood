@@ -73,6 +73,9 @@
                 $(containerId).html(data);
             });
         }
+            $(document).ready(function () {
+            loadList('/Tarifler/RecipeList', '#recipeList');
+        }); 
 
         function loadCreateForm(url) {
             $.get(url, function (data) {
@@ -87,6 +90,16 @@
                 $("#modal").modal('show');
             });
         }
+         function loadEditRecipeForm(id) {
+            const url = `/Tarifler/Edit?id=${id}`;
+            $.get(url, function (data) {
+                $("#modal .modal-content").html(data);
+                $("#modal").modal('show');
+            }).fail(function () {
+                Swal.fire('Hata!', 'Tarif düzenleme yüklenemedi!', 'error');
+            });
+        }
+
 
         function deleteItem(url, id, reloadUrl, containerId) {
             Swal.fire({

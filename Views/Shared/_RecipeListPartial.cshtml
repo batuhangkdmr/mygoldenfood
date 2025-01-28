@@ -5,8 +5,8 @@
         <tr>
             <th>Tarif Adı</th>
             <th>İçerik</th>
-            <th>Kategori</th>
             <th>Resim</th>
+            <th>Kategori</th>
             <th>İşlemler</th>
         </tr>
     </thead>
@@ -16,7 +16,6 @@
             <tr>
                 <td>@recipe.Name</td>
                 <td>@recipe.Content</td>
-                <td>@recipe.CategoryName</td>
                 <td>
                     @if (!string.IsNullOrEmpty(recipe.ImagePath))
                     {
@@ -27,9 +26,10 @@
                         <span>Resim Yok</span>
                     }
                 </td>
+                <td>@recipe.RecipeCategory?.Name</td> <!-- RecipeCategory.Name ekrana bastırılıyor -->
                 <td>
-                    <button class="btn btn-warning" onclick="loadEditRecipeForm(@recipe.Id)">Düzenle</button>
-                    <button class="btn btn-danger" onclick="deleteRecipe(@recipe.Id)">Sil</button>
+                    <button class="btn btn-warning" onclick="loadEditForm('@recipe.Id')">Düzenle</button>
+                    <button class="btn btn-danger" onclick="deleteRecipe('@recipe.Id')">Sil</button>
                 </td>
             </tr>
         }

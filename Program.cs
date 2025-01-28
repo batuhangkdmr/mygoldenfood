@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using MyGoldenFood.ApplicationDbContext;
 using MyGoldenFood.Services;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +40,17 @@ builder.Services.AddSingleton(sp =>
 // Register CloudinaryService
 builder.Services.AddScoped<CloudinaryService>();
 
+builder.Services.AddScoped<MailService>();
+builder.Services.AddScoped<SmtpClient>(sp =>
+{
+    var client = new SmtpClient("mail.mygoldenfood.com", 465)
+    {
+        Credentials = new NetworkCredential("info@mygoldenfood.com", "MYG1234myg"),
+        EnableSsl = true
+    };
+    return client;
+});
+
 // Memory Cache
 builder.Services.AddMemoryCache();
 
@@ -49,7 +62,7 @@ builder.Services.AddRateLimiter(options =>
             context.User.Identity?.Name ?? "guest",
             _ => new FixedWindowRateLimiterOptions
             {
-                PermitLimit = 10, // 10 requests per minute
+                PermitLimit = 100, // 10 requests per minute
                 Window = TimeSpan.FromMinutes(1),
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
                 QueueLimit = 2

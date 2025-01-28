@@ -5,12 +5,12 @@
 }
 
 <div class="container my-5">
-    <h2 class="text-center mb-4 text-white">Ürünlerimiz</h2>
+    <h2 class="text-center mb-5 text-white">Ürünlerimiz</h2>
     <div class="product-grid">
         @foreach (var product in Model)
         {
-            <div class="product-card" onclick="showModal('@product.Name', '@product.Description')">
-                <div class="image-container">
+            <div class="product-card">
+                <div class="image-container" onclick="showModal('@product.Name', '@product.Description')">
                     <img src="@product.ImagePath" alt="@product.Name" class="product-image">
                 </div>
                 <div class="product-name-container">
@@ -29,83 +29,72 @@
                 <h5 class="modal-title" id="detailsModalLabel" style="color: #fff;"></h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div style="border-bottom: 1px solid white; margin: 10px 0;"></div>
             <div class="modal-body">
                 <h6 style="padding-bottom: 5px;">Ürün Detayı:</h6>
-                <p id="detailsModalDescription" style="margin-top: 10px; line-height: 1.6;"></p>
+                <p id="detailsModalDescription"></p>
             </div>
         </div>
     </div>
 </div>
 
 <style>
-    /* Grid Layout */
+    /* Responsive Grid Düzeni */
     .product-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Daha esnek düzen */
         gap: 20px;
     }
 
-    /* Card Style */
+    /* Kart Tasarımı */
     .product-card {
-        border: none; /* Beyaz çevreyi kaldır */
-        border-radius: 10px;
         overflow: hidden;
-        cursor: pointer;
-        transition: transform 0.3s ease;
         text-align: center;
-        background-color: transparent; /* Arka planı şeffaf yap */
+        border-radius: 15px;
+        background-color: rgba(0, 0, 0, 0); /* Tamamen şeffaf arka plan */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
         .product-card:hover {
-            transform: scale(1.05);
+            transform: translateY(-10px); /* Hafif yükselme efekti */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Daha belirgin gölge */
         }
 
-    /* Resim Düzeni */
     .image-container {
         width: 100%;
-        height: 300px;
+        height: 250px; /* Sabit yükseklik */
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #000;
+        background-color: #000; /* Siyah arka plan */
+        overflow: hidden; /* Taşan kısımları gizler */
+        border-radius: 15px; /* Köşe yuvarlama */
     }
 
     .product-image {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain; /* Resim tam görünür */
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Resim çerçeveye sığacak şekilde kesilir */  /* Contain yada cover */
+        object-position: center; /* Ortalar */
+        transition: transform 0.3s ease; /* Hover efektine uyum sağlar */
     }
+
+    .image-container:hover .product-image {
+        transform: scale(1.1); /* Hover sırasında hafif büyüme efekti */
+    }   
 
     /* Ürün Adı */
     .product-name-container {
-        background-color: #000; /* Siyah arka plan */
-        padding: 10px 0;
+        padding: 15px;
+        background-color: rgba(0, 0, 0, 0); /* Şeffaf arka plan */
+        border-radius: 0 0 15px 15px;
+        color: #fff; /* Yazı rengi beyaz */
     }
 
     .product-name {
         margin: 0;
-        font-size: 1.25rem;
-        font-weight: bold;
-        color: #fff; /* Yazı rengi beyaz */
-    }
-
-    /* Modal Style */
-    .modal-content {
-        background: rgba(0, 0, 0, 0.8) !important;
-        color: white !important;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    }
-
-    .modal-body h6 {
-        border-bottom: 1px solid white;
-        padding-bottom: 5px;
-    }
-
-    .btn-close-white {
-        background-color: white;
-        border-radius: 50%;
+        font-size: 1.2rem;
+        color: #fff;
     }
 </style>
 

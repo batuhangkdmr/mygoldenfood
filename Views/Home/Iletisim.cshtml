@@ -1,0 +1,203 @@
+﻿@* @{
+    ViewData["Title"] = "Bize Ulaşın";
+}
+
+<h2 class="text-center text-white mt-5">Bize Ulaşın</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.Uyari))
+{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                title: "@(ViewBag.Uyari.Contains("başarıyla") ? "Başarılı" : "Hata")",
+                text: decodeURIComponent("@Uri.EscapeDataString(ViewBag.Uyari)"),
+                icon: "@(ViewBag.Uyari.Contains("başarıyla") ? "success" : "error")",
+                showConfirmButton: false,
+                timer: 2000 // 2 saniye sonra otomatik kapanacak
+            });
+
+        @if (ViewBag.Uyari.Contains("başarıyla"))
+        {
+            <text>
+                    setTimeout(function () {
+                        window.location.href = "/Home/Iletisim"; // 2 saniye sonra yönlendir
+                    }, 2000);
+            </text>
+        }
+        });
+    </script>
+}
+
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form method="post" action="/Home/Iletisim">
+                <div class="form-group">
+                    <label for="adsoyad">Adınız Soyadınız</label>
+                    <input type="text" name="adsoyad" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-Posta Adresiniz</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="konu">Konu</label>
+                    <input type="text" name="konu" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="mesaj">Mesajınız</label>
+                    <textarea name="mesaj" class="form-control" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Gönder</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+ *@
+
+@{
+    ViewData["Title"] = "Bize Ulaşın";
+}
+
+<style>
+    /* Arka plan resmi */
+    body {
+        background: url('/images/arkapilan2.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    /* Genel konteyner */
+    .contact-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
+
+    /* Şeffaf kutu */
+    .contact-box {
+        display: flex;
+        background: rgba(255, 255, 255, 0.2); /* Şeffaf beyaz */
+        padding: 20px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px); /* Arka planı bulanıklaştırır */
+    }
+
+    /* Form ve iletişim bilgileri */
+    .contact-form, .contact-info {
+        padding: 20px;
+        border-radius: 10px;
+        width: 100%;
+    }
+
+        /* Form alanı */
+        .contact-form h3, .contact-info h3 {
+            color: white;
+            text-align: center;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* Buton */
+        .contact-form button {
+            width: 100%;
+            padding: 10px;
+            background: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+            .contact-form button:hover {
+                background: black;
+            }
+
+    /* İletişim bilgileri */
+    .contact-info {
+        background: rgba(0, 0, 0, 0.5); /* Şeffaf siyah */
+        color: white;
+    }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+        }
+
+</style>
+
+<!-- İletişim Formu Başlığı -->
+@* <h2 class="text-center text-white mt-5">Bize Ulaşın</h2> *@
+
+@if (!string.IsNullOrEmpty(ViewBag.Uyari))
+{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            Swal.fire({
+                title: "@(ViewBag.Uyari.Contains("başarıyla") ? "Başarılı" : "Hata")",
+                text: decodeURIComponent("@Uri.EscapeDataString(ViewBag.Uyari)"),
+                icon: "@(ViewBag.Uyari.Contains("başarıyla") ? "success" : "error")",
+                showConfirmButton: false,
+                timer: 2000 // 2 saniye sonra otomatik kapanacak
+            });
+
+        @if (ViewBag.Uyari.Contains("başarıyla"))
+        {
+            <text>
+                    setTimeout(function () {
+                        window.location.href = "/Home/Iletisim"; // 2 saniye sonra yönlendir
+                    }, 2000);
+            </text>
+        }
+        });
+    </script>
+}
+
+<!-- İletişim Formu -->
+<div class="contact-container mt-5">
+    <div class="contact-box">
+        <!-- Şeffaf Form -->
+        <div class="contact-form">
+            <h3>Bizimle İletişime Geçin</h3>
+            <form method="post" action="/Home/Iletisim">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" name="adsoyad" placeholder="Adınız Soyadınız" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="email" name="email" placeholder="E-Posta Adresiniz" required>
+                    </div>
+                </div>
+                <input type="text" name="konu" placeholder="Konu" required>
+                <textarea name="mesaj" placeholder="Mesajınız" rows="5" required></textarea>
+                <button type="submit">Gönder</button>
+            </form>
+        </div>
+
+        <!-- Şeffaf İletişim Bilgileri -->
+        <div class="contact-info">
+            <h3>İletişim Bilgilerimiz</h3>
+            <p><i class="fas fa-map-marker-alt"></i> <strong> Adres:</strong> 123 West 21th Street, Suite 721 New York, NY 10016</p>
+            <p><i class="fas fa-phone"></i> <strong> Telefon:</strong>  +1 234 567 890</p>
+            <p><i class="fas fa-envelope"></i> <strong> Email:</strong>  info@mygoldenfood.com</p>
+            @* <p><i class="fas fa-globe"></i> <strong> Website:</strong> www.mygoldenfood.com</p> *@
+        </div>
+    </div>
+</div>

@@ -10,7 +10,9 @@
         {
             <div class="col-md-4 text-center mb-4">
                 <div class="recipe-card" onclick="showModal('@recipe.Name', '@recipe.Content')">
-                    <img src="@recipe.ImagePath" alt="@recipe.Name" class="img-fluid" />
+                    <div class="image-container">
+                        <img src="@recipe.ImagePath" alt="@recipe.Name" class="recipe-image" />
+                    </div>
                     <h3 class="mt-3 text-white">@recipe.Name</h3>
                 </div>
             </div>
@@ -36,14 +38,38 @@
 </div>
 
 <style>
-    /* Tarife özel kart tasarımı */
+    /* Görsel kapsayıcı */
+    .image-container {
+        width: 100%;
+        height: 250px; /* Sabit yükseklik */
+        overflow: hidden; /* Taşan kısımları gizler */
+        border-radius: 10px; /* Köşe yuvarlama */
+        background-color: #000; /* Siyah arka plan */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Görsel düzenleme */
+    .recipe-image {
+        width: 100%; /* Görseller çerçevede daha küçük görünür */
+        height: 100%;
+        object-fit: contain; /* Görseller çerçeveye sığacak şekilde kesilir */
+        object-position: center; /* Ortalıyor */
+    }
+
+    /* Kart tasarımı */
     .recipe-card {
         cursor: pointer;
-        transition: transform 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #121928;
     }
 
         .recipe-card:hover {
             transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
         }
 
     /* Modal içerik düzeni */
