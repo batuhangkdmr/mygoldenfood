@@ -1,0 +1,66 @@
+﻿@model MyGoldenFood.Models.Recipe
+
+<div class="modal-header bg-primary text-white">
+    <h5 class="modal-title">Tarif Düzenle</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<div class="modal-body">
+    <form id="editRecipeForm" enctype="multipart/form-data">
+        <input type="hidden" name="Id" value="@Model.Id" />
+
+        <div class="mb-3">
+            <label for="Name" class="form-label">Tarif Adı</label>
+            <input asp-for="Name" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="Content" class="form-label">Tarif İçeriği</label>
+            <textarea asp-for="Content" class="form-control" rows="5" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="RecipeCategoryId" class="form-label">Kategori</label>
+            <select asp-for="RecipeCategoryId" class="form-select" required>
+                <option value="">Kategori Seçin</option>
+                @foreach (var category in ViewBag.Categories as List<MyGoldenFood.Models.RecipeCategory>)
+                {
+                    <option value="@category.Id" selected="@(category.Id == Model.RecipeCategoryId)">
+                        @category.Name
+                    </option>
+
+                }
+            </select>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+    <button type="button" class="btn btn-primary" onclick="submitEditRecipeForm()">Güncelle</button>
+</div>
+
+<script>
+    function submitEditRecipeForm() {
+        var formData = new FormData($("#editRecipeForm")[0]);
+        $.ajax({
+            url: "/Tarifler/Edit",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response.success) {
+                    Swal.fire("Başarılı", response.message, "success");
+                    $("#modal").modal('hide');
+                    loadList('/Tarifler/RecipeList', '#recipeList');
+                } else {
+                    Swal.fire("Hata", response.message, "error");
+                }
+            },
+            error: function () {
+                Swal.fire("Hata", "Bir hata oluştu!", "error");
+            }
+        });
+    }
+</script>

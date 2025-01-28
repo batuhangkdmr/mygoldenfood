@@ -19,7 +19,6 @@ namespace MyGoldenFood.Controllers
             _cloudinaryService = cloudinaryService;
         }
         [HttpGet]
-        [HttpGet]
         public async Task<IActionResult> Index()
         {
             // Tarif kategorilerini listeleme
@@ -67,7 +66,7 @@ namespace MyGoldenFood.Controllers
             ViewBag.Categories = _context.RecipeCategories.ToList();
             return PartialView("_CreateRecipePartial", model);
         }
-    
+
 
         // Tarif Detayları Listeleme
         [HttpGet]
@@ -75,70 +74,34 @@ namespace MyGoldenFood.Controllers
         {
             var recipes = await _context.Recipes
                 .Include(r => r.RecipeCategory) // RecipeCategory tablosunu dahil ediyoruz
-                .Select(r => new Recipe
+                .Select(r => new
                 {
                     Id = r.Id,
                     Name = r.Name,
                     Content = r.Content,
                     ImagePath = r.ImagePath,
                     RecipeCategoryId = r.RecipeCategoryId,
-                    CategoryName = r.RecipeCategory != null ? r.RecipeCategory.Name : null // CategoryName'i dolduruyoruz
+                    RecipeCategoryName = r.RecipeCategory != null ? r.RecipeCategory.Name : "Kategori Yok"
                 })
                 .ToListAsync();
 
-            return PartialView("_RecipeListPartial", recipes);
-        }
-
-        // Yeni Tarif Ekle - GET
-        [HttpGet]
-        public IActionResult CreateRecipe()
-        {
-            return PartialView("_CreateRecipePartial");
-        }
-
-        // Yeni Tarif Ekle - POST
-        [HttpPost]
-        public async Task<IActionResult> CreateRecipe(Recipe model, IFormFile ImageFile)
-        {
-            if (ModelState.IsValid)
+            // Veriyi View'e gönderirken model dönüşümü yapıyoruz
+            var recipeModels = recipes.Select(r => new Recipe
             {
-                if (ImageFile != null && ImageFile.Length > 0)
-                {
-                    var uploadResult = await _cloudinaryService.UploadImageAsync(ImageFile, "recipes");
-                    if (uploadResult != null)
-                    {
-                        model.ImagePath = uploadResult;
-                    }
-                }
+                Id = r.Id,
+                Name = r.Name,
+                Content = r.Content,
+                ImagePath = r.ImagePath,
+                RecipeCategoryId = r.RecipeCategoryId,
+                RecipeCategory = new RecipeCategory { Name = r.RecipeCategoryName } // Sadece Name bilgisini ekliyoruz
+            }).ToList();
 
-                _context.Recipes.Add(model);
-                await _context.SaveChangesAsync();
-                return Json(new { success = true, message = "Tarif başarıyla eklendi!" });
-            }
-
-            return PartialView("_CreateRecipePartial", model);
+            return PartialView("_RecipeListPartial", recipeModels);
         }
 
-        // Tarif Silme
-        [HttpPost]
-        public async Task<IActionResult> DeleteRecipe(int id)
-        {
-            var recipe = await _context.Recipes.FindAsync(id);
-            if (recipe == null)
-            {
-                return Json(new { success = false, message = "Tarif bulunamadı!" });
-            }
 
-            if (!string.IsNullOrEmpty(recipe.ImagePath))
-            {
-                await _cloudinaryService.DeleteImageAsync(recipe.ImagePath);
-            }
 
-            _context.Recipes.Remove(recipe);
-            await _context.SaveChangesAsync();
 
-            return Json(new { success = true, message = "Tarif başarıyla silindi!" });
-        }
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
@@ -159,5 +122,71 @@ namespace MyGoldenFood.Controllers
             return View(recipes); // Tarifleri view'e gönder
         }
 
+        // Tarif Düzenleme (GET
+        [Route("Tarifler/Edit")]
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var recipe = await _context.Recipes
+                .Include(r => r.RecipeCategory)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (recipe == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Categories = await _context.RecipeCategories.ToListAsync();
+
+            return PartialView("_EditRecipePartial", recipe);
+        }
+
+        // Tarif Düzenleme (POST)
+        [HttpPost]
+        public async Task<IActionResult> Edit(Recipe model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = await _context.RecipeCategories.ToListAsync();
+                return PartialView("_EditRecipePartial", model);
+            }
+
+            var existingRecipe = await _context.Recipes.FindAsync(model.Id);
+            if (existingRecipe == null)
+            {
+                return NotFound();
+            }
+
+            existingRecipe.Name = model.Name;
+            existingRecipe.Content = model.Content;
+            existingRecipe.RecipeCategoryId = model.RecipeCategoryId;
+
+            await _context.SaveChangesAsync();
+
+            return Json(new { success = true, message = "Tarif başarıyla güncellendi!" });
+        }
+
+
+
+        // Tarif Silme
+        [HttpGet]
+        public async Task<IActionResult> DeleteRecipe(int id)
+        {
+            var recipe = await _context.Recipes.FindAsync(id);
+            if (recipe == null)
+            {
+                return Json(new { success = false, message = "Tarif bulunamadı!" });
+            }
+
+            if (!string.IsNullOrEmpty(recipe.ImagePath))
+            {
+                await _cloudinaryService.DeleteImageAsync(recipe.ImagePath);
+            }
+
+            _context.Recipes.Remove(recipe);
+            await _context.SaveChangesAsync();
+
+            return Json(new { success = true, message = "Tarif başarıyla silindi!" });
+        }
     }
 }
