@@ -109,18 +109,19 @@ namespace MyGoldenFood.Controllers
                 .Where(r => r.RecipeCategoryId == id) // Seçilen kategoriye ait tarifleri getir
                 .ToListAsync();
 
-            if (!recipes.Any())
-            {
-                return NotFound(); // Eğer tarif bulunamazsa 404 döndür
-            }
-
             ViewBag.CategoryName = _context.RecipeCategories
                 .Where(c => c.Id == id)
                 .Select(c => c.Name)
                 .FirstOrDefault();
 
+            if (!recipes.Any())
+            {
+                ViewBag.Message = "Bu kategoriye ait tarif bulunmamaktadır.";
+            }
+
             return View(recipes); // Tarifleri view'e gönder
         }
+
 
         // Tarif Düzenleme (GET
         [Route("Tarifler/Edit")]
