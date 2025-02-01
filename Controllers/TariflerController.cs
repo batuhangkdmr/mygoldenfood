@@ -169,8 +169,7 @@ namespace MyGoldenFood.Controllers
 
 
 
-        // Tarif Silme
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> DeleteRecipe(int id)
         {
             var recipe = await _context.Recipes.FindAsync(id);
@@ -189,5 +188,7 @@ namespace MyGoldenFood.Controllers
 
             return Json(new { success = true, message = "Tarif başarıyla silindi!" });
         }
+
+
     }
 }
