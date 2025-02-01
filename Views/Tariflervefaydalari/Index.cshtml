@@ -5,16 +5,16 @@
 
 <div class="container text-center mt-5">
     <h1 class="mb-5 text-white">Tarifler ve Faydaları</h1>
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-6">
             <a href="/Tarifler/Index">
-                <img src="https://placehold.co/400x400" alt="Tarifler" class="img-fluid" />
+                <img src="https://placehold.co/400x400" alt="Tarifler" class="img-fluid img-responsive" />
                 <h3 class="mt-3 text-white">Tarifler</h3>
             </a>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6">
             <a href="/Faydalari/Index">
-                <img src="https://placehold.co/400x400" alt="Faydaları" class="img-fluid" />
+                <img src="https://placehold.co/400x400" alt="Faydaları" class="img-fluid img-responsive" />
                 <h3 class="mt-3 text-white">Faydaları</h3>
             </a>
         </div>
@@ -27,8 +27,13 @@
         padding-top: 80px;
     }
 
-    body {
+    htmş, body {
         background-color: black;
+        overflow-x: hidden;
+    }
+
+    .container {
+        overflow-x: hidden;
     }
 
     h1 {
@@ -43,4 +48,33 @@
         img:hover {
             transform: scale(1.1);
         }
+
+    /* 🌟 Mobilde Yan Yana Getirme */
+    @@media (max-width: 768px) {
+        .row
+
+    {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow: hidden;
+    }
+    h1{
+       font-size: 35px;
+    }
+
+    .col-sm-6 {
+        width: 50%; /* Mobilde ikiye bölerek yan yana getir */
+        padding: 10px;
+    }
+
+    img {
+        max-width: 90%; /* Küçük ekranlarda daha iyi sığması için */
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    }
 </style>

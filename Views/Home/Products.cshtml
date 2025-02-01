@@ -10,7 +10,9 @@
         @foreach (var product in Model)
         {
             <div class="product-card">
-                <div class="image-container" onclick="showModal('@product.Name', '@product.Description')">
+                <div class="image-container"
+                     data-name="@product.Name"
+                     data-description="@product.Description">
                     <img src="@product.ImagePath" alt="@product.Name" class="product-image">
                 </div>
                 <div class="product-name-container">
@@ -24,13 +26,12 @@
 <!-- Modal -->
 <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="background: rgba(0, 0, 0, 0.8); color: white; border: none;">
+        <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="detailsModalLabel" style="color: #fff;"></h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="detailsModalLabel"></h5>
             </div>
             <div class="modal-body">
-                <h6 style="padding-bottom: 5px;">Ürün Detayı:</h6>
+                <h6 class="modal-title-with-line">Ürün Detayı:</h6>
                 <p id="detailsModalDescription"></p>
             </div>
         </div>
@@ -39,15 +40,30 @@
 
 <style>
     .content {
-        flex: 1; /* Sayfa içeriği alanını genişletir */
+        flex: 1;
         padding-top: 5%;
     }
 
     /* Responsive Grid Düzeni */
     .product-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Daha esnek düzen */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
+    }
+
+    /* Mobilde 2 sütun */
+    @@media (max-width: 950px) {
+        .product-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 70%;
+            object-fit: contain;
+            object-position: center;
+            transition: transform 0.3s ease;
+        }
     }
 
     /* Kart Tasarımı */
@@ -55,45 +71,46 @@
         overflow: hidden;
         text-align: center;
         border-radius: 15px;
-        background-color: rgba(0, 0, 0, 0); /* Tamamen şeffaf arka plan */
+        background-color: rgba(0, 0, 0, 0);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
         .product-card:hover {
-            transform: translateY(-10px); /* Hafif yükselme efekti */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Daha belirgin gölge */
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
+    /* Görseller */
     .image-container {
         width: 100%;
-        height: 250px; /* Sabit yükseklik */
+        height: 250px;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #000; /* Siyah arka plan */
-        overflow: hidden; /* Taşan kısımları gizler */
-        border-radius: 15px; /* Köşe yuvarlama */
+        background-color: #000;
+        overflow: hidden;
+        border-radius: 15px;
     }
 
     .product-image {
         width: 100%;
         height: 100%;
-        object-fit: cover; /* Resim çerçeveye sığacak şekilde kesilir */  /* Contain yada cover */
-        object-position: center; /* Ortalar */
-        transition: transform 0.3s ease; /* Hover efektine uyum sağlar */
+        object-fit: contain;
+        object-position: center;
+        transition: transform 0.3s ease;
     }
 
     .image-container:hover .product-image {
-        transform: scale(1.1); /* Hover sırasında hafif büyüme efekti */
-    }   
+        transform: scale(1.1);
+    }
 
     /* Ürün Adı */
     .product-name-container {
         padding: 15px;
-        background-color: rgba(0, 0, 0, 0); /* Şeffaf arka plan */
+        background-color: rgba(0, 0, 0, 0);
         border-radius: 0 0 15px 15px;
-        color: #fff; /* Yazı rengi beyaz */
+        color: #fff;
     }
 
     .product-name {
@@ -101,13 +118,65 @@
         font-size: 1.2rem;
         color: #fff;
     }
+
+    /* 🔥 Scale-Up Modal Efekti */
+    .modal-content {
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        transform: scale(0.7);
+        transition: transform 0.3s ease-out;
+    }
+
+    .modal.show .modal-content {
+        transform: scale(1);
+    }
+
+    /* Ürün Detayı Başlığı (Renk Güncellendi) */
+    .modal-title-with-line {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 10px;
+        font-size: 1.2rem;
+        color: #FFD700; /* Altın Sarısı */
+        margin-bottom: 15px;
+    }
+
+        .modal-title-with-line::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
 </style>
 
 <script>
-    function showModal(name, description) {
-        document.getElementById('detailsModalLabel').textContent = name;
-        document.getElementById('detailsModalDescription').textContent = description;
-        var modal = new bootstrap.Modal(document.getElementById('detailsModal'));
-        modal.show();
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".image-container").forEach(item => {
+            item.addEventListener("click", function () {
+                let name = this.getAttribute("data-name");
+                let description = this.getAttribute("data-description");
+
+                console.log("Ürün Adı:", name);
+                console.log("Ürün Açıklaması:", description);
+
+                if (!name || !description) {
+                    alert("Ürün detayları eksik!");
+                    return;
+                }
+
+                document.getElementById('detailsModalLabel').textContent = name;
+                document.getElementById('detailsModalDescription').textContent = description;
+
+                var modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+                modal.show();
+            });
+        });
+    });
 </script>
