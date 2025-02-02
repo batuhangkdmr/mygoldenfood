@@ -2,6 +2,9 @@
     ViewData["Title"] = "Tarifler";
     Layout = "_Layout";
 }
+<div class="margin mt-5" >
+
+
 
 <div class="container mt-5">
     <h1 class="text-center text-white mb-4">Tarifler</h1>
@@ -31,7 +34,7 @@
         </div>
     }
 </div>
-
+</div>
 <!-- Modal -->
 <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -87,7 +90,7 @@
     .recipe-image {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         object-position: center;
         transition: transform 0.3s ease;
     }
@@ -151,37 +154,43 @@
         }
 
     /* 📌 Mobilde Tek Ürün Sol Tarafa Yaslansın */
-    @@media (max-width: 768px) {
-        .row
+        @@media (max-width: 768px) {
+            .row
 
-    {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start; /* Sol hizalı olacak */
-    }
+        {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start; /* Sol hizalı olacak */
+        }
 
-    .col-md-4 {
-        flex: 0 0 50%; /* Mobilde 2 sütun olacak */
-        max-width: 50%;
-        padding: 5px;
-    }
-
-        .col-md-4:nth-last-child(1):nth-child(odd) {
-            flex: 0 0 100%; /* Eğer tek bir ürün kalırsa tam genişlikte olmasın */
+        .col-md-4 {
+            flex: 0 0 50%; /* Mobilde 2 sütun olacak */
             max-width: 50%;
-            margin-left: 0;
+            padding: 5px;
         }
 
-    .image-container {
-        height: 180px; /* Mobilde daha küçük resimler */
-            overflow-x: hidden;
+            .col-md-4:nth-last-child(1):nth-child(odd) {
+                flex: 0 0 100%; /* Eğer tek bir ürün kalırsa tam genişlikte olmasın */
+                max-width: 50%;
+                margin-left: 0;
+            }
+
+        .image-container {
+            height: 180px; /* Mobilde daha küçük resimler */
+                overflow-x: hidden;
+            }
+
+        h3 {
+            font-size: 1.1rem;
         }
+        container .text-center{
+            margin-top: 55%;
+        }
+        h1{
+                margin-top: 7pc;
+            }
 
-    h3 {
-        font-size: 1.1rem;
-    }
-
-    }
+        }
 </style>
 
 <script>

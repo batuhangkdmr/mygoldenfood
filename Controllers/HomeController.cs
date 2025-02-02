@@ -46,21 +46,26 @@ namespace MyGoldenFood.Controllers
         {
             try
             {
+                // Türkiye saatini al
+                var turkiyeSaati = TimeZoneInfo.ConvertTime(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Turkey Standard Time"));
+
                 var emailMessage = new MimeMessage();
-                emailMessage.From.Add(new MailboxAddress("My Golden Food", "info@mygoldenfood.com"));
-                emailMessage.To.Add(new MailboxAddress("Admin", "info@mygoldenfood.com"));
+                emailMessage.From.Add(new MailboxAddress("My Golden Food", "fatihozkaya@mygoldenfood.com"));
+                emailMessage.To.Add(new MailboxAddress("Admin", "fatihozkaya@mygoldenfood.com"));
                 emailMessage.Subject = konu;
                 emailMessage.Body = new TextPart("html")
                 {
-                    Text = $"<strong>Gönderen:</strong> {adsoyad} ({email}) <br><br> <strong>Mesaj:</strong> {mesaj}"
+                    Text = $"<strong>Gönderen:</strong> {adsoyad} ({email}) <br><br> " +
+                           $"<strong>Tarih:</strong> {turkiyeSaati:dd.MM.yyyy HH:mm:ss} <br><br> " +
+                           $"<strong>Mesaj:</strong> {mesaj}"
                 };
 
                 using (var client = new SmtpClient())
                 {
-                    client.ServerCertificateValidationCallback = (s, c, h, e) => true; // (Opsiyonel) SSL kontrolünü atlamak için
+                    client.ServerCertificateValidationCallback = (s, c, h, e) => true; // SSL kontrolünü atlamak için
 
-                    client.Connect("mail.mygoldenfood.com", 465, SecureSocketOptions.Auto); // Sunucu adresi düzeltildi
-                    client.Authenticate("info@mygoldenfood.com", "MYG1234myg");
+                    client.Connect("mail.mygoldenfood.com", 465, SecureSocketOptions.Auto);
+                    client.Authenticate("fatihozkaya@mygoldenfood.com", "MYG1234MYG");
                     client.Send(emailMessage);
                     client.Disconnect(true);
                 }
@@ -74,5 +79,8 @@ namespace MyGoldenFood.Controllers
 
             return View();
         }
+
+
+
     }
 }

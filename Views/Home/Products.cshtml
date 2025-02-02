@@ -4,9 +4,13 @@
     ViewData["Title"] = "Ürünlerimiz";
 }
 
-<div class="container my-5">
-    <h2 class="text-center mb-5 text-white">Ürünlerimiz</h2>
-    <div class="product-grid">
+<div class="container">
+    <div class="title-container">
+        <h2 class="text-center text-white">Ürünlerimiz</h2>
+    </div>
+
+    <!-- Ürün Listesi -->
+    <div class="product-grid" id="productGrid">
         @foreach (var product in Model)
         {
             <div class="product-card">
@@ -20,6 +24,13 @@
                 </div>
             </div>
         }
+    </div>
+
+    <!-- Sayfalama Butonları -->
+    <div class="pagination">
+        <button id="prevPage" class="btn btn-primary" disabled>Önceki</button>
+        <span id="pageNumber">Sayfa 1</span>
+        <button id="nextPage" class="btn btn-primary">Sonraki</button>
     </div>
 </div>
 
@@ -51,6 +62,12 @@
         gap: 20px;
     }
 
+    .title-container {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
     /* Mobilde 2 sütun */
     @@media (max-width: 950px) {
         .product-grid {
@@ -63,6 +80,15 @@
             object-fit: contain;
             object-position: center;
             transition: transform 0.3s ease;
+        }
+
+        .title-container {
+            margin-top: 30%;
+            margin-bottom: 10px;
+        }
+
+        h2.text-center {
+            font-size: 3rem;
         }
     }
 
@@ -119,6 +145,15 @@
         color: #fff;
     }
 
+    /* Sayfalama Butonları */
+    .pagination {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
     /* 🔥 Scale-Up Modal Efekti */
     .modal-content {
         background: rgba(0, 0, 0, 0.8);
@@ -133,13 +168,13 @@
         transform: scale(1);
     }
 
-    /* Ürün Detayı Başlığı (Renk Güncellendi) */
+    /* Ürün Detayı Başlığı */
     .modal-title-with-line {
         position: relative;
         display: inline-block;
         padding-bottom: 10px;
         font-size: 1.2rem;
-        color: #FFD700; /* Altın Sarısı */
+        color: #FFD700;
         margin-bottom: 15px;
     }
 
@@ -153,18 +188,45 @@
             bottom: 0;
             left: 0;
         }
-
 </style>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        const allProducts = document.querySelectorAll(".product-card");
+        const pageSize = 12;
+        let currentPage = 1;
+
+        function showPage(page) {
+            allProducts.forEach((product, index) => {
+                product.style.display = (index >= (page - 1) * pageSize && index < page * pageSize) ? "block" : "none";
+            });
+
+            document.getElementById("pageNumber").textContent = `Sayfa ${page}`;
+            document.getElementById("prevPage").disabled = (page === 1);
+            document.getElementById("nextPage").disabled = (page * pageSize >= allProducts.length);
+        }
+
+        document.getElementById("prevPage").addEventListener("click", function () {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        });
+
+        document.getElementById("nextPage").addEventListener("click", function () {
+            if (currentPage * pageSize < allProducts.length) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        });
+
+        showPage(currentPage);
+
+        // Modal Açma
         document.querySelectorAll(".image-container").forEach(item => {
             item.addEventListener("click", function () {
                 let name = this.getAttribute("data-name");
                 let description = this.getAttribute("data-description");
-
-                console.log("Ürün Adı:", name);
-                console.log("Ürün Açıklaması:", description);
 
                 if (!name || !description) {
                     alert("Ürün detayları eksik!");
