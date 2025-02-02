@@ -139,11 +139,47 @@
         .contact-info i {
             margin-right: 10px;
         }
+    /* 📱 Mobil Uyumlu Görünüm */
+    @@media (max-width: 768px) {
+        .contact-container {
+            flex-direction: column;
+            align-items: center;
+            height: 110%;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .contact-box {
+            flex-direction: column;
+            padding: 15px;
+        }
+
+        .contact-form, .contact-info {
+            width: 100%;
+            padding: 10px;
+        }
+
+            .contact-form input, .contact-form textarea {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .contact-form h3, .contact-info h3 {
+                font-size: 1.5rem;
+            }
+
+            .contact-form button {
+                padding: 10px;
+                font-size: 1rem;
+            }
+
+            .contact-info p {
+                font-size: 13px;
+            }
+    }
 
 </style>
 
-<!-- İletişim Formu Başlığı -->
-@* <h2 class="text-center text-white mt-5">Bize Ulaşın</h2> *@
 
 @if (!string.IsNullOrEmpty(ViewBag.Uyari))
 {

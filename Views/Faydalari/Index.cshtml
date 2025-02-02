@@ -5,8 +5,10 @@
     Layout = "_Layout";
 }
 
-<div class="container my-5">
-    <h2 class="text-center mb-5 text-white">Ürünlerin Faydaları</h2>
+<div class="container">
+    <div class="title-container">
+        <h2 class="text-center text-white">Ürünlerin Faydaları</h2>
+    </div>
     <div class="benefit-grid">
         @foreach (var benefit in Model)
         {
@@ -28,10 +30,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="detailsModalLabel"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                @* <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button> *@
             </div>
             <div class="modal-body">
-                <h6>Fayda Detayı:</h6>
+                <h6 class="modal-title-with-line">Fayda Detayı:</h6>
                 <p id="detailsModalDescription"></p>
             </div>
         </div>
@@ -39,31 +41,64 @@
 </div>
 
 <style>
-  
-    /* Grid Layout */
+    .content {
+        flex: 1;
+        padding-top: 5%;
+    }
+
+    /* Grid Düzeni */
     .benefit-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
     }
 
-    /* Card Style */
-    .benefit-card {
-        border-radius: 10px;
-        overflow: hidden;
-        cursor: pointer;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Başlık Konumu */
+    .title-container {
+        margin-top: 30px;
+        margin-bottom: 15px;
         text-align: center;
-        background-color: transparent;
+    }
+
+    /* Mobilde 2 Sütun */
+    /* Mobilde Başlık Konumlandırma */
+    @@media (max-width: 768px) {
+        .title-container {
+            margin-top: 7pc; /* Başlığı aşağı kaydır */
+        }
+
+        h2.text-center {
+            font-size: 2rem; /* Başlığı büyüt */
+        }
+
+        .benefit-grid {
+            grid-template-columns: repeat(2, 1fr); /* Mobilde 2 sütun */
+        }
+
+        .image-container {
+            height: 180px; /* Mobilde daha küçük resimler */
+            overflow-x: hidden;
+        }
+    }
+
+
+    /* Kart Tasarımı */
+    .benefit-card {
+        overflow: hidden;
+        text-align: center;
+        border-radius: 15px;
+        background-color: rgba(0, 0, 0, 0);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
     }
 
         .benefit-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
-    /* Image Styling */
+    /* Görseller */
     .image-container {
         width: 100%;
         height: 250px;
@@ -71,14 +106,15 @@
         justify-content: center;
         align-items: center;
         background-color: #000;
-        border-radius: 10px;
         overflow: hidden;
+        border-radius: 15px;
     }
 
     .benefit-image {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        object-position: center;
         transition: transform 0.3s ease;
     }
 
@@ -86,10 +122,12 @@
         transform: scale(1.1);
     }
 
-    /* Benefit Name */
+    /* Fayda Adı */
     .benefit-name-container {
         padding: 15px;
-        background-color: transparent;
+        background-color: rgba(0, 0, 0, 0);
+        border-radius: 0 0 15px 15px;
+        color: #fff;
     }
 
     .benefit-name {
@@ -98,18 +136,40 @@
         color: #fff;
     }
 
-    /* Modal Styling */
+    /* 🔥 Modal Yapısı (Açılır Pencere) */
     .modal-content {
         background: rgba(0, 0, 0, 0.8);
         color: white;
+        border: none;
         border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        transform: scale(0.7);
+        transition: transform 0.3s ease-out;
     }
 
-    .content {
-        flex: 1;
-        padding-top: 5%;
+    .modal.show .modal-content {
+        transform: scale(1);
     }
+
+    /* Başlık Stili */
+    .modal-title-with-line {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 10px;
+        font-size: 1.2rem;
+        color: #FFD700;
+        margin-bottom: 15px;
+    }
+
+        .modal-title-with-line::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
 </style>
 
 <script>
