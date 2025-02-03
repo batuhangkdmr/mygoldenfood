@@ -41,16 +41,6 @@ builder.Services.AddSingleton(sp =>
 builder.Services.AddScoped<CloudinaryService>();
 
 builder.Services.AddScoped<MailService>();
-builder.Services.AddScoped<SmtpClient>(sp =>
-{
-    var client = new SmtpClient("mail.mygoldenfood.com", 465)
-    {
-        Credentials = new NetworkCredential("info@mygoldenfood.com", "MYG1234myg"),
-        EnableSsl = true
-    };
-    return client;
-});
-
 // Memory Cache
 builder.Services.AddMemoryCache();
 
