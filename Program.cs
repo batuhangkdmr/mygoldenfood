@@ -10,6 +10,7 @@ using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container
 builder.Services.AddControllersWithViews();
 
@@ -40,16 +41,25 @@ builder.Services.AddSingleton(sp =>
 // Register CloudinaryService
 builder.Services.AddScoped<CloudinaryService>();
 
-builder.Services.AddScoped<MailService>();
+// ? **Mail Ayarlarýný appsettings.json'dan Oku**
+var emailSettings = builder.Configuration.GetSection("EmailSettings");
+var smtpServer = emailSettings["SmtpServer"];
+var smtpPort = int.Parse(emailSettings["Port"]);
+var smtpUsername = emailSettings["Username"];
+var smtpPassword = emailSettings["Password"];
+
 builder.Services.AddScoped<SmtpClient>(sp =>
 {
-    var client = new SmtpClient("mail.mygoldenfood.com", 465)
+    var client = new SmtpClient(smtpServer, smtpPort)
     {
-        Credentials = new NetworkCredential("info@mygoldenfood.com", "MYG1234myg"),
+        Credentials = new NetworkCredential(smtpUsername, smtpPassword),
         EnableSsl = true
     };
     return client;
 });
+
+// Register MailService
+builder.Services.AddScoped<MailService>();
 
 // Memory Cache
 builder.Services.AddMemoryCache();
