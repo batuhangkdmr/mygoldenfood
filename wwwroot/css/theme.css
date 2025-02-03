@@ -11,10 +11,6 @@ a {
     color: #fff;
     text-decoration: none;
 }
-.about-page footer a {
-    color: black !important;
-}
-
 
 a:hover {
     color: #efefef;
@@ -186,7 +182,7 @@ footer {
 /* Section 1 */
 
 .section-1 {
-    width: 90%;
+    width: 100%;
     height: 100vh;
     position: relative;
     background-color: black;
@@ -249,10 +245,10 @@ footer {
 }
 
 .section-1 .pasta-2 {
-    width: 30%;
+    width: 20%;
     position: absolute;
     top: 8%;
-    left: 30%;
+    left: 17%;
 }
 
 .section-1 .pasta-3 {
@@ -265,8 +261,8 @@ footer {
 .section-1 .pasta-4 {
     width: 23%;
     position: absolute;
-    top: 8%;
-    right: 7%;
+    top: 5%;
+    right: 37%;
     animation: rotation 20s infinite linear;
 }
 
@@ -274,35 +270,8 @@ footer {
     width: 27%;
     position: absolute;
     bottom: 5%;
-    right: 24%;
+    right: 19%;
 }
-
-
-/* yeni section 1*/
-/* Sadece pasta-4 ve pasta-5 için yuvarlak tasarım */
-.section-1 .pasta-4 img,
-.section-1 .pasta-5 img {
-    border-radius: 50%; /* Yuvarlak hale getir */
-    object-fit: cover; /* Resimleri düzgün yerleştir */
-    border: 5px solid  purple; /* İsteğe bağlı kenarlık */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Gölge ekler */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover efekti için */
-}
-
-.section-1 .pasta-4 img:hover,
-.section-1 .pasta-5 img:hover {
-    transform: scale(1.1); /* Hover sırasında büyütme efekti */
-    box-shadow: 0 8px 20px rgba(255, 255, 0, 0.6); /* Gölgeyi artırır */
-}
-
-/* Diğer resimleri eski haline döndür */
-.section-1 img {
-    border-radius: 0; /* Köşeleri eski hale getir */
-    box-shadow: none; /* Gölgeyi kaldır */
-    border: none; /* Kenarlık eklenmesin */
-}
-
-/* yeni section 1*/
 
 /* Section 1 */
 
@@ -335,7 +304,7 @@ footer {
 .section-2 .slide {
     position: relative;
     height: 100vh;
-    width: 80%;
+    width: 100%;
     margin-right: 5px;
     flex-shrink: 0;
     text-align: center;
@@ -801,6 +770,20 @@ footer {
     p {
         line-height: 1em;
     }
+    .section-1 img{
+        width: 120%;
+    }
+    .section-1 .kahve-1 img {
+        width: 130%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+     
+
+    }
+    .content .metin-1 p {
+        font-size: 80%;
+    }
     .section-2 .kup {
         width: 100%;
     }
@@ -880,7 +863,7 @@ footer {
     .section-1 .kahve-1 {
         width: 40%;
         position: absolute;
-        bottom: 15%;
+        bottom: 0;
         left: 0;
     }
     .section-1 .yaprak-1 {
@@ -896,30 +879,29 @@ footer {
         left: 35%;
     }
     .section-1 .pasta-2 {
-        width: 55%;
+        width: 45%;
         position: absolute;
-        top: 25%;
-        left: 18%;
+        top: 20%;
+        left: 5%;
     }
     .section-1 .pasta-3 {
         width: 45%;
         position: absolute;
         bottom: 25%;
         right: 0;
-        top: 72%;
     }
     .section-1 .pasta-4 {
         width: 45%;
         position: absolute;
-        top: 15%;
-        right: -10%;
+        top: 10%;
+        right: 5%;
         animation: rotation 20s infinite linear;
     }
     .section-1 .pasta-5 {
-        width: 75%;
+        width: 45%;
         position: absolute;
         bottom: 30%;
-        right: 10%;
+        right: 30%;
     }
     .section-3 .catal-bicak {
         width: 50%;
@@ -1345,7 +1327,7 @@ footer {
     padding-top: 10px;
 }
 
-.mygoldenfood-video {
+.maun-video {
     max-width: 100%;
     width: 100%;
     height: 100vh;

@@ -5,16 +5,178 @@
     Layout = "_Layout";
 }
 
-<div class="container mt-5">
-    <h1 class="text-center text-white mb-4">Ürünlerin Faydaları</h1>
-    <div class="row">
+<div class="container">
+    <div class="title-container">
+        <h2 class="text-center text-white">Ürünlerin Faydaları</h2>
+    </div>
+    <div class="benefit-grid">
         @foreach (var benefit in Model)
         {
-            <div class="col-md-4 text-center mb-4">
-                <img src="@benefit.ImagePath" alt="@benefit.Name" class="img-fluid" />
-                <h3 class="mt-3 text-white">@benefit.Name</h3>
-                <p class="text-white">@benefit.Content</p>
+            <div class="benefit-card" onclick="showModal('@benefit.Name', '@benefit.Content')">
+                <div class="image-container">
+                    <img src="@benefit.ImagePath" alt="@benefit.Name" class="benefit-image">
+                </div>
+                <div class="benefit-name-container">
+                    <h5 class="benefit-name">@benefit.Name</h5>
+                </div>
             </div>
         }
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailsModalLabel"></h5>
+                @* <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button> *@
+            </div>
+            <div class="modal-body">
+                <h6 class="modal-title-with-line">Fayda Detayı:</h6>
+                <p id="detailsModalDescription"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .content {
+        flex: 1;
+        padding-top: 5%;
+    }
+
+    /* Grid Düzeni */
+    .benefit-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    /* Başlık Konumu */
+    .title-container {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    /* Mobilde 2 Sütun */
+    /* Mobilde Başlık Konumlandırma */
+    @@media (max-width: 768px) {
+        .title-container {
+            margin-top: 7pc; /* Başlığı aşağı kaydır */
+        }
+
+        h2.text-center {
+            font-size: 2rem; /* Başlığı büyüt */
+        }
+
+        .benefit-grid {
+            grid-template-columns: repeat(2, 1fr); /* Mobilde 2 sütun */
+        }
+
+        .image-container {
+            height: 180px; /* Mobilde daha küçük resimler */
+            overflow-x: hidden;
+        }
+    }
+
+
+    /* Kart Tasarımı */
+    .benefit-card {
+        overflow: hidden;
+        text-align: center;
+        border-radius: 15px;
+        background-color: rgba(0, 0, 0, 0);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+    /* Görseller */
+    .image-container {
+        width: 100%;
+        height: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000;
+        overflow: hidden;
+        border-radius: 15px;
+    }
+
+    .benefit-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        transition: transform 0.3s ease;
+    }
+
+    .image-container:hover .benefit-image {
+        transform: scale(1.1);
+    }
+
+    /* Fayda Adı */
+    .benefit-name-container {
+        padding: 15px;
+        background-color: rgba(0, 0, 0, 0);
+        border-radius: 0 0 15px 15px;
+        color: #fff;
+    }
+
+    .benefit-name {
+        margin: 0;
+        font-size: 1.2rem;
+        color: #fff;
+    }
+
+    /* 🔥 Modal Yapısı (Açılır Pencere) */
+    .modal-content {
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        transform: scale(0.7);
+        transition: transform 0.3s ease-out;
+    }
+
+    .modal.show .modal-content {
+        transform: scale(1);
+    }
+
+    /* Başlık Stili */
+    .modal-title-with-line {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 10px;
+        font-size: 1.2rem;
+        color: #FFD700;
+        margin-bottom: 15px;
+    }
+
+        .modal-title-with-line::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+</style>
+
+<script>
+    function showModal(name, description) {
+        document.getElementById('detailsModalLabel').textContent = name;
+        document.getElementById('detailsModalDescription').textContent = description;
+        var modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+        modal.show();
+    }
+</script>

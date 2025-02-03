@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using MyGoldenFood.ApplicationDbContext;
 using MyGoldenFood.Services;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container
 builder.Services.AddControllersWithViews();
@@ -38,6 +41,26 @@ builder.Services.AddSingleton(sp =>
 // Register CloudinaryService
 builder.Services.AddScoped<CloudinaryService>();
 
+// ? **Mail Ayarlarýný appsettings.json'dan Oku**
+var emailSettings = builder.Configuration.GetSection("EmailSettings");
+var smtpServer = emailSettings["SmtpServer"];
+var smtpPort = int.Parse(emailSettings["Port"]);
+var smtpUsername = emailSettings["Username"];
+var smtpPassword = emailSettings["Password"];
+
+builder.Services.AddScoped<SmtpClient>(sp =>
+{
+    var client = new SmtpClient(smtpServer, smtpPort)
+    {
+        Credentials = new NetworkCredential(smtpUsername, smtpPassword),
+        EnableSsl = true
+    };
+    return client;
+});
+
+// Register MailService
+builder.Services.AddScoped<MailService>();
+
 // Memory Cache
 builder.Services.AddMemoryCache();
 
@@ -49,7 +72,7 @@ builder.Services.AddRateLimiter(options =>
             context.User.Identity?.Name ?? "guest",
             _ => new FixedWindowRateLimiterOptions
             {
-                PermitLimit = 10, // 10 requests per minute
+                PermitLimit = 100, // 10 requests per minute
                 Window = TimeSpan.FromMinutes(1),
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
                 QueueLimit = 2

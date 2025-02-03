@@ -24,7 +24,7 @@ if (indexPage) {
             $('.baton-simit-1').addClass("animate__fadeInUp animate__slow");
         }
     });
-    $('.section-3').on('inview', function(event, isInView) {
+    $('.section-3').on('inview', function(event, isInView) {    
         if (isInView) {
             $('.metin-2').show();
             $('.metin-2').addClass("animate__fadeInUp animate__slow");

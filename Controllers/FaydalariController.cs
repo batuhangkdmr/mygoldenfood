@@ -7,7 +7,7 @@ using MyGoldenFood.Services;
 
 namespace MyGoldenFood.Controllers
 {
-    [Authorize(AuthenticationSchemes = "AdminCookie", Roles = "Admin")]
+    
     public class FaydalariController : Controller
     {
         private readonly AppDbContext _context;
@@ -18,11 +18,14 @@ namespace MyGoldenFood.Controllers
             _context = context;
             _cloudinaryService = cloudinaryService;
         }
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            var products = _context.Benefits.ToListAsync();
-            return View(products);
+            // Tarif kategorilerini listeleme
+            var categories = await _context.Benefits.ToListAsync();
+            return View(categories); // categories değişkenini view'e gönderiyoruz
         }
+
         // Fayda Listeleme
         [HttpGet]
         public async Task<IActionResult> BenefitList()
