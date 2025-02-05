@@ -1,23 +1,55 @@
 ﻿@model IEnumerable<MyGoldenFood.Models.Benefit>
 
 @{
-    ViewData["Title"] = "Ürünlerin Faydaları";
+    ViewData["Title"] = "Ürünlerin Faydaları | My Golden Food - Dondurulmuş Gıda Ürünleri";
     Layout = "_Layout";
 }
 
+<!-- SEO Meta Etiketleri -->
+<head>
+    <meta name="description" content="My Golden Food ürünlerinin sağlık üzerindeki faydalarını keşfedin. Dondurulmuş gıdaların sağlıklı, besleyici ve doğal yapısını öğrenin.">
+    <meta name="keywords" content="Dondurulmuş gıda faydaları, My Golden Food ürünleri, sağlıklı dondurulmuş gıda">
+    <meta name="author" content="My Golden Food">
+    <link rel="canonical" href="https://mygoldenfood.com/Faydalari/Index" />
+</head>
+
+<!-- Schema Markup (Google SEO için) -->
+<script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "ItemList",
+        "name": "Ürünlerin Faydaları",
+        "description": "My Golden Food ürünlerinin sağlık üzerindeki faydalarını keşfedin. Dondurulmuş gıdaların besleyici ve doğal yapısını öğrenin.",
+        "itemListElement": [
+    @foreach (var benefit in Model)
+    {
+        <text>
+                    {
+                        "@@type": "Product",
+                        "name": "@benefit.Name",
+                        "image": "@benefit.ImagePath",
+                        "description": "@benefit.Content"
+                    },
+        </text>
+    }
+        ]
+    }
+</script>
+
+<!-- Ana İçerik -->
 <div class="container">
     <div class="title-container">
-        <h2 class="text-center text-white">Ürünlerin Faydaları</h2>
+        <h1 class="text-center text-white">Ürünlerin Faydaları</h1> <!-- SEO için H1 Güncellendi -->
     </div>
     <div class="benefit-grid">
         @foreach (var benefit in Model)
         {
-            <div class="benefit-card" onclick="showModal('@benefit.Name', '@benefit.Content')">
+            <div class="benefit-card" onclick="showModal('@benefit.Name', '@benefit.Content')" aria-label="@benefit.Name">
                 <div class="image-container">
-                    <img src="@benefit.ImagePath" alt="@benefit.Name" class="benefit-image">
+                    <img src="@benefit.ImagePath" alt="@benefit.Name | Dondurulmuş Gıda Faydaları" class="benefit-image" loading="lazy">
                 </div>
                 <div class="benefit-name-container">
-                    <h5 class="benefit-name">@benefit.Name</h5>
+                    <h2 class="benefit-name">@benefit.Name</h2> <!-- SEO İçin H2 Başlığı Güncellendi -->
                 </div>
             </div>
         }
@@ -29,11 +61,10 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="detailsModalLabel"></h5>
-                @* <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button> *@
+                <h2 class="modal-title" id="detailsModalLabel"></h2> <!-- SEO için H2 Güncellendi -->
             </div>
             <div class="modal-body">
-                <h6 class="modal-title-with-line">Fayda Detayı:</h6>
+                <h3 class="modal-title-with-line">Fayda Detayı:</h3> <!-- SEO için H3 Güncellendi -->
                 <p id="detailsModalDescription"></p>
             </div>
         </div>

@@ -347,13 +347,13 @@ footer {
 
 .section-2 .kup-icon img {
     position: absolute;
-    left: 50%;
+    left: 30%;
     top: 50%;
 }
 
 .section-2 .kup-derece {
     position: absolute;
-    left: 31%;
+    right: 250%;
     top: 25%;
 }
 
@@ -474,8 +474,8 @@ footer {
     line-height: .8em;
     letter-spacing: 3px;
     z-index: 2;
-    padding-left: 10%;
-    margin-top: -20%;
+    padding-left: 70%;
+    margin-top: 0%;
 }
 
 .section-4 .baslik {
@@ -771,7 +771,8 @@ footer {
         line-height: 1em;
     }
     .section-1 img{
-        width: 120%;
+        width: 100%;
+
     }
     .section-1 .kahve-1 img {
         width: 130%;
@@ -814,6 +815,7 @@ footer {
         height: 10vw;
         font-size: 5vw;
     }
+
 }
 
 @media screen and (max-width: 411px) {
@@ -1066,7 +1068,76 @@ footer {
     /* Section 4 */
 }
 
-@media screen and (min-width: 412px) and (max-width: 1024px) {
+@media screen and (min-width: 385px) and (max-width: 1024px) {
+    .section-2 .slide-section {
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .section-2 .slide {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        margin-right: 5px;
+        flex-shrink: 0;
+        text-align: center;
+    }
+
+    .section-2 .kup {
+        position: absolute;
+        left: 0%;
+        bottom: 0;
+        width: 150%;
+        left: 45%;
+        transform: translate(-50%, 0);
+    }
+
+    .section-2 .kup-baslik {
+        color: #fff;
+        font-size: 3vw;
+        text-align: left;
+        position: absolute;
+        left: 40%;
+        top: 35%;
+        font-weight: 800;
+    }
+
+    .section-2 .kup-icerik {
+        color: #fff;
+        font-size: 1.2vw;
+        position: absolute;
+        left: 68%;
+        top: 50%;
+        font-weight: 600;
+    }
+
+    .section-2 .kup-icon {
+        position: absolute;
+        right: 27%;
+        top: 55%;
+        width: 5%;
+    }
+
+        .section-2 .kup-icon img {
+            position: absolute;
+            left: 400%;
+            top: 50%;
+        }
+
+    .section-2 .kup-derece {
+        position: absolute;
+        left: 31%;
+        top: 42%;
+    }
+
+        .section-2 .kup-derece span {
+            display: table-cell;
+            vertical-align: middle;
+        }
     .navbar-collapse {
         background-color: rgb(0, 0, 0);
     }
@@ -1144,7 +1215,7 @@ footer {
         right: 0;
     }
     .section-1 .pasta-4 {
-        width: 40%;
+        width: 55%;
         position: absolute;
         top: 10%;
         right: 5%;
@@ -1280,7 +1351,7 @@ footer {
     }
     .section-4 .pasta-2 .baslik {
         position: absolute;
-        top: 60%;
+        top: 45%;
         left: 50%;
     }
     .section-4 .pasta-2 .pasta-derece {

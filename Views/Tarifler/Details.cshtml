@@ -1,40 +1,74 @@
 ﻿@{
-    ViewData["Title"] = "Tarifler";
+    ViewData["Title"] = "Lezzetli Tarifler | My Golden Food";
     Layout = "_Layout";
 }
-<div class="margin mt-5" >
 
+<!-- SEO Meta Etiketleri -->
+<head>
+    <meta name="description" content="En lezzetli dondurulmuş gıda tariflerini keşfedin! My Golden Food'un sunduğu birbirinden özel tatlı ve yemek tarifleriyle sofralarınıza lezzet katın.">
+    <meta name="keywords" content="Tarifler, Dondurulmuş Gıda Tarifleri, Tatlı Tarifleri, Yemek Tarifleri, My Golden Food">
+    <meta name="author" content="My Golden Food">
+    <link rel="canonical" href="https://mygoldenfood.com/Tarifler/Details" />
+</head>
 
-
-<div class="container mt-5">
-    <h1 class="text-center text-white mb-4">Tarifler</h1>
-
-    @if (!string.IsNullOrEmpty(ViewBag.Message))
+<!-- Schema Markup (Google SEO için) -->
+<script type="application/ld+json">
     {
-        <div class="alert alert-success text-center text-black" role="alert">
-            @ViewBag.Message
-        </div>
-    }
-    else
-    {
-        <div class="row">
-            @foreach (var recipe in Model)
-            {
-                <div class="col-md-4 text-center mb-4">
-                    <div class="recipe-card"
-                         data-name="@recipe.Name"
-                         data-content="@recipe.Content">
-                        <div class="image-container">
-                            <img src="@recipe.ImagePath" alt="@recipe.Name" class="recipe-image" />
-                        </div>
-                        <h3 class="mt-3 text-white">@recipe.Name</h3>
-                    </div>
-                </div>
+        "@@context": "https://schema.org",
+        "@@type": "Recipe",
+        "name": "My Golden Food Tarifleri",
+        "description": "My Golden Food'un sunduğu en lezzetli dondurulmuş gıda tarifleri burada! Tatlı ve yemek tariflerini keşfet.",
+        "image": "https://mygoldenfood.com/images/tarifler.jpg",
+        "author": {
+            "@@type": "Organization",
+            "name": "My Golden Food"
+        },
+        "publisher": {
+            "@@type": "Organization",
+            "name": "My Golden Food",
+            "logo": {
+                "@@type": "ImageObject",
+                "url": "https://res.cloudinary.com/dbhogeepn/image/upload/v1738688048/logo-moonlife1_ulf0n3.png"
             }
-        </div>
+        },
+        "mainEntityOfPage": {
+            "@@type": "WebPage",
+            "@@id": "https://mygoldenfood.com/Tarifler/Details"
+        }
     }
+</script>
+
+<!-- Tarifler Sayfası -->
+<div class="margin mt-5">
+    <div class="container mt-5">
+        <h1 class="text-center text-white mb-4">Lezzetli Tarifler</h1> <!-- SEO İçin H1 Güncellendi -->
+        @if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="alert alert-success text-center text-black" role="alert">
+                @ViewBag.Message
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                @foreach (var recipe in Model)
+                {
+                    <div class="col-md-4 text-center mb-4">
+                        <div class="recipe-card"
+                             data-name="@recipe.Name"
+                             data-content="@recipe.Content">
+                            <div class="image-container">
+                                <img src="@recipe.ImagePath" alt="@recipe.Name - En Lezzetli Tarif" class="recipe-image" />
+                            </div>
+                            <h3 class="mt-3 text-white">@recipe.Name</h3>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
 </div>
-</div>
+
 <!-- Modal -->
 <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -49,7 +83,6 @@
         </div>
     </div>
 </div>
-
 <style>
     /* Grid Layout */
     .recipe-grid {

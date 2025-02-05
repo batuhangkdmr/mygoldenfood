@@ -1,9 +1,37 @@
 ﻿@{
-    ViewData["Title"] = "Bize Ulaşın";
+    ViewData["Title"] = "Bize Ulaşın | My Golden Food - İletişim";
 }
 
+<!-- SEO Meta Etiketleri -->
+<head>
+    <meta name="description" content="My Golden Food ile iletişime geçin. Dondurulmuş gıda ürünleri hakkında bilgi almak için bizimle iletişime geçin.">
+    <meta name="keywords" content="İletişim, My Golden Food, Dondurulmuş Gıda, Müşteri Hizmetleri, Ankara">
+    <meta name="author" content="My Golden Food">
+    <link rel="canonical" href="https://mygoldenfood.com/Contact/Index" />
+</head>
+
+<!-- Schema Markup (Google SEO için) -->
+<script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "ContactPage",
+        "name": "Bize Ulaşın - My Golden Food",
+        "description": "My Golden Food ile iletişime geçin. Dondurulmuş gıda ürünleri hakkında bilgi almak için bizimle iletişime geçin.",
+        "url": "https://mygoldenfood.com/Contact/Index",
+        "contactPoint": {
+            "@@type": "ContactPoint",
+            "telephone": "+90 533 635 24 58",
+            "contactType": "Customer Service",
+            "email": "gokhangokdemir@mygoldenfood.com",
+            "areaServed": "TR",
+            "availableLanguage": ["Türkçe", "English"]
+        }
+    }
+</script>
+
+<!-- İletişim Sayfası İçeriği -->
 <div class="container mt-5">
-    <h2 class="text-center">Bize Ulaşın</h2>
+    <h1 class="text-center">Bize Ulaşın</h1> <!-- SEO İçin H1 Güncellendi -->
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form id="contactForm">
@@ -19,7 +47,7 @@
                     <label for="message" class="form-label">Mesajınız</label>
                     <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Gönder</button>
+                <button type="submit" class="btn btn-primary w-100" aria-label="Gönder Butonu">Gönder</button>
             </form>
         </div>
     </div>
