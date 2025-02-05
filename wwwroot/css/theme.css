@@ -158,7 +158,7 @@ footer {
 }
 
 .footer-logo img {
-    width: 90%;
+    width: 100%;
 }
 
 .footer-contact-img img {
@@ -238,10 +238,10 @@ footer {
 }
 
 .section-1 .pasta-1 {
-    width: 50%;
+    width: 24%;
     position: absolute;
     bottom: 0;
-    left: 10%;
+    left: 27%;
 }
 
 .section-1 .pasta-2 {
@@ -769,6 +769,20 @@ footer {
 @media only screen and (max-width: 800px) {
     p {
         line-height: 1em;
+    }
+    .section-1 img{
+        width: 120%;
+    }
+    .section-1 .kahve-1 img {
+        width: 130%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+     
+
+    }
+    .content .metin-1 p {
+        font-size: 80%;
     }
     .section-2 .kup {
         width: 100%;

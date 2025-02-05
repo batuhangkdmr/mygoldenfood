@@ -1,36 +1,87 @@
-﻿<nav class="navbar navbar-expand-md navbar-dark fixed-top main-menu">
-    <a class="navbar-brand" href="https://mygoldenfood.com/">
-        <img src="~/images/logo-moonlife1.png"
-             width="150px"
-             alt="My Golden Food logo"
-             loading="lazy"> <!-- Lazy Loading -->
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/Home/Index">Anasayfa</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Kurumsal
-                </a>
-                <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/Home/About">Hakkımızda</a>
-                </div>
-            </li>
-            <!-- "Tüm Ürünler" Linki -->
-            <li class="nav-item">
-                <a href="/Home/Products" class="nav-link">Tüm Ürünler</a>
-            </li>
-            <li class="nav-item">
-                <a href="/tariflervefaydalari/Index" class="nav-link">Tarifler ve Faydaları</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/Home/Iletisim">İletişim</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <!-- SEO için Meta Etiketleri -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="My Golden Food - En kaliteli dondurulmuş gıdaları keşfedin. Taptaze ve doğal meyve, sebze ve tatlılarımızı hemen inceleyin!">
+    <meta name="keywords" content="dondurulmuş gıda, dondurulmuş meyve, taze sebze, dondurulmuş tatlılar, sağlıklı gıdalar, böğürtlen, çilek, ahududu, yaban mersini">
+    <meta name="author" content="My Golden Food">
+    <link rel="canonical" href="https://mygoldenfood.com/">
+
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:title" content="My Golden Food - En Kaliteli Dondurulmuş Gıdalar">
+    <meta property="og:description" content="Dondurulmuş meyve ve tatlı çeşitlerimizle lezzeti keşfedin. Kaliteli ve taze gıdalar My Golden Food'da!">
+    <meta property="og:image" content="https://res.cloudinary.com/dbhogeepn/image/upload/v1738688048/logo-moonlife1_ulf0n3.png">
+    <meta property="og:url" content="https://mygoldenfood.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card (Twitter Paylaşımı İçin) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="My Golden Food - En Kaliteli Dondurulmuş Gıdalar">
+    <meta name="twitter:description" content="Dondurulmuş meyve ve tatlı çeşitlerimizle lezzeti keşfedin. Kaliteli ve taze gıdalar My Golden Food'da!">
+    <meta name="twitter:image" content="https://res.cloudinary.com/dbhogeepn/image/upload/v1738688048/logo-moonlife1_ulf0n3.png">
+
+    <!-- Schema.org Yapısal Veri (Google İçin) -->
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org",
+          "@@type": "Organization",
+          "name": "My Golden Food",
+          "url": "https://mygoldenfood.com/",
+          "logo": "https://res.cloudinary.com/dbhogeepn/image/upload/v1738688048/logo-moonlife1_ulf0n3.png",
+          "description": "Dondurulmuş meyve ve tatlı çeşitlerimizle lezzeti keşfedin. Kaliteli ve taze gıdalar My Golden Food'da!",
+          "sameAs": [
+            "https://www.facebook.com/mygoldenfood",
+            "https://www.instagram.com/mygoldenfood",
+            "https://twitter.com/mygoldenfood"
+          ]
+        }
+    </script>
+
+    <!-- Navbar CSS -->
+    <link rel="stylesheet" href="~/css/navbar.css">
+</head>
+<body>
+
+    <!-- Navbar Başlangıcı -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top main-menu">
+        <a class="navbar-brand" href="https://mygoldenfood.com/">
+            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1738688048/logo-moonlife1_ulf0n3.png"
+                 width="150px"
+                 alt="My Golden Food logo"
+                 loading="lazy"> <!-- Lazy Loading -->
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/Home/Index">Anasayfa</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Kurumsal
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/Home/About">Hakkımızda</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="/Home/Products" class="nav-link">Tüm Ürünler</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/tariflervefaydalari/Index" class="nav-link">Tarifler ve Faydaları</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Iletisim">İletişim</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Navbar Bitişi -->
+
+</body>
+</html>

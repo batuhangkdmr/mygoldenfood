@@ -8,7 +8,7 @@
     <div class="row">
         @foreach (var category in Model)
         {
-            <div class="col-md-4 text-center mb-4">
+            <div class="col-md-4 col-6 text-center mb-4">
                 <a href="/Tarifler/Details/@category.Id" class="text-decoration-none text-white">
                     <div class="category-card">
                         <div class="image-container">
@@ -23,41 +23,90 @@
 </div>
 
 <style>
-    /* Görsel kapsayıcı */
+    /* 🌟 Görsel kapsayıcı */
     .image-container {
         width: 100%;
-        height: 250px; /* Sabit yükseklik */
-        overflow: hidden; /* Taşan kısımları gizler */
-        border-radius: 10px; /* Köşe yuvarlama */
-        background-color: #000; /* Siyah arka plan */
+        height: 250px;
+        overflow: hidden;
+        border-radius: 10px;
+        background-color: #000;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    /* Görsel düzenleme */
+    /* 🌟 Görsel düzenleme */
     .category-image {
-        max-width: 100%; /* Görsel çerçevenin genişliğini geçmez */
-        max-height: 100%; /* Görsel çerçevenin yüksekliğini geçmez */
-        object-fit: contain; /* Görseller çerçeveye sığar, orijinal boyut korunur */
-        object-position: center; /* Ortalar */
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
     }
 
-    /* Kart düzeni */
+    /* 🌟 Kart düzeni */
     .category-card {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         padding: 10px;
-        background-color: #121928; /* Hafif şeffaf arka plan */
+        background-color: #121928;
         border-radius: 10px;
+        height: 100%; /* 📌 Tüm kartları eşit yükseklikte tut */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
         .category-card:hover {
-            transform: translateY(-5px); /* Hafif yükselme efekti */
-            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2); /* Daha belirgin gölge efekti */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
         }
 
-    /* Hover sırasında görsel büyümesi iptal edildi */
+    /* 🌟 Hover sırasında görsel büyümesini engelle */
     .category-image:hover {
         transform: none;
+    }
+
+    .content {
+        flex: 1;
+        padding-top: 80px;
+    }
+
+    /* 🌟 📱 Mobil Görünüm için Resim ve Kartları Eşitleme */
+    @@media (max-width: 768px) {
+        .row
+
+    {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .col-6 {
+        width: 50%;
+        padding: 5px;
+    }
+
+    .category-card {
+        padding: 5px;
+        height: 100%; /* 📌 Tüm kartları eşit yükseklikte tut */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* 🌟 Tüm resimleri eşit boyut yap */
+    .image-container {
+        height: 180px; /* Mobilde sabit yükseklik */
+    }
+
+    .category-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Resimleri kesmeden boyuta uyum sağlar */
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
     }
 </style>

@@ -10,6 +10,7 @@ using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container
 builder.Services.AddControllersWithViews();
 
@@ -40,7 +41,7 @@ builder.Services.AddSingleton(sp =>
 // Register CloudinaryService
 builder.Services.AddScoped<CloudinaryService>();
 
-builder.Services.AddScoped<MailService>();
+
 // Memory Cache
 builder.Services.AddMemoryCache();
 
