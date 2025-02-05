@@ -7,12 +7,40 @@ using MyGoldenFood.Services;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Localization;
+using System.Globalization;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// **Localization (Çoklu Dil) Servisini Ekle**
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-// Add services to the container
-builder.Services.AddControllersWithViews();
+// **Desteklenen Kültürler (Diller)**
+var supportedCultures = new[]
+{
+    new CultureInfo("tr"),  // Türkçe (Varsayýlan)
+    new CultureInfo("en"),  // Ýngilizce
+    new CultureInfo("de"),  // Almanca
+    new CultureInfo("fr"),  // Fransýzca
+    new CultureInfo("ru"),  // Rusça
+    new CultureInfo("ja"),  // Japonca
+    new CultureInfo("ko")   // Korece
+};
+
+// **Localization Middleware Ayarlarý**
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("tr");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
+
+// **Localization Servisini Ekleyelim**
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
 
 // Database Connection (Using appsettings.json)
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -41,7 +69,7 @@ builder.Services.AddSingleton(sp =>
 // Register CloudinaryService
 builder.Services.AddScoped<CloudinaryService>();
 
-// ? **Mail Ayarlarýný appsettings.json'dan Oku**
+// **Mail Ayarlarýný appsettings.json'dan Oku**
 var emailSettings = builder.Configuration.GetSection("EmailSettings");
 var smtpServer = emailSettings["SmtpServer"];
 var smtpPort = int.Parse(emailSettings["Port"]);
@@ -60,6 +88,8 @@ builder.Services.AddScoped<SmtpClient>(sp =>
 
 // Register MailService
 builder.Services.AddScoped<MailService>();
+builder.Services.AddScoped<LocalizationCacheService>();
+
 
 // Memory Cache
 builder.Services.AddMemoryCache();
@@ -72,7 +102,7 @@ builder.Services.AddRateLimiter(options =>
             context.User.Identity?.Name ?? "guest",
             _ => new FixedWindowRateLimiterOptions
             {
-                PermitLimit = 100, // 10 requests per minute
+                PermitLimit = 100, // 100 requests per minute
                 Window = TimeSpan.FromMinutes(1),
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
                 QueueLimit = 2
@@ -80,6 +110,10 @@ builder.Services.AddRateLimiter(options =>
 });
 
 var app = builder.Build();
+
+// **Localization Middleware'i ekle**
+var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value;
+app.UseRequestLocalization(localizationOptions);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
