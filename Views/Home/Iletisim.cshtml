@@ -59,10 +59,24 @@
 
  *@
 
-@{
+@* @{
     ViewData["Title"] = "Bize Ulaşın";
 }
+ *@
 
+
+@{
+    ViewData["Title"] = "İletişim | My Golden Food - Dondurulmuş Gıda Ürünleri";
+    Layout = "_Layout";
+}
+
+<!-- SEO Meta Etiketleri -->
+<head>
+    <meta name="description" content="My Golden Food ile iletişime geçin. Dondurulmuş gıda sektöründe kaliteli ürünlerimiz hakkında bilgi alın veya bizimle iletişime geçerek işbirliği fırsatlarını değerlendirin.">
+    <meta name="keywords" content="My Golden Food iletişim, dondurulmuş gıda iletişim, gıda üreticisi iletişim">
+    <meta name="author" content="My Golden Food">
+    <link rel="canonical" href="https://mygoldenfood.com/Home/Iletisim" />
+</head>
 <style>
     /* Arka plan resmi */
     body {
@@ -179,7 +193,26 @@
     }
 
 </style>
-
+<!-- Schema Markup (Google SEO için) -->
+<script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "LocalBusiness",
+        "name": "My Golden Food",
+        "url": "https://mygoldenfood.com",
+        "logo": "https://res.cloudinary.com/dbhogeepn/image/upload/v1738688048/logo-moonlife1_ulf0n3.png",
+        "description": "My Golden Food, dondurulmuş gıda sektöründe lider bir markadır. Kaliteli ve sağlıklı dondurulmuş gıda ürünleri sunmaktadır.",
+        "address": {
+            "@@type": "PostalAddress",
+            "addressLocality": "Ankara, Türkiye"
+        },
+        "contactPoint": {
+            "@@type": "ContactPoint",
+            "telephone": "+90 533 635 24 58",
+            "contactType": "customer service"
+        }
+    }
+</script>
 
 @if (!string.IsNullOrEmpty(ViewBag.Uyari))
 {
@@ -197,9 +230,9 @@
         @if (ViewBag.Uyari.Contains("başarıyla"))
         {
             <text>
-                    setTimeout(function () {
-                        window.location.href = "/Home/Iletisim"; // 2 saniye sonra yönlendir
-                    }, 2000);
+                        setTimeout(function () {
+                            window.location.href = "/Home/Iletisim"; // 2 saniye sonra yönlendir
+                        }, 2000);
             </text>
         }
         });
@@ -211,29 +244,28 @@
     <div class="contact-box">
         <!-- Şeffaf Form -->
         <div class="contact-form">
-            <h3>Bizimle İletişime Geçin</h3>
+            <h1>Bizimle İletişime Geçin</h1> <!-- SEO İçin H1 Güncellendi -->
             <form method="post" action="/Home/Iletisim">
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="text" name="adsoyad" placeholder="Adınız Soyadınız" required>
+                        <input type="text" name="adsoyad" placeholder="Adınız Soyadınız" aria-label="Adınız Soyadınız" required>
                     </div>
                     <div class="col-md-6">
-                        <input type="email" name="email" placeholder="E-Posta Adresiniz" required>
+                        <input type="email" name="email" placeholder="E-Posta Adresiniz" aria-label="E-Posta Adresiniz" required>
                     </div>
                 </div>
-                <input type="text" name="konu" placeholder="Konu" required>
-                <textarea name="mesaj" placeholder="Mesajınız" rows="5" required></textarea>
+                <input type="text" name="konu" placeholder="Konu" aria-label="Konu" required>
+                <textarea name="mesaj" placeholder="Mesajınız" rows="5" aria-label="Mesajınız" required></textarea>
                 <button type="submit">Gönder</button>
             </form>
         </div>
 
         <!-- Şeffaf İletişim Bilgileri -->
         <div class="contact-info">
-            <h3>İletişim Bilgilerimiz</h3>
+            <h2>İletişim Bilgilerimiz</h2> <!-- SEO İçin H2 Kullanıldı -->
             <p><i class="fas fa-map-marker-alt"></i> <strong> Adres:</strong> MY GOLDEN FOOD GIDA SAN.TİC A.Ş. Türkiye/Ankara</p>
-            <p><i class="fas fa-phone"></i> <strong> Telefon:</strong>  +90 533 635 24 58</p>
-            <p><i class="fas fa-envelope"></i> <strong> Email:</strong>  gokhangokdemir@mygoldenfood.com</p>
-            @* <p><i class="fas fa-globe"></i> <strong> Website:</strong> www.mygoldenfood.com</p> *@
+            <p><i class="fas fa-phone"></i> <strong> Telefon:</strong>  <a href="tel:+905336352458" class="text-white">+90 533 635 24 58</a></p>
+            <p><i class="fas fa-envelope"></i> <strong> Email:</strong>  <a href="mailto:gokhangokdemir@mygoldenfood.com" class="text-white">gokhangokdemir@mygoldenfood.com</a></p>
         </div>
     </div>
 </div>
