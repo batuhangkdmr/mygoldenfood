@@ -1,7 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> localizer
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-    <!-- SEO için Meta Etiketleri -->
+    @using Microsoft.Extensions.Localization
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="index, follow">
@@ -10,48 +12,16 @@
     <meta name="author" content="My Golden Food">
     <link rel="canonical" href="https://mygoldenfood.com/">
 
-    <!-- Open Graph (Facebook, LinkedIn) -->
-    <meta property="og:title" content="My Golden Food - En Kaliteli Dondurulmuş Gıdalar">
-    <meta property="og:description" content="Dondurulmuş meyve ve tatlı çeşitlerimizle lezzeti keşfedin. Kaliteli ve taze gıdalar My Golden Food'da!">
-    <meta property="og:image" content="https://res.cloudinary.com/dbhogeepn/image/upload/v1738688048/logo-moonlife1_ulf0n3.png">
-    <meta property="og:url" content="https://mygoldenfood.com/">
-    <meta property="og:type" content="website">
-
-    <!-- Twitter Card (Twitter Paylaşımı İçin) -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="My Golden Food - En Kaliteli Dondurulmuş Gıdalar">
-    <meta name="twitter:description" content="Dondurulmuş meyve ve tatlı çeşitlerimizle lezzeti keşfedin. Kaliteli ve taze gıdalar My Golden Food'da!">
-    <meta name="twitter:image" content="https://res.cloudinary.com/dbhogeepn/image/upload/v1738688048/logo-moonlife1_ulf0n3.png">
-
-    <!-- Schema.org Yapısal Veri (Google İçin) -->
-    <script type="application/ld+json">
-        {
-          "@@context": "https://schema.org",
-          "@@type": "Organization",
-          "name": "My Golden Food",
-          "url": "https://mygoldenfood.com/",
-          "logo": "https://res.cloudinary.com/dbhogeepn/image/upload/v1738688048/logo-moonlife1_ulf0n3.png",
-          "description": "Dondurulmuş meyve ve tatlı çeşitlerimizle lezzeti keşfedin. Kaliteli ve taze gıdalar My Golden Food'da!",
-          "sameAs": [
-            "https://www.facebook.com/mygoldenfood",
-            "https://www.instagram.com/mygoldenfood",
-            "https://twitter.com/mygoldenfood"
-          ]
-        }
-    </script>
-
-    <!-- Navbar CSS -->
     <link rel="stylesheet" href="~/css/navbar.css">
 </head>
 <body>
 
-    <!-- Navbar Başlangıcı -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top main-menu">
         <a class="navbar-brand" href="https://mygoldenfood.com/">
             <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1738688048/logo-moonlife1_ulf0n3.png"
                  width="150px"
                  alt="My Golden Food logo"
-                 loading="lazy"> <!-- Lazy Loading -->
+                 loading="lazy">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -59,30 +29,30 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/Home/Index">Anasayfa</a>
+                    <a class="nav-link" href="/Home/Index"> @localizer["Navbar_Anasayfa"]</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Kurumsal
+                        @localizer["Navbar_Company"]
                     </a>
                     <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/Home/About">Hakkımızda</a>
+                        <a class="dropdown-item" href="/Home/About">@localizer["Navbar_About"]</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="/Home/Products" class="nav-link">Tüm Ürünler</a>
+                    <a href="/Home/Products" class="nav-link">@localizer["Navbar_Products"]</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/tariflervefaydalari/Index" class="nav-link">Tarifler ve Faydaları</a>
+                    <a href="/tariflervefaydalari/Index" class="nav-link">@localizer["Navbar_Recipes"]</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Home/Iletisim">İletişim</a>
+                    <a class="nav-link" href="/Home/Iletisim">@localizer["Navbar_Contact"]</a>
                 </li>
 
                 <!-- Dil Seçimi -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        🌐 Dil
+                         @localizer["Navbar_Language"]
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languageDropdown">
                         <a class="dropdown-item" href="/Language/SetLanguage?culture=tr&returnUrl=@Context.Request.Path">
@@ -97,10 +67,10 @@
                         <a class="dropdown-item" href="/Language/SetLanguage?culture=fr&returnUrl=@Context.Request.Path">
                             <img src="~/images/flags/fr.png" width="18" height="12" alt="Français"> Français
                         </a>
-                        <a class="dropdown-item" href="/Language/SetLanguage?culture=jp&returnUrl=@Context.Request.Path">
+                        <a class="dropdown-item" href="/Language/SetLanguage?culture=ja&returnUrl=@Context.Request.Path">
                             <img src="~/images/flags/jp.png" width="18" height="12" alt="日本語"> 日本語
                         </a>
-                        <a class="dropdown-item" href="/Language/SetLanguage?culture=kr&returnUrl=@Context.Request.Path">
+                        <a class="dropdown-item" href="/Language/SetLanguage?culture=ko&returnUrl=@Context.Request.Path">
                             <img src="~/images/flags/kr.png" width="18" height="12" alt="한국어"> 한국어
                         </a>
                         <a class="dropdown-item" href="/Language/SetLanguage?culture=ru&returnUrl=@Context.Request.Path">
@@ -111,7 +81,5 @@
             </ul>
         </div>
     </nav>
-    <!-- Navbar Bitişi -->
-
 </body>
 </html>

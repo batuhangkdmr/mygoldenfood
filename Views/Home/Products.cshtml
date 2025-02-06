@@ -1,4 +1,6 @@
-﻿@model IEnumerable<MyGoldenFood.Models.Product>
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> localizer
+@model IEnumerable<MyGoldenFood.Models.Product>
 
 @{
     ViewData["Title"] = "Ürünlerimiz";
@@ -6,7 +8,7 @@
 
 <div class="container">
     <div class="title-container">
-        <h2 class="text-center text-white">Ürünlerimiz</h2>
+        <h2 class="text-center text-white">@localizer["Product_Ürünlerimiz"]</h2>
     </div>
 
     <!-- Ürün Listesi -->
@@ -28,9 +30,9 @@
 
     <!-- Sayfalama Butonları -->
     <div class="pagination">
-        <button id="prevPage" class="btn btn-primary" disabled>Önceki</button>
-        <span id="pageNumber">Sayfa 1</span>
-        <button id="nextPage" class="btn btn-primary">Sonraki</button>
+        <button id="prevPage" class="btn btn-primary" disabled>@localizer["Product_Önceki"]</button>
+        <span id="pageNumber">@localizer["Product_Sayfa"]</span>
+        <button id="nextPage" class="btn btn-primary">@localizer["Product_Sonraki"]</button>
     </div>
 </div>
 
@@ -201,7 +203,7 @@
                 product.style.display = (index >= (page - 1) * pageSize && index < page * pageSize) ? "block" : "none";
             });
 
-            document.getElementById("pageNumber").textContent = `Sayfa ${page}`;
+            document.getElementById("pageNumber").textContent = `@localizer["Product_Sayfa"] ${page}`;
             document.getElementById("prevPage").disabled = (page === 1);
             document.getElementById("nextPage").disabled = (page * pageSize >= allProducts.length);
         }

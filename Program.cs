@@ -7,12 +7,52 @@ using MyGoldenFood.Services;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Localization;
+using System.Globalization;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// **Localization (�oklu Dil) Servisini Ekle**
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-// Add services to the container
-builder.Services.AddControllersWithViews();
+// **Desteklenen K�lt�rler (Diller)**
+var supportedCultures = new[]
+{
+    new CultureInfo("tr"),  // T�rk�e (Varsay�lan)
+    new CultureInfo("en"),  // �ngilizce
+    new CultureInfo("de"),  // Almanca
+    new CultureInfo("fr"),  // Frans�zca
+    new CultureInfo("ru"),  // Rus�a
+    new CultureInfo("ja"),  // Japonca
+    new CultureInfo("ko")   // Korece
+};
+
+// **Localization Middleware Ayarlar�**
+var localizationOptions = new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("tr"), // ? T�rk�eyi varsay�lan yap
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures,
+};
+
+// **E�er �erez veya taray�c� ayar� yoksa, ba�lang�� dilini zorla**
+localizationOptions.ApplyCurrentCultureToResponseHeaders = true;
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("tr");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
+
+builder.Services.AddSingleton(localizationOptions); // ? Localization servisini singleton olarak ekleyelim
+
+// **Localization Servisini Ekleyelim**
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
 
 // Database Connection (Using appsettings.json)
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -53,7 +93,7 @@ builder.Services.AddRateLimiter(options =>
             context.User.Identity?.Name ?? "guest",
             _ => new FixedWindowRateLimiterOptions
             {
-                PermitLimit = 100, // 10 requests per minute
+                PermitLimit = 100, // 100 requests per minute
                 Window = TimeSpan.FromMinutes(1),
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
                 QueueLimit = 2
@@ -61,6 +101,9 @@ builder.Services.AddRateLimiter(options =>
 });
 
 var app = builder.Build();
+
+// **Localization Middleware'i ekle**
+app.UseRequestLocalization(localizationOptions);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
