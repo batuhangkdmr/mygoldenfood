@@ -117,7 +117,100 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Navbar_Home" xml:space="preserve">
+  <data name="About_Biz Kimiz?" xml:space="preserve">
+    <value>Who Are We?</value>
+  </data>
+  <data name="About_dondurulmuş gıda sektöründe **kaliteli ve lezzetli** ürünler sunan öncü bir markadır." xml:space="preserve">
+    <value>A leading brand offering high-quality and delicious products in the frozen food industry.</value>
+  </data>
+  <data name="About_dünya çapında lezzetimizi tanıtmak ve **sürdürülebilir üretim anlayışıyla** herkese sağlıklı ve lezzetli ürünler sunmaktır." xml:space="preserve">
+    <value>To promote our flavors worldwide and provide everyone with healthy and delicious products through a sustainable production approach.</value>
+  </data>
+  <data name="About_Müşterilerimize en iyi hizmeti sağlamak için sürekli **yenilikçi çözümler** üretmekteyiz." xml:space="preserve">
+    <value>e We continuously develop innovative solutions to provide the best service to our customers.</value>
+  </data>
+  <data name="About_Vizyonumuz" xml:space="preserve">
+    <value>Our Vision</value>
+  </data>
+  <data name="Home_Ahududu" xml:space="preserve">
+    <value>Raspberry</value>
+  </data>
+  <data name="Home_Ahududu ve Böğürtlen" xml:space="preserve">
+    <value>Raspberry and Blackberry</value>
+  </data>
+  <data name="Home_AŞAMASINDADIR" xml:space="preserve">
+    <value>In Progress</value>
+  </data>
+  <data name="Home_Böğürtlen" xml:space="preserve">
+    <value>Blackberry</value>
+  </data>
+  <data name="Home_GÜVENİLİR" xml:space="preserve">
+    <value>Reliable</value>
+  </data>
+  <data name="Home_KULLANIŞLI" xml:space="preserve">
+    <value>Useful</value>
+  </data>
+  <data name="Home_Limonlu Tart" xml:space="preserve">
+    <value> Lemon Tart</value>
+  </data>
+  <data name="Home_SİTEMİZ" xml:space="preserve">
+    <value>Our Website</value>
+  </data>
+  <data name="Home_TAZE" xml:space="preserve">
+    <value>Fresh</value>
+  </data>
+  <data name="Home_Yaban mersini" xml:space="preserve">
+    <value>Blueberry</value>
+  </data>
+  <data name="Home_YAPIM" xml:space="preserve">
+    <value>Construction</value>
+  </data>
+  <data name="Home_Çilek" xml:space="preserve">
+    <value>Strawberry</value>
+  </data>
+  <data name="Navbar_About" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="Navbar_Anasayfa" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="Navbar_Company" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="Navbar_Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Navbar_Language" xml:space="preserve">
+    <value>🌐 Language </value>
+  </data>
+  <data name="Navbar_Products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="Navbar_Recipes" xml:space="preserve">
+    <value>Recipes and Benefits</value>
+  </data>
+  <data name="Product_Sayfa" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="Product_Sonraki" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Product_Önceki" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Product_Ürünlerimiz" xml:space="preserve">
+    <value>Our Products</value>
+  </data>
+  <data name="Tariflervefaydalari_Faydaları" xml:space="preserve">
+    <value>Benefits</value>
+  </data>
+  <data name="Tariflervefaydalari_Tarifler" xml:space="preserve">
+    <value>Recipes</value>
+  </data>
+  <data name="Tariflervefaydalari_Tarifler ve Faydaları" xml:space="preserve">
+    <value>Recipes and Benefits</value>
+  </data>
+  <data name="Tarifler_Tarif Kategorileri" xml:space="preserve">
+    <value>Recipe Categories</value>
   </data>
 </root>

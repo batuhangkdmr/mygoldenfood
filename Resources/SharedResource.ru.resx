@@ -117,7 +117,100 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Navbar_Home" xml:space="preserve">
+  <data name="About_Biz Kimiz?" xml:space="preserve">
+    <value>Кто мы?</value>
+  </data>
+  <data name="About_dondurulmuş gıda sektöründe **kaliteli ve lezzetli** ürünler sunan öncü bir markadır." xml:space="preserve">
+    <value>Ведущий бренд, предлагающий качественные и вкусные продукты в сфере замороженных продуктов.</value>
+  </data>
+  <data name="About_dünya çapında lezzetimizi tanıtmak ve **sürdürülebilir üretim anlayışıyla** herkese sağlıklı ve lezzetli ürünler sunmaktır." xml:space="preserve">
+    <value>Популяризировать наш вкус по всему миру и предлагать всем здоровые и вкусные продукты с устойчивым подходом к производству.</value>
+  </data>
+  <data name="About_Müşterilerimize en iyi hizmeti sağlamak için sürekli **yenilikçi çözümler** üretmekteyiz." xml:space="preserve">
+    <value>Мы постоянно разрабатываем инновационные решения, чтобы обеспечить нашим клиентам лучший сервис.</value>
+  </data>
+  <data name="About_Vizyonumuz" xml:space="preserve">
+    <value>Наше видение</value>
+  </data>
+  <data name="Home_Ahududu" xml:space="preserve">
+    <value>Малина</value>
+  </data>
+  <data name="Home_Ahududu ve Böğürtlen" xml:space="preserve">
+    <value>Малина и Ежевика</value>
+  </data>
+  <data name="Home_AŞAMASINDADIR" xml:space="preserve">
+    <value>В процессе</value>
+  </data>
+  <data name="Home_Böğürtlen" xml:space="preserve">
+    <value>Ежевика</value>
+  </data>
+  <data name="Home_GÜVENİLİR" xml:space="preserve">
+    <value>Надежный</value>
+  </data>
+  <data name="Home_KULLANIŞLI" xml:space="preserve">
+    <value>Полезный</value>
+  </data>
+  <data name="Home_Limonlu Tart" xml:space="preserve">
+    <value>Лимонный тарт</value>
+  </data>
+  <data name="Home_SİTEMİZ" xml:space="preserve">
+    <value>Наш сайт</value>
+  </data>
+  <data name="Home_TAZE" xml:space="preserve">
+    <value>Свежий</value>
+  </data>
+  <data name="Home_Yaban mersini" xml:space="preserve">
+    <value>Черника</value>
+  </data>
+  <data name="Home_YAPIM" xml:space="preserve">
+    <value>Строительство</value>
+  </data>
+  <data name="Home_Çilek" xml:space="preserve">
+    <value>Клубника</value>
+  </data>
+  <data name="Navbar_About" xml:space="preserve">
+    <value>О нас</value>
+  </data>
+  <data name="Navbar_Anasayfa" xml:space="preserve">
     <value>Главная</value>
+  </data>
+  <data name="Navbar_Company" xml:space="preserve">
+    <value>Компания</value>
+  </data>
+  <data name="Navbar_Contact" xml:space="preserve">
+    <value>Контакты</value>
+  </data>
+  <data name="Navbar_Language" xml:space="preserve">
+    <value>🌐 Язык</value>
+  </data>
+  <data name="Navbar_Products" xml:space="preserve">
+    <value>Продукты</value>
+  </data>
+  <data name="Navbar_Recipes" xml:space="preserve">
+    <value>Рецепты и Преимущества</value>
+  </data>
+  <data name="Product_Sayfa" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="Product_Sonraki" xml:space="preserve">
+    <value>Следующий</value>
+  </data>
+  <data name="Product_Önceki" xml:space="preserve">
+    <value>Предыдущий</value>
+  </data>
+  <data name="Product_Ürünlerimiz" xml:space="preserve">
+    <value>Наши продукты</value>
+  </data>
+  <data name="Tariflervefaydalari_Faydaları" xml:space="preserve">
+    <value>Польза</value>
+  </data>
+  <data name="Tariflervefaydalari_Tarifler" xml:space="preserve">
+    <value>Рецепты</value>
+  </data>
+  <data name="Tariflervefaydalari_Tarifler ve Faydaları" xml:space="preserve">
+    <value> Рецепты и Польза</value>
+  </data>
+  <data name="Tarifler_Tarif Kategorileri" xml:space="preserve">
+    <value>Категории рецептов</value>
   </data>
 </root>

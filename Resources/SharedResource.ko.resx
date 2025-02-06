@@ -117,7 +117,100 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Navbar_Home" xml:space="preserve">
+  <data name="About_Biz Kimiz?" xml:space="preserve">
+    <value>우리는 누구입니까?</value>
+  </data>
+  <data name="About_dondurulmuş gıda sektöründe **kaliteli ve lezzetli** ürünler sunan öncü bir markadır." xml:space="preserve">
+    <value>냉동식품 업계에서 고품질과 맛있는 제품을 제공하는 선도적인 브랜드입니다.</value>
+  </data>
+  <data name="About_dünya çapında lezzetimizi tanıtmak ve **sürdürülebilir üretim anlayışıyla** herkese sağlıklı ve lezzetli ürünler sunmaktır." xml:space="preserve">
+    <value>전 세계적으로 우리의 맛을 알리고 지속 가능한 생산 방식을 통해 모든 사람에게 건강하고 맛있는 제품을 제공하는 것입니다. </value>
+  </data>
+  <data name="About_Müşterilerimize en iyi hizmeti sağlamak için sürekli **yenilikçi çözümler** üretmekteyiz." xml:space="preserve">
+    <value>고객에게 최고의 서비스를 제공하기 위해 지속적으로 혁신적인 솔루션을 개발하고 있습니다.</value>
+  </data>
+  <data name="About_Vizyonumuz" xml:space="preserve">
+    <value>우리의 비전</value>
+  </data>
+  <data name="Home_Ahududu" xml:space="preserve">
+    <value> 라즈베리</value>
+  </data>
+  <data name="Home_Ahududu ve Böğürtlen" xml:space="preserve">
+    <value>라즈베리와 블랙베리</value>
+  </data>
+  <data name="Home_AŞAMASINDADIR" xml:space="preserve">
+    <value> 진행 중</value>
+  </data>
+  <data name="Home_Böğürtlen" xml:space="preserve">
+    <value>블랙베리</value>
+  </data>
+  <data name="Home_GÜVENİLİR" xml:space="preserve">
+    <value>신뢰할 수 있는</value>
+  </data>
+  <data name="Home_KULLANIŞLI" xml:space="preserve">
+    <value>유용한</value>
+  </data>
+  <data name="Home_Limonlu Tart" xml:space="preserve">
+    <value> 레몬 타르트</value>
+  </data>
+  <data name="Home_SİTEMİZ" xml:space="preserve">
+    <value>우리 사이트</value>
+  </data>
+  <data name="Home_TAZE" xml:space="preserve">
+    <value>신선한</value>
+  </data>
+  <data name="Home_Yaban mersini" xml:space="preserve">
+    <value>블루베리</value>
+  </data>
+  <data name="Home_YAPIM" xml:space="preserve">
+    <value>건설</value>
+  </data>
+  <data name="Home_Çilek" xml:space="preserve">
+    <value>딸기</value>
+  </data>
+  <data name="Navbar_About" xml:space="preserve">
+    <value>회사 소개</value>
+  </data>
+  <data name="Navbar_Anasayfa" xml:space="preserve">
     <value>홈</value>
+  </data>
+  <data name="Navbar_Company" xml:space="preserve">
+    <value>회사</value>
+  </data>
+  <data name="Navbar_Contact" xml:space="preserve">
+    <value>연락처</value>
+  </data>
+  <data name="Navbar_Language" xml:space="preserve">
+    <value>🌐 언어</value>
+  </data>
+  <data name="Navbar_Products" xml:space="preserve">
+    <value>제품</value>
+  </data>
+  <data name="Navbar_Recipes" xml:space="preserve">
+    <value>레시피와 혜택</value>
+  </data>
+  <data name="Product_Sayfa" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="Product_Sonraki" xml:space="preserve">
+    <value>다음</value>
+  </data>
+  <data name="Product_Önceki" xml:space="preserve">
+    <value>이전</value>
+  </data>
+  <data name="Product_Ürünlerimiz" xml:space="preserve">
+    <value>우리의 제품</value>
+  </data>
+  <data name="Tariflervefaydalari_Faydaları" xml:space="preserve">
+    <value>효능</value>
+  </data>
+  <data name="Tariflervefaydalari_Tarifler" xml:space="preserve">
+    <value>레시피</value>
+  </data>
+  <data name="Tariflervefaydalari_Tarifler ve Faydaları" xml:space="preserve">
+    <value>레시피 및 효능</value>
+  </data>
+  <data name="Tarifler_Tarif Kategorileri" xml:space="preserve">
+    <value>레시피 카테고리</value>
   </data>
 </root>

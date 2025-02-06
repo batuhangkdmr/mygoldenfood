@@ -1,4 +1,5 @@
-﻿ 
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> localizer
 
 
 
@@ -15,9 +16,9 @@
 
 <section class="section-1">
     <div class="metin-1 animate__animated animate__fadeInDown animate__slow animate__delay-1s">
-        <p>SİTEMİZ</p>
-        <p>YAPIM</p>
-        <p>AŞAMASINDADIR</p>
+        <p>@localizer["Home_SİTEMİZ"]</p>
+        <p>@localizer["Home_YAPIM"]</p>
+        <p>@localizer["Home_AŞAMASINDADIR"]</p>
     </div>
 
     <div class="kahve-1 animate__animated animate__fadeInUp animate__slow">
@@ -48,7 +49,7 @@
                 <section role="feed" class="slide-section">
                     <article id="slide-1" class="slide">
                         <img class="kup" src="https://res.cloudinary.com/dbhogeepn/image/upload/v1738685369/bogurtlen-2_yzdoxd.png" alt="Böğürtlen">
-                        <span class="kup-baslik">Böğürtlen</span>
+                        <span class="kup-baslik">@localizer["Home_Böğürtlen"]</span>
                         <span class="kup-icerik"></span>
 
                         <!-- Yaprak Görselleri -->
@@ -62,7 +63,7 @@
 
                     <article id="slide-2" class="slide">
                         <img class="kup" src="https://res.cloudinary.com/dbhogeepn/image/upload/v1738685503/strawberry-1_tcnfcy.png" alt="Çilek">
-                        <span class="kup-baslik">Çilek</span>
+                        <span class="kup-baslik">@localizer["Home_Çilek"]</span>
 
                  @*        <!-- Ok İkonu -->
                         <span class="kup-icon">
@@ -93,10 +94,10 @@
             <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1738685865/meyveli-pasta_d6u4ye.png" alt="Meyveli Pasta">
         </div>
         <div class="baslik">
-            <p>Çilek</p>
-            <p>Ahududu</p>
-            <p>Böğürtlen</p>
-            <p>Yaban mersini</p>
+            <p>@localizer["Home_Çilek"]</p>
+            <p>@localizer["Home_Ahududu"]</p>
+            <p>@localizer["Home_Böğürtlen"]</p>
+            <p>@localizer["Home_Yaban mersini"]</p>
         </div>
     </div>
 
@@ -105,8 +106,8 @@
             <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1738685929/meyveli-turta_ekskkb.png" alt="Meyveli Turta">
         </div>
         <div class="baslik">
-            <p>Limonlu Tart</p>
-            <p>Ahududu ve Böğürtlen</p>
+            <p>@localizer["Home_Limonlu Tart"]</p>
+            <p>@localizer["Home_Ahududu ve Böğürtlen"]</p>
         </div>
     </div>
 
@@ -120,9 +121,9 @@
     </div> *@
 
     <div class="metin-4">
-        <p>TAZE</p>
-        <p>KULLANIŞLI</p>
-        <p>GÜVENİLİR</p>
+        <p>@localizer["Home_TAZE"]</p>
+        <p>@localizer["Home_KULLANIŞLI"]</p>
+        <p>@localizer["Home_GÜVENİLİR"]</p>
     </div>
 </section>
 

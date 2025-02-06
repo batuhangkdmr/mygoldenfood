@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> localizer
+@{
     ViewData["Title"] = "Tarif Kategorileri | Dondurulmuş Tatlı Tarifleri";
     Layout = "_Layout";
 }
@@ -9,7 +11,7 @@
 <meta name="author" content="My Golden Food">
 
 <div class="container mt-5">
-    <h1 class="text-center text-white mb-4">Tarif Kategorileri</h1>
+    <h1 class="text-center text-white mb-4">@localizer["Tarifler_Tarif Kategorileri"]</h1>
     <div class="row">
         @foreach (var category in Model)
         {

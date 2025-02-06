@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> localizer
+@{
     ViewData["Title"] = "Hakkımızda | My Golden Food - Kaliteli Dondurulmuş Gıda";
     Layout = "_Layout";
 }
@@ -48,15 +50,15 @@
 
 <!-- Metin Alanı -->
 <section class="container mt-5">
-    <h1 class="text-center mb-4">Biz Kimiz? | My Golden Food</h1> <!-- SEO için H1 etiketi -->
+    <h1 class="text-center mb-4">@localizer["About_Biz Kimiz?"] | My Golden Food</h1> <!-- SEO için H1 etiketi -->
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
             <p>
-                <strong>My Golden Food</strong>, dondurulmuş gıda sektöründe **kaliteli ve lezzetli** ürünler sunan öncü bir markadır.
-                Müşterilerimize en iyi hizmeti sağlamak için sürekli **yenilikçi çözümler** üretmekteyiz.
+                <strong>My Golden Food</strong>, @localizer["About_dondurulmuş gıda sektöründe **kaliteli ve lezzetli** ürünler sunan öncü bir markadır."]
+                @localizer["About_Müşterilerimize en iyi hizmeti sağlamak için sürekli **yenilikçi çözümler** üretmekteyiz."]
             </p>
             <p>
-                <strong>Vizyonumuz</strong>, dünya çapında lezzetimizi tanıtmak ve **sürdürülebilir üretim anlayışıyla** herkese sağlıklı ve lezzetli ürünler sunmaktır.
+                <strong>@localizer["About_Vizyonumuz"]</strong>, @localizer["About_dünya çapında lezzetimizi tanıtmak ve **sürdürülebilir üretim anlayışıyla** herkese sağlıklı ve lezzetli ürünler sunmaktır."]
             </p>
         </div>
     </div>

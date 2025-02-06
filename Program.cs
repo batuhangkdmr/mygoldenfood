@@ -30,12 +30,24 @@ var supportedCultures = new[]
 };
 
 // **Localization Middleware Ayarlarý**
+var localizationOptions = new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("tr"), // ? Türkçeyi varsayýlan yap
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures,
+};
+
+// **Eðer çerez veya tarayýcý ayarý yoksa, baþlangýç dilini zorla**
+localizationOptions.ApplyCurrentCultureToResponseHeaders = true;
+
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     options.DefaultRequestCulture = new RequestCulture("tr");
     options.SupportedCultures = supportedCultures;
     options.SupportedUICultures = supportedCultures;
 });
+
+builder.Services.AddSingleton(localizationOptions); // ? Localization servisini singleton olarak ekleyelim
 
 // **Localization Servisini Ekleyelim**
 builder.Services.AddControllersWithViews()
@@ -90,7 +102,6 @@ builder.Services.AddScoped<SmtpClient>(sp =>
 builder.Services.AddScoped<MailService>();
 builder.Services.AddScoped<LocalizationCacheService>();
 
-
 // Memory Cache
 builder.Services.AddMemoryCache();
 
@@ -112,7 +123,6 @@ builder.Services.AddRateLimiter(options =>
 var app = builder.Build();
 
 // **Localization Middleware'i ekle**
-var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value;
 app.UseRequestLocalization(localizationOptions);
 
 // Configure the HTTP request pipeline.
