@@ -48,6 +48,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 });
 
 builder.Services.AddSingleton(localizationOptions); // ? Localization servisini singleton olarak ekleyelim
+builder.Services.AddSingleton<DeepLTranslationService>();
 
 // **Localization Servisini Ekleyelim**
 builder.Services.AddControllersWithViews()
@@ -80,6 +81,9 @@ builder.Services.AddSingleton(sp =>
 
 // Register CloudinaryService
 builder.Services.AddScoped<CloudinaryService>();
+builder.Services.AddScoped<DeepLTranslationService>();
+builder.Services.AddScoped<TranslationService>();
+
 
 // **Mail Ayarlarýný appsettings.json'dan Oku**
 var emailSettings = builder.Configuration.GetSection("EmailSettings");

@@ -132,6 +132,15 @@
   <data name="About_Vizyonumuz" xml:space="preserve">
     <value>Наше видение</value>
   </data>
+  <data name="Faydalari_Fayda Detayı:" xml:space="preserve">
+    <value>Подробности пользы:</value>
+  </data>
+  <data name="Faydalari_Ürünlerin Faydaları" xml:space="preserve">
+    <value>Польза продуктов</value>
+  </data>
+  <data name="Footer_Adres" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
   <data name="Home_Ahududu" xml:space="preserve">
     <value>Малина</value>
   </data>
@@ -168,6 +177,39 @@
   <data name="Home_Çilek" xml:space="preserve">
     <value>Клубника</value>
   </data>
+  <data name="Iletisim_Adres:" xml:space="preserve">
+    <value>Адрес:</value>
+  </data>
+  <data name="Iletisim_Adınız Soyadınız" xml:space="preserve">
+    <value>Ваше имя и фамилия</value>
+  </data>
+  <data name="Iletisim_Bizimle İletişime Geçin" xml:space="preserve">
+    <value>Свяжитесь с нами</value>
+  </data>
+  <data name="Iletisim_E-Posta Adresiniz" xml:space="preserve">
+    <value>Ваш адрес электронной почты</value>
+  </data>
+  <data name="Iletisim_Email:" xml:space="preserve">
+    <value>Электронная почта:</value>
+  </data>
+  <data name="Iletisim_Gönder" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="Iletisim_Konu" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+  <data name="Iletisim_Mesajınız" xml:space="preserve">
+    <value>Ваше сообщение</value>
+  </data>
+  <data name="Iletisim_Telefon:" xml:space="preserve">
+    <value>Телефон:</value>
+  </data>
+  <data name="Iletisim_İletişim" xml:space="preserve">
+    <value>Контакт</value>
+  </data>
+  <data name="Iletisim_İletişim Bilgilerimiz" xml:space="preserve">
+    <value>Наши контактные данные</value>
+  </data>
   <data name="Navbar_About" xml:space="preserve">
     <value>О нас</value>
   </data>
@@ -198,8 +240,17 @@
   <data name="Product_Önceki" xml:space="preserve">
     <value>Предыдущий</value>
   </data>
+  <data name="Product_Ürün Detayı:" xml:space="preserve">
+    <value>Подробности продукта:</value>
+  </data>
   <data name="Product_Ürünlerimiz" xml:space="preserve">
     <value>Наши продукты</value>
+  </data>
+  <data name="TariflerDetails_Lezzetli Tarifler" xml:space="preserve">
+    <value>Вкусные рецепты</value>
+  </data>
+  <data name="TariflerDetails_Tarif Detayı:" xml:space="preserve">
+    <value>Подробности рецепта:</value>
   </data>
   <data name="Tariflervefaydalari_Faydaları" xml:space="preserve">
     <value>Польза</value>

@@ -1,4 +1,7 @@
-﻿<footer class="text-white about-footer">
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> localizer
+
+<footer class="text-white about-footer">
     <div class="container-fluid">
         <section class="footer-1">
             <div class="row">
@@ -11,7 +14,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 mb-4 mb-md-0 p-4">
-                    <h5 class="text-uppercase">Adres</h5>
+                    <h5 class="text-uppercase">@localizer["Footer_Adres"]</h5>
                     <p>MY GOLDEN FOOD GIDA SAN.TİC A.Ş. Türkiye/Ankara</p>
                    @*  <p><strong>Dondurulmuş meyve, sebze ve tatlı çeşitleriyle en taze lezzetleri keşfedin.</strong></p> *@
                     <div class="mb-4">
@@ -30,7 +33,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0 p-4">
-                    <h5 class="text-uppercase">İletişim</h5>
+                    <h5 class="text-uppercase">@localizer["Iletisim_İletişim"]</h5>
                     <ul class="list-unstyled mb-0">
                         <li>
                             <a href="#" class="text-white">Gökhan GÖKDEMİR</a>

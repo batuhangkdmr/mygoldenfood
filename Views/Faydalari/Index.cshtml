@@ -1,4 +1,6 @@
-﻿@model IEnumerable<MyGoldenFood.Models.Benefit>
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> localizer
+@model IEnumerable<MyGoldenFood.Models.Benefit>
 
 @{
     ViewData["Title"] = "Ürünlerin Faydaları | My Golden Food - Dondurulmuş Gıda Ürünleri";
@@ -39,7 +41,7 @@
 <!-- Ana İçerik -->
 <div class="container">
     <div class="title-container">
-        <h1 class="text-center text-white">Ürünlerin Faydaları</h1> <!-- SEO için H1 Güncellendi -->
+        <h2 class="text-center text-white">@localizer["Faydalari_Ürünlerin Faydaları"]</h2> <!-- SEO için H1 Güncellendi -->
     </div>
     <div class="benefit-grid">
         @foreach (var benefit in Model)
@@ -64,7 +66,7 @@
                 <h2 class="modal-title" id="detailsModalLabel"></h2> <!-- SEO için H2 Güncellendi -->
             </div>
             <div class="modal-body">
-                <h3 class="modal-title-with-line">Fayda Detayı:</h3> <!-- SEO için H3 Güncellendi -->
+                <h3 class="modal-title-with-line">@localizer["Faydalari_Fayda Detayı:"]</h3> <!-- SEO için H3 Güncellendi -->
                 <p id="detailsModalDescription"></p>
             </div>
         </div>

@@ -39,6 +39,9 @@ namespace MyGoldenFood.ApplicationDbContext
             modelBuilder.Entity<RecipeCategory>().ToTable("RecipeCategories"); // Tarif kategorileri tablosu
             modelBuilder.Entity<Recipe>().ToTable("Recipes"); // Tarif tablosu
             modelBuilder.Entity<Benefit>().ToTable("Benefits"); // Fayda tablosu
+            modelBuilder.Entity<ProductTranslation>().ToTable("ProductTranslations");
+            modelBuilder.Entity<RecipeTranslation>().ToTable("RecipeTranslations");
+            modelBuilder.Entity<BenefitTranslation>().ToTable("BenefitTranslations");
 
             base.OnModelCreating(modelBuilder);
         }
@@ -49,5 +52,11 @@ namespace MyGoldenFood.ApplicationDbContext
         public DbSet<RecipeCategory> RecipeCategories { get; set; } // Tarif kategorileri
         public DbSet<Recipe> Recipes { get; set; } // Tarifler
         public DbSet<Benefit> Benefits { get; set; } // Faydalar
+        public DbSet<ProductTranslation> ProductTranslations { get; set; }
+        public DbSet<RecipeTranslation> RecipeTranslations { get; set; }
+        public DbSet<BenefitTranslation> BenefitTranslations { get; set; }
+        public DbSet<Translation> Translations { get; set; }
+
+
     }
 }
