@@ -1,9 +1,12 @@
 ﻿@using Microsoft.Extensions.Localization
+@using System.Globalization
 @inject IStringLocalizer<SharedResource> localizer
+@inject MyGoldenFood.Services.TranslationService translationService
 @model IEnumerable<MyGoldenFood.Models.Product>
 
 @{
     ViewData["Title"] = "Ürünlerimiz";
+    var currentLang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 }
 
 <div class="container">
@@ -11,22 +14,24 @@
         <h2 class="text-center text-white">@localizer["Product_Ürünlerimiz"]</h2>
     </div>
 
-    <!-- Ürün Listesi -->
     <div class="product-grid" id="productGrid">
         @foreach (var product in Model)
         {
             <div class="product-card">
                 <div class="image-container"
-                     data-name="@product.Name"
-                     data-description="@product.Description">
-                    <img src="@product.ImagePath" alt="@product.Name" class="product-image">
+                     data-name="@translationService.GetTranslation("Name", "Product", product.Id, currentLang)"
+                     data-description="@translationService.GetTranslation("Description", "Product", product.Id, currentLang)">
+                    <img src="@product.ImagePath" alt="@translationService.GetTranslation("Name", "Product", product.Id, currentLang)" class="product-image">
                 </div>
                 <div class="product-name-container">
-                    <h5 class="product-name">@product.Name</h5>
+                    <h5 class="product-name">@translationService.GetTranslation("Name", "Product", product.Id, currentLang)</h5>
                 </div>
             </div>
         }
     </div>
+</div>
+
+
 
     <!-- Sayfalama Butonları -->
     <div class="pagination">

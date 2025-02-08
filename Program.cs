@@ -82,7 +82,6 @@ builder.Services.AddSingleton(sp =>
 // Register CloudinaryService
 builder.Services.AddScoped<CloudinaryService>();
 builder.Services.AddScoped<DeepLTranslationService>();
-builder.Services.AddScoped<TranslationService>();
 
 
 // **Mail Ayarlarýný appsettings.json'dan Oku**
@@ -104,10 +103,11 @@ builder.Services.AddScoped<SmtpClient>(sp =>
 
 // Register MailService
 builder.Services.AddScoped<MailService>();
-builder.Services.AddScoped<LocalizationCacheService>();
-
 // Memory Cache
 builder.Services.AddMemoryCache();
+builder.Services.AddScoped<LocalizationCacheService>();
+builder.Services.AddScoped<TranslationService>();
+
 
 // Rate Limiting
 builder.Services.AddRateLimiter(options =>

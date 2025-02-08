@@ -2,10 +2,10 @@
 {
     public class Translation : BaseEntity
     {
-        public string EntityType { get; set; } // Product, Recipe, Benefit gibi
-        public int EntityId { get; set; } // Çeviriye ait ID
-        public string FieldName { get; set; } // Örneğin "Name" veya "Description"
-        public string Language { get; set; } // Hedef dil (TR, EN, DE vb.)
-        public string TranslatedText { get; set; } // Çevrilen metin
+        public int ReferenceId { get; set; } // Ürün/Tarif/Fayda ID'si
+        public string TableName { get; set; } // "Product", "Recipe", "Benefit"
+        public string FieldName { get; set; }
+        public string Language { get; set; } // tr, en, de, fr, ru, ja, ko
+        public string TranslatedValue { get; set; } // Çevrilen değer
     }
 }
