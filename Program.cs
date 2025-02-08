@@ -14,30 +14,30 @@ using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// **Localization (Çoklu Dil) Servisini Ekle**
+// **Localization (ï¿½oklu Dil) Servisini Ekle**
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-// **Desteklenen Kültürler (Diller)**
+// **Desteklenen Kï¿½ltï¿½rler (Diller)**
 var supportedCultures = new[]
 {
-    new CultureInfo("tr"),  // Türkçe (Varsayýlan)
-    new CultureInfo("en"),  // Ýngilizce
+    new CultureInfo("tr"),  // Tï¿½rkï¿½e (Varsayï¿½lan)
+    new CultureInfo("en"),  // ï¿½ngilizce
     new CultureInfo("de"),  // Almanca
-    new CultureInfo("fr"),  // Fransýzca
-    new CultureInfo("ru"),  // Rusça
+    new CultureInfo("fr"),  // Fransï¿½zca
+    new CultureInfo("ru"),  // Rusï¿½a
     new CultureInfo("ja"),  // Japonca
     new CultureInfo("ko")   // Korece
 };
 
-// **Localization Middleware Ayarlarý**
+// **Localization Middleware Ayarlarï¿½**
 var localizationOptions = new RequestLocalizationOptions
 {
-    DefaultRequestCulture = new RequestCulture("tr"), // ? Türkçeyi varsayýlan yap
+    DefaultRequestCulture = new RequestCulture("tr"), // ? Tï¿½rkï¿½eyi varsayï¿½lan yap
     SupportedCultures = supportedCultures,
     SupportedUICultures = supportedCultures,
 };
 
-// **Eðer çerez veya tarayýcý ayarý yoksa, baþlangýç dilini zorla**
+// **Eï¿½er ï¿½erez veya tarayï¿½cï¿½ ayarï¿½ yoksa, baï¿½langï¿½ï¿½ dilini zorla**
 localizationOptions.ApplyCurrentCultureToResponseHeaders = true;
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
@@ -84,7 +84,7 @@ builder.Services.AddScoped<CloudinaryService>();
 builder.Services.AddScoped<DeepLTranslationService>();
 
 
-// **Mail Ayarlarýný appsettings.json'dan Oku**
+// **Mail AyarlarÄ±nÄ± appsettings.json'dan Oku**
 var emailSettings = builder.Configuration.GetSection("EmailSettings");
 var smtpServer = emailSettings["SmtpServer"];
 var smtpPort = int.Parse(emailSettings["Port"]);
