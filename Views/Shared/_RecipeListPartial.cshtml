@@ -26,14 +26,31 @@
                         <span>Resim Yok</span>
                     }
                 </td>
-                <td>@recipe.RecipeCategory?.Name</td> <!-- RecipeCategory.Name ekrana bastırılıyor -->
+                <td>@recipe.RecipeCategory?.Name</td>
                 <td>
-                    <button class="btn btn-warning" onclick="loadEditForm('@recipe.Id')">Düzenle</button>
+                    <button class="btn btn-warning" onclick="loadEditRecipeForm('@recipe.Id')">Düzenle</button>
                     <button class="btn btn-danger" onclick="deleteItem('/Tarifler/DeleteRecipe', '@recipe.Id', '/Tarifler/RecipeList', '#recipeList')">Sil</button>
-
-
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<!-- Modal -->
+<div id="modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+</div>
+
+<script>
+    function loadEditRecipeForm(id) {
+        const url = `/Tarifler/Edit?id=${id}`;
+        $.get(url, function (data) {
+            $("#modal .modal-content").html(data);
+            $("#modal").modal('show');
+        }).fail(function () {
+            Swal.fire('Hata!', 'Tarif düzenleme yüklenemedi!', 'error');
+        });
+    }
+</script>
