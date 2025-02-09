@@ -64,6 +64,8 @@
 }
  *@
 
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> localizer
 
 @{
     ViewData["Title"] = "İletişim | My Golden Food - Dondurulmuş Gıda Ürünleri";
@@ -244,28 +246,28 @@
     <div class="contact-box">
         <!-- Şeffaf Form -->
         <div class="contact-form">
-            <h1>Bizimle İletişime Geçin</h1> <!-- SEO İçin H1 Güncellendi -->
+            <h1>@localizer["Iletisim_Bizimle İletişime Geçin"]</h1> <!-- SEO İçin H1 Güncellendi -->
             <form method="post" action="/Home/Iletisim">
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="text" name="adsoyad" placeholder="Adınız Soyadınız" aria-label="Adınız Soyadınız" required>
+                        <input type="text" name="adsoyad" placeholder="@localizer["Iletisim_Adınız Soyadınız"]" aria-label="Adınız Soyadınız" required>
                     </div>
                     <div class="col-md-6">
-                        <input type="email" name="email" placeholder="E-Posta Adresiniz" aria-label="E-Posta Adresiniz" required>
+                        <input type="email" name="email" placeholder="@localizer["Iletisim_E-Posta Adresiniz"]" aria-label="E-Posta Adresiniz" required>
                     </div>
                 </div>
-                <input type="text" name="konu" placeholder="Konu" aria-label="Konu" required>
-                <textarea name="mesaj" placeholder="Mesajınız" rows="5" aria-label="Mesajınız" required></textarea>
-                <button type="submit">Gönder</button>
+                <input type="text" name="konu" placeholder="Konu" aria-label="@localizer["Iletisim_Konu"]" required>
+                <textarea name="mesaj" placeholder="@localizer["Iletisim_Mesajınız"]" rows="5" aria-label="Mesajınız" required></textarea>
+                <button type="submit">@localizer["Iletisim_Gönder"]</button>
             </form>
         </div>
 
         <!-- Şeffaf İletişim Bilgileri -->
         <div class="contact-info">
-            <h2>İletişim Bilgilerimiz</h2> <!-- SEO İçin H2 Kullanıldı -->
-            <p><i class="fas fa-map-marker-alt"></i> <strong> Adres:</strong> MY GOLDEN FOOD GIDA SAN.TİC A.Ş. Türkiye/Ankara</p>
-            <p><i class="fas fa-phone"></i> <strong> Telefon:</strong>  <a href="tel:+905336352458" class="text-white">+90 533 635 24 58</a></p>
-            <p><i class="fas fa-envelope"></i> <strong> Email:</strong>  <a href="mailto:gokhangokdemir@mygoldenfood.com" class="text-white">gokhangokdemir@mygoldenfood.com</a></p>
+            <h2>@localizer["Iletisim_İletişim Bilgilerimiz"]</h2> <!-- SEO İçin H2 Kullanıldı -->
+            <p><i class="fas fa-map-marker-alt"></i> <strong> @localizer["Iletisim_Adres:"]</strong> MY GOLDEN FOOD GIDA SAN.TİC A.Ş. Türkiye/Ankara</p>
+            <p><i class="fas fa-phone"></i> <strong> @localizer["Iletisim_Telefon:"]</strong>  <a href="tel:+905336352458" class="text-white">+90 533 635 24 58</a></p>
+            <p><i class="fas fa-envelope"></i> <strong> @localizer["Iletisim_Email:"]</strong>  <a href="mailto:gokhangokdemir@mygoldenfood.com" class="text-white">gokhangokdemir@mygoldenfood.com</a></p>
         </div>
     </div>
 </div>

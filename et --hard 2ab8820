@@ -1,0 +1,54 @@
+[33m783db2e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mDeepLTranslate-API-V1[m[33m, [m[1;31morigin/DeepLTranslate-API-V1[m[33m, [m[1;32mmain[m[33m)[m HEAD@{0}: checkout: moving from DeepLTranslate-API-V2 to DeepLTranslate-API-V1
+[33m6f563c1[m[33m ([m[1;31morigin/DeepLTranslate-API-V2[m[33m, [m[1;32mDeepLTranslate-API-V2[m[33m)[m HEAD@{1}: checkout: moving from DeepLTranslate-API to DeepLTranslate-API-V2
+[33m5d9ba25[m[33m ([m[1;31morigin/DeepLTranslate-API[m[33m, [m[1;32mDeepLTranslate-API[m[33m)[m HEAD@{2}: checkout: moving from DeepLTranslate-API-V2 to DeepLTranslate-API
+[33m6f563c1[m[33m ([m[1;31morigin/DeepLTranslate-API-V2[m[33m, [m[1;32mDeepLTranslate-API-V2[m[33m)[m HEAD@{3}: checkout: moving from DeepLTranslate-API-V1 to DeepLTranslate-API-V2
+[33m783db2e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mDeepLTranslate-API-V1[m[33m, [m[1;31morigin/DeepLTranslate-API-V1[m[33m, [m[1;32mmain[m[33m)[m HEAD@{4}: checkout: moving from DeepLTranslate-API-V2 to DeepLTranslate-API-V1
+[33m6f563c1[m[33m ([m[1;31morigin/DeepLTranslate-API-V2[m[33m, [m[1;32mDeepLTranslate-API-V2[m[33m)[m HEAD@{5}: commit: Güncelleme.
+[33m783db2e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mDeepLTranslate-API-V1[m[33m, [m[1;31morigin/DeepLTranslate-API-V1[m[33m, [m[1;32mmain[m[33m)[m HEAD@{6}: checkout: moving from DeepLTranslate-API-V1 to DeepLTranslate-API-V2
+[33m783db2e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mDeepLTranslate-API-V1[m[33m, [m[1;31morigin/DeepLTranslate-API-V1[m[33m, [m[1;32mmain[m[33m)[m HEAD@{7}: reset: moving to origin/main
+[33m2ab8820[m HEAD@{8}: checkout: moving from main to DeepLTranslate-API-V1
+[33m783db2e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mDeepLTranslate-API-V1[m[33m, [m[1;31morigin/DeepLTranslate-API-V1[m[33m, [m[1;32mmain[m[33m)[m HEAD@{9}: pull origin main: Fast-forward
+[33m9b4820b[m[33m ([m[1;31morigin/Model_Veritabani[m[33m, [m[1;32mModel_Veritabani[m[33m)[m HEAD@{10}: checkout: moving from DeepLTranslate-API-V1 to main
+[33m2ab8820[m HEAD@{11}: commit: Ürünler için DeepL Translate ve Localization işlemi aynı anda hem statik hemde dinamik verilerin 7 dilde çevrilmesi sağlandı.
+[33m5d9ba25[m[33m ([m[1;31morigin/DeepLTranslate-API[m[33m, [m[1;32mDeepLTranslate-API[m[33m)[m HEAD@{12}: checkout: moving from DeepLTranslate-API to DeepLTranslate-API-V1
+[33m5d9ba25[m[33m ([m[1;31morigin/DeepLTranslate-API[m[33m, [m[1;32mDeepLTranslate-API[m[33m)[m HEAD@{13}: commit: DeepL Translate den API çekerek CRUD işelimdeki verileri otomatik çevireceğiz seçilen dillere göre
+[33m60d55ef[m[33m ([m[1;32mLocalization1[m[33m)[m HEAD@{14}: Branch: renamed refs/heads/Localization2 to refs/heads/DeepLTranslate-API
+[33m60d55ef[m[33m ([m[1;32mLocalization1[m[33m)[m HEAD@{16}: checkout: moving from Localization1 to Localization2
+[33m60d55ef[m[33m ([m[1;32mLocalization1[m[33m)[m HEAD@{17}: commit: Localizer ayarlarının bir kısmı bitti.
+[33m06978e2[m[33m ([m[1;31morigin/Localization[m[33m, [m[1;32mLocalization[m[33m)[m HEAD@{18}: checkout: moving from Localization to Localization1
+[33m06978e2[m[33m ([m[1;31morigin/Localization[m[33m, [m[1;32mLocalization[m[33m)[m HEAD@{19}: commit: Localizer ilk eklemeler.
+[33m1186750[m[33m ([m[1;31morigin/SEO_Guncellemesi_son[m[33m, [m[1;32mSEO_Guncellemesi_son[m[33m)[m HEAD@{20}: checkout: moving from SEO_Guncellemesi_son to Localization
+[33m1186750[m[33m ([m[1;31morigin/SEO_Guncellemesi_son[m[33m, [m[1;32mSEO_Guncellemesi_son[m[33m)[m HEAD@{21}: Branch: renamed refs/heads/SEO_Guncellemesi2 to refs/heads/SEO_Guncellemesi_son
+[33m1186750[m[33m ([m[1;31morigin/SEO_Guncellemesi_son[m[33m, [m[1;32mSEO_Guncellemesi_son[m[33m)[m HEAD@{23}: checkout: moving from SEO_Guncellemesi1 to SEO_Guncellemesi2
+[33m1936542[m[33m ([m[1;31morigin/SEO_Guncellemesi1[m[33m, [m[1;32mSEO_Guncellemesi1[m[33m)[m HEAD@{24}: checkout: moving from SEO_Guncellemesi2 to SEO_Guncellemesi1
+[33m1186750[m[33m ([m[1;31morigin/SEO_Guncellemesi_son[m[33m, [m[1;32mSEO_Guncellemesi_son[m[33m)[m HEAD@{25}: commit: SEO güncellemesinin bitmiş hali
+[33m1936542[m[33m ([m[1;31morigin/SEO_Guncellemesi1[m[33m, [m[1;32mSEO_Guncellemesi1[m[33m)[m HEAD@{26}: checkout: moving from SEO_Guncellemesi1 to SEO_Guncellemesi2
+[33m1936542[m[33m ([m[1;31morigin/SEO_Guncellemesi1[m[33m, [m[1;32mSEO_Guncellemesi1[m[33m)[m HEAD@{27}: commit: SEO güncellemesi 1. adım
+[33m54d1e23[m[33m ([m[1;31morigin/Email_Gonderimi2[m[33m, [m[1;32mEmail_Gonderimi2[m[33m, [m[1;32mEmail_Gonderimi[m[33m)[m HEAD@{28}: checkout: moving from Email_Gonderimi2 to SEO_Guncellemesi1
+[33m54d1e23[m[33m ([m[1;31morigin/Email_Gonderimi2[m[33m, [m[1;32mEmail_Gonderimi2[m[33m, [m[1;32mEmail_Gonderimi[m[33m)[m HEAD@{29}: checkout: moving from Email_Gonderimi to Email_Gonderimi2
+[33m54d1e23[m[33m ([m[1;31morigin/Email_Gonderimi2[m[33m, [m[1;32mEmail_Gonderimi2[m[33m, [m[1;32mEmail_Gonderimi[m[33m)[m HEAD@{30}: commit: Emai için son güncelleme
+[33m38213ec[m HEAD@{31}: reset: moving to HEAD
+[33m38213ec[m HEAD@{32}: filter-branch: rewrite
+[33mc166032[m HEAD@{33}: reset: moving to HEAD
+[33mc166032[m HEAD@{34}: commit: Ignore appsettings.json file
+[33m3515abe[m HEAD@{35}: commit: Mail gönderimi başarılı bir şekilde kodlandı.
+[33ma805f4b[m HEAD@{36}: checkout: moving from css_duzenlenmesi2 to Email_Gonderimi
+[33ma805f4b[m HEAD@{37}: commit: css düzenlemeleri yapıldı.
+[33med047b4[m HEAD@{38}: checkout: moving from css_duzenlemesi to css_duzenlenmesi2
+[33med047b4[m HEAD@{39}: commit: 2. css düzenlemesi
+[33mbdcf462[m HEAD@{40}: commit: css düzenlendi ve yazılar bir tık aşşağıya taşındı
+[33m8305c0c[m HEAD@{41}: checkout: moving from home_Index to css_duzenlemesi
+[33m8305c0c[m HEAD@{42}: commit: home index sayfası tasarlanması
+[33m908212e[m HEAD@{43}: checkout: moving from Iletisim to home_Index
+[33m908212e[m HEAD@{44}: commit: Home Index Front-and
+[33mb0ec186[m HEAD@{45}: commit: İletişim
+[33m1881759[m HEAD@{46}: checkout: moving from Tarifler_faydalari to Iletisim
+[33m1881759[m HEAD@{47}: commit: Tarifler ve faydaları sayfası ve Admin üzerinden CRUD işlemleri tamamlandı.
+[33mdffd963[m HEAD@{48}: checkout: moving from main to Tarifler_faydalari
+[33mdffd963[m HEAD@{49}: merge Model_Veritabani: Fast-forward
+[33mae12efd[m HEAD@{50}: checkout: moving from Model_Veritabani to main
+[33mdffd963[m HEAD@{51}: commit: comp
+[33m0d512d0[m HEAD@{52}: commit: complited tafidler and faydalari
+[33mae12efd[m HEAD@{53}: checkout: moving from main to Model_Veritabani
+[33mae12efd[m HEAD@{54}: Branch: renamed refs/heads/master to refs/heads/main
+[33mae12efd[m HEAD@{56}: commit (initial): First commit

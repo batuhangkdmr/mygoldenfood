@@ -132,6 +132,15 @@
   <data name="About_Vizyonumuz" xml:space="preserve">
     <value>Vizyonumuz</value>
   </data>
+  <data name="Faydalari_Fayda Detayı:" xml:space="preserve">
+    <value>Fayda Detayı:</value>
+  </data>
+  <data name="Faydalari_Ürünlerin Faydaları" xml:space="preserve">
+    <value>Ürünlerin Faydaları</value>
+  </data>
+  <data name="Footer_Adres" xml:space="preserve">
+    <value>Adres</value>
+  </data>
   <data name="Home_Ahududu" xml:space="preserve">
     <value>Ahududu</value>
   </data>
@@ -168,6 +177,39 @@
   <data name="Home_Çilek" xml:space="preserve">
     <value>Çilek</value>
   </data>
+  <data name="Iletisim_Adres:" xml:space="preserve">
+    <value>Adres:</value>
+  </data>
+  <data name="Iletisim_Adınız Soyadınız" xml:space="preserve">
+    <value>Adınız Soyadınız</value>
+  </data>
+  <data name="Iletisim_Bizimle İletişime Geçin" xml:space="preserve">
+    <value>Bizimle İletişime Geçin</value>
+  </data>
+  <data name="Iletisim_E-Posta Adresiniz" xml:space="preserve">
+    <value>E-Posta Adresiniz</value>
+  </data>
+  <data name="Iletisim_Email:" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="Iletisim_Gönder" xml:space="preserve">
+    <value>Gönder</value>
+  </data>
+  <data name="Iletisim_Konu" xml:space="preserve">
+    <value>Konu</value>
+  </data>
+  <data name="Iletisim_Mesajınız" xml:space="preserve">
+    <value>Mesajınız</value>
+  </data>
+  <data name="Iletisim_Telefon:" xml:space="preserve">
+    <value>Telefon:</value>
+  </data>
+  <data name="Iletisim_İletişim" xml:space="preserve">
+    <value>İletişim</value>
+  </data>
+  <data name="Iletisim_İletişim Bilgilerimiz" xml:space="preserve">
+    <value>İletişim Bilgilerimiz</value>
+  </data>
   <data name="Navbar_About" xml:space="preserve">
     <value>Hakkımızda</value>
   </data>
@@ -198,8 +240,17 @@
   <data name="Product_Önceki" xml:space="preserve">
     <value>Önceki</value>
   </data>
+  <data name="Product_Ürün Detayı:" xml:space="preserve">
+    <value>Ürün Detayı:</value>
+  </data>
   <data name="Product_Ürünlerimiz" xml:space="preserve">
     <value>Ürünlerimiz</value>
+  </data>
+  <data name="TariflerDetails_Lezzetli Tarifler" xml:space="preserve">
+    <value>Lezzetli Tarifler</value>
+  </data>
+  <data name="TariflerDetails_Tarif Detayı:" xml:space="preserve">
+    <value>Tarif Detayı:</value>
   </data>
   <data name="Tariflervefaydalari_Faydaları" xml:space="preserve">
     <value>Faydaları</value>

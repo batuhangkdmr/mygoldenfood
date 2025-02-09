@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyGoldenFood.ApplicationDbContext;
@@ -21,10 +22,31 @@ namespace MyGoldenFood.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            // Tarif kategorilerini listeleme
-            var categories = await _context.RecipeCategories.ToListAsync();
-            return View(categories); // categories değişkenini view'e gönderiyoruz
+            string selectedLanguage = "tr"; // Varsayılan dil
+
+            // Kullanıcının seçtiği dili çerezlerden al
+            var userCulture = Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
+            if (!string.IsNullOrEmpty(userCulture))
+            {
+                selectedLanguage = userCulture.Split('|')[0].Replace("c=", "");
+            }
+
+            var categories = await _context.RecipeCategories
+                .Include(c => c.Translations) // Çevirileri dahil et
+                .ToListAsync();
+
+            foreach (var category in categories)
+            {
+                var translation = category.Translations.FirstOrDefault(t => t.Language == selectedLanguage);
+                if (translation != null)
+                {
+                    category.Name = translation.Name; // Çeviriyi uygula
+                }
+            }
+
+            return View(categories);
         }
+
 
 
         // Tarif Kategorileri Listeleme
@@ -105,8 +127,16 @@ namespace MyGoldenFood.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
+            string selectedLanguage = "tr"; // Varsayılan dil
+
+            var userCulture = Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
+            if (!string.IsNullOrEmpty(userCulture))
+            {
+                selectedLanguage = userCulture.Split('|')[0].Replace("c=", "");
+            }
+
             var recipes = await _context.Recipes
-                .Where(r => r.RecipeCategoryId == id) // Seçilen kategoriye ait tarifleri getir
+                .Include(r => r.RecipeCategory) // Kategori bilgilerini de çekiyoruz
                 .ToListAsync();
 
             ViewBag.CategoryName = _context.RecipeCategories
@@ -114,13 +144,28 @@ namespace MyGoldenFood.Controllers
                 .Select(c => c.Name)
                 .FirstOrDefault();
 
+            // Çeviriyi uygula
+            foreach (var recipe in recipes)
+            {
+                var translation = _context.Translations
+                    .Where(t => t.ReferenceId == recipe.Id && t.TableName == "Recipes" && t.Language == selectedLanguage)
+                    .FirstOrDefault();
+
+                if (translation != null)
+                {
+                    recipe.Name = translation.FieldName == "Name" ? translation.TranslatedValue : recipe.Name;
+                    recipe.Content = translation.FieldName == "Content" ? translation.TranslatedValue : recipe.Content;
+                }
+            }
+
             if (!recipes.Any())
             {
                 ViewBag.Message = "Bu kategoriye ait tarif bulunmamaktadır.";
             }
 
-            return View(recipes); // Tarifleri view'e gönder
+            return View(recipes);
         }
+
 
 
         // Tarif Düzenleme (GET

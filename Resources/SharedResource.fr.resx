@@ -132,6 +132,15 @@
   <data name="About_Vizyonumuz" xml:space="preserve">
     <value>Notre vision</value>
   </data>
+  <data name="Faydalari_Fayda Detayı:" xml:space="preserve">
+    <value>Détail du Bienfait:</value>
+  </data>
+  <data name="Faydalari_Ürünlerin Faydaları" xml:space="preserve">
+    <value>Bienfaits des Produits</value>
+  </data>
+  <data name="Footer_Adres" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
   <data name="Home_Ahududu" xml:space="preserve">
     <value>Framboise</value>
   </data>
@@ -168,6 +177,39 @@
   <data name="Home_Çilek" xml:space="preserve">
     <value>Fraise</value>
   </data>
+  <data name="Iletisim_Adres:" xml:space="preserve">
+    <value>Adresse:</value>
+  </data>
+  <data name="Iletisim_Adınız Soyadınız" xml:space="preserve">
+    <value>Votre Nom et Prénom</value>
+  </data>
+  <data name="Iletisim_Bizimle İletişime Geçin" xml:space="preserve">
+    <value>Contactez-nous</value>
+  </data>
+  <data name="Iletisim_E-Posta Adresiniz" xml:space="preserve">
+    <value>Votre Adresse E-mail</value>
+  </data>
+  <data name="Iletisim_Email:" xml:space="preserve">
+    <value>E-mail:</value>
+  </data>
+  <data name="Iletisim_Gönder" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="Iletisim_Konu" xml:space="preserve">
+    <value>Sujet</value>
+  </data>
+  <data name="Iletisim_Mesajınız" xml:space="preserve">
+    <value>Votre Message</value>
+  </data>
+  <data name="Iletisim_Telefon:" xml:space="preserve">
+    <value>Téléphone:</value>
+  </data>
+  <data name="Iletisim_İletişim" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Iletisim_İletişim Bilgilerimiz" xml:space="preserve">
+    <value>Nos Informations de Contact</value>
+  </data>
   <data name="Navbar_About" xml:space="preserve">
     <value>À propos</value>
   </data>
@@ -198,8 +240,17 @@
   <data name="Product_Önceki" xml:space="preserve">
     <value>Précédent</value>
   </data>
+  <data name="Product_Ürün Detayı:" xml:space="preserve">
+    <value>Détail du Produit:</value>
+  </data>
   <data name="Product_Ürünlerimiz" xml:space="preserve">
     <value>Nos produits</value>
+  </data>
+  <data name="TariflerDetails_Lezzetli Tarifler" xml:space="preserve">
+    <value>Recettes Délicieuses</value>
+  </data>
+  <data name="TariflerDetails_Tarif Detayı:" xml:space="preserve">
+    <value>Détail de la Recette:</value>
   </data>
   <data name="Tariflervefaydalari_Faydaları" xml:space="preserve">
     <value>Bienfaits</value>

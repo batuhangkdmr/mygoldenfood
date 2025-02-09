@@ -1,23 +1,31 @@
 ﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using MyGoldenFood.Services;
+using System;
 
-public class LanguageController : Controller
+namespace MyGoldenFood.Controllers
 {
-    public IActionResult SetLanguage(string culture, string returnUrl)
+    public class LanguageController : Controller
     {
-        // Eğer culture değeri boşsa veya geçersizse, varsayılan olarak Türkçeyi ayarla
-        if (string.IsNullOrEmpty(culture) || !new[] { "tr", "en", "de", "fr", "ru", "ja", "ko" }.Contains(culture))
+        private readonly LocalizationCacheService _translationCacheService;
+
+        public LanguageController(LocalizationCacheService translationCacheService)
         {
-            culture = "tr";
+            _translationCacheService = translationCacheService;
         }
 
-        Response.Cookies.Append(
-            CookieRequestCultureProvider.DefaultCookieName,
-            CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-            new CookieOptions { Expires = DateTime.UtcNow.AddYears(1) } // ✅ 1 yıl boyunca çerez olarak sakla
-        );
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
 
-        return LocalRedirect(returnUrl);
+            return LocalRedirect(returnUrl);
+        }
+
     }
 
 }
+

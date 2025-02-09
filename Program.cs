@@ -48,6 +48,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 });
 
 builder.Services.AddSingleton(localizationOptions); // ? Localization servisini singleton olarak ekleyelim
+builder.Services.AddSingleton<DeepLTranslationService>();
 
 // **Localization Servisini Ekleyelim**
 builder.Services.AddControllersWithViews()
@@ -80,10 +81,33 @@ builder.Services.AddSingleton(sp =>
 
 // Register CloudinaryService
 builder.Services.AddScoped<CloudinaryService>();
+builder.Services.AddScoped<DeepLTranslationService>();
 
 
+// **Mail Ayarlarını appsettings.json'dan Oku**
+var emailSettings = builder.Configuration.GetSection("EmailSettings");
+var smtpServer = emailSettings["SmtpServer"];
+var smtpPort = int.Parse(emailSettings["Port"]);
+var smtpUsername = emailSettings["Username"];
+var smtpPassword = emailSettings["Password"];
+
+builder.Services.AddScoped<SmtpClient>(sp =>
+{
+    var client = new SmtpClient(smtpServer, smtpPort)
+    {
+        Credentials = new NetworkCredential(smtpUsername, smtpPassword),
+        EnableSsl = true
+    };
+    return client;
+});
+
+// Register MailService
+builder.Services.AddScoped<MailService>();
 // Memory Cache
 builder.Services.AddMemoryCache();
+builder.Services.AddScoped<LocalizationCacheService>();
+builder.Services.AddScoped<TranslationService>();
+
 
 // Rate Limiting
 builder.Services.AddRateLimiter(options =>

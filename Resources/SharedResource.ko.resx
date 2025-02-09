@@ -132,6 +132,15 @@
   <data name="About_Vizyonumuz" xml:space="preserve">
     <value>우리의 비전</value>
   </data>
+  <data name="Faydalari_Fayda Detayı:" xml:space="preserve">
+    <value>효능 상세:</value>
+  </data>
+  <data name="Faydalari_Ürünlerin Faydaları" xml:space="preserve">
+    <value>제품의 효능</value>
+  </data>
+  <data name="Footer_Adres" xml:space="preserve">
+    <value>주소</value>
+  </data>
   <data name="Home_Ahududu" xml:space="preserve">
     <value> 라즈베리</value>
   </data>
@@ -168,6 +177,39 @@
   <data name="Home_Çilek" xml:space="preserve">
     <value>딸기</value>
   </data>
+  <data name="Iletisim_Adres:" xml:space="preserve">
+    <value>주소: </value>
+  </data>
+  <data name="Iletisim_Adınız Soyadınız" xml:space="preserve">
+    <value>이름 성</value>
+  </data>
+  <data name="Iletisim_Bizimle İletişime Geçin" xml:space="preserve">
+    <value>문의하기</value>
+  </data>
+  <data name="Iletisim_E-Posta Adresiniz" xml:space="preserve">
+    <value>이메일 주소</value>
+  </data>
+  <data name="Iletisim_Email:" xml:space="preserve">
+    <value>이메일:</value>
+  </data>
+  <data name="Iletisim_Gönder" xml:space="preserve">
+    <value>보내기</value>
+  </data>
+  <data name="Iletisim_Konu" xml:space="preserve">
+    <value>제목</value>
+  </data>
+  <data name="Iletisim_Mesajınız" xml:space="preserve">
+    <value>귀하의 메시지</value>
+  </data>
+  <data name="Iletisim_Telefon:" xml:space="preserve">
+    <value>전화:</value>
+  </data>
+  <data name="Iletisim_İletişim" xml:space="preserve">
+    <value>연락</value>
+  </data>
+  <data name="Iletisim_İletişim Bilgilerimiz" xml:space="preserve">
+    <value>연락처 정보</value>
+  </data>
   <data name="Navbar_About" xml:space="preserve">
     <value>회사 소개</value>
   </data>
@@ -198,8 +240,17 @@
   <data name="Product_Önceki" xml:space="preserve">
     <value>이전</value>
   </data>
+  <data name="Product_Ürün Detayı:" xml:space="preserve">
+    <value>제품 상세:</value>
+  </data>
   <data name="Product_Ürünlerimiz" xml:space="preserve">
     <value>우리의 제품</value>
+  </data>
+  <data name="TariflerDetails_Lezzetli Tarifler" xml:space="preserve">
+    <value>맛있는 레시피</value>
+  </data>
+  <data name="TariflerDetails_Tarif Detayı:" xml:space="preserve">
+    <value>레시피 상세: </value>
   </data>
   <data name="Tariflervefaydalari_Faydaları" xml:space="preserve">
     <value>효능</value>

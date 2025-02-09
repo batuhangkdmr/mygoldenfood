@@ -132,6 +132,15 @@
   <data name="About_Vizyonumuz" xml:space="preserve">
     <value>私たちのビジョン</value>
   </data>
+  <data name="Faydalari_Fayda Detayı:" xml:space="preserve">
+    <value>利点の詳細:</value>
+  </data>
+  <data name="Faydalari_Ürünlerin Faydaları" xml:space="preserve">
+    <value> 製品の利点</value>
+  </data>
+  <data name="Footer_Adres" xml:space="preserve">
+    <value>住所</value>
+  </data>
   <data name="Home_Ahududu" xml:space="preserve">
     <value> ラズベリ</value>
   </data>
@@ -157,7 +166,7 @@
     <value>私たちのウェブサイト</value>
   </data>
   <data name="Home_TAZE" xml:space="preserve">
-    <value> 新鮮</value>
+    <value>新鮮</value>
   </data>
   <data name="Home_Yaban mersini" xml:space="preserve">
     <value>ブルーベリ</value>
@@ -167,6 +176,39 @@
   </data>
   <data name="Home_Çilek" xml:space="preserve">
     <value>いちご</value>
+  </data>
+  <data name="Iletisim_Adres:" xml:space="preserve">
+    <value>住所: </value>
+  </data>
+  <data name="Iletisim_Adınız Soyadınız" xml:space="preserve">
+    <value>あなたの名前と姓</value>
+  </data>
+  <data name="Iletisim_Bizimle İletişime Geçin" xml:space="preserve">
+    <value>お問い合わせください</value>
+  </data>
+  <data name="Iletisim_E-Posta Adresiniz" xml:space="preserve">
+    <value>あなたのメールアドレス</value>
+  </data>
+  <data name="Iletisim_Email:" xml:space="preserve">
+    <value>メール:</value>
+  </data>
+  <data name="Iletisim_Gönder" xml:space="preserve">
+    <value>送信</value>
+  </data>
+  <data name="Iletisim_Konu" xml:space="preserve">
+    <value>件名 </value>
+  </data>
+  <data name="Iletisim_Mesajınız" xml:space="preserve">
+    <value>あなたのメッセージ</value>
+  </data>
+  <data name="Iletisim_Telefon:" xml:space="preserve">
+    <value>電話: </value>
+  </data>
+  <data name="Iletisim_İletişim" xml:space="preserve">
+    <value>連絡 </value>
+  </data>
+  <data name="Iletisim_İletişim Bilgilerimiz" xml:space="preserve">
+    <value>連絡先情報</value>
   </data>
   <data name="Navbar_About" xml:space="preserve">
     <value>について</value>
@@ -198,8 +240,17 @@
   <data name="Product_Önceki" xml:space="preserve">
     <value>前</value>
   </data>
+  <data name="Product_Ürün Detayı:" xml:space="preserve">
+    <value>製品の詳細:</value>
+  </data>
   <data name="Product_Ürünlerimiz" xml:space="preserve">
     <value>私たちの製品</value>
+  </data>
+  <data name="TariflerDetails_Lezzetli Tarifler" xml:space="preserve">
+    <value>美味しいレシピ</value>
+  </data>
+  <data name="TariflerDetails_Tarif Detayı:" xml:space="preserve">
+    <value>レシピの詳細:</value>
   </data>
   <data name="Tariflervefaydalari_Faydaları" xml:space="preserve">
     <value>利点</value>
