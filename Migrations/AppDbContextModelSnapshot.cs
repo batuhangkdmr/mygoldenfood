@@ -194,6 +194,34 @@ namespace MyGoldenFood.Migrations
                     b.ToTable("RecipeCategories", (string)null);
                 });
 
+            modelBuilder.Entity("MyGoldenFood.Models.RecipeCategoryTranslation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("RecipeCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipeCategoryId");
+
+                    b.ToTable("RecipeCategoryTranslations", (string)null);
+                });
+
             modelBuilder.Entity("MyGoldenFood.Models.RecipeTranslation", b =>
                 {
                     b.Property<int>("Id")
@@ -253,7 +281,7 @@ namespace MyGoldenFood.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("TranslatedText")
+                    b.Property<string>("TranslatedValue")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -317,6 +345,17 @@ namespace MyGoldenFood.Migrations
                     b.Navigation("RecipeCategory");
                 });
 
+            modelBuilder.Entity("MyGoldenFood.Models.RecipeCategoryTranslation", b =>
+                {
+                    b.HasOne("MyGoldenFood.Models.RecipeCategory", "RecipeCategory")
+                        .WithMany("Translations")
+                        .HasForeignKey("RecipeCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RecipeCategory");
+                });
+
             modelBuilder.Entity("MyGoldenFood.Models.RecipeTranslation", b =>
                 {
                     b.HasOne("MyGoldenFood.Models.Recipe", "Recipe")
@@ -331,6 +370,8 @@ namespace MyGoldenFood.Migrations
             modelBuilder.Entity("MyGoldenFood.Models.RecipeCategory", b =>
                 {
                     b.Navigation("Recipes");
+
+                    b.Navigation("Translations");
                 });
 #pragma warning restore 612, 618
         }

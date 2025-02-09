@@ -13,11 +13,13 @@ namespace MyGoldenFood.Controllers
     {
         private readonly AppDbContext _context;
         private readonly CloudinaryService _cloudinaryService;
+        private readonly DeepLTranslationService _translationService;
 
-        public ProductController(AppDbContext context, CloudinaryService cloudinaryService)
+        public ProductController(AppDbContext context, CloudinaryService cloudinaryService, DeepLTranslationService translationService)
         {
             _context = context;
             _cloudinaryService = cloudinaryService;
+            _translationService = translationService;
         }
 
         // Ürün Listeleme
@@ -158,7 +160,6 @@ namespace MyGoldenFood.Controllers
             return PartialView("_EditProductPartial", product);
         }
 
-        // Ürün Düzenle - POST
         [HttpPost]
         public async Task<IActionResult> Edit(Product model, IFormFile? ImageFile)
         {
@@ -172,7 +173,6 @@ namespace MyGoldenFood.Controllers
 
                 if (ImageFile != null && ImageFile.Length > 0)
                 {
-                    // Yeni resim yüklendiğinde eski resim silinir
                     await _cloudinaryService.DeleteImageAsync(existingProduct.ImagePath);
                     var uploadResult = await _cloudinaryService.UploadImageAsync(ImageFile, "products");
                     if (uploadResult != null)
@@ -180,11 +180,48 @@ namespace MyGoldenFood.Controllers
                         existingProduct.ImagePath = uploadResult;
                     }
                 }
-
-                // Resim değişikliği yapılmadığında mevcut resim yolu korunur
                 else if (string.IsNullOrEmpty(existingProduct.ImagePath) && !string.IsNullOrEmpty(model.ImagePath))
                 {
                     existingProduct.ImagePath = model.ImagePath;
+                }
+
+                // Eski çevirileri kaldır
+                var existingTranslations = await _context.Translations
+                    .Where(t => t.ReferenceId == model.Id && t.TableName == "Product")
+                    .ToListAsync();
+                _context.Translations.RemoveRange(existingTranslations);
+
+                // Yeni çevirileri oluştur
+                string[] languages = { "en", "de", "fr", "ru", "ja", "ko" };
+
+                foreach (var lang in languages)
+                {
+                    var translatedName = await _translationService.TranslateText(model.Name, lang, "tr");
+                    var translatedDescription = await _translationService.TranslateText(model.Description, lang, "tr");
+
+                    if (!string.IsNullOrEmpty(translatedName))
+                    {
+                        _context.Translations.Add(new Translation
+                        {
+                            ReferenceId = model.Id,
+                            TableName = "Product",
+                            FieldName = "Name",
+                            Language = lang,
+                            TranslatedValue = translatedName
+                        });
+                    }
+
+                    if (!string.IsNullOrEmpty(translatedDescription))
+                    {
+                        _context.Translations.Add(new Translation
+                        {
+                            ReferenceId = model.Id,
+                            TableName = "Product",
+                            FieldName = "Description",
+                            Language = lang,
+                            TranslatedValue = translatedDescription
+                        });
+                    }
                 }
 
                 await _context.SaveChangesAsync();
@@ -194,10 +231,6 @@ namespace MyGoldenFood.Controllers
             return PartialView("_EditProductPartial", model);
         }
 
-
-
-
-            
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -213,9 +246,16 @@ namespace MyGoldenFood.Controllers
             }
 
             _context.Products.Remove(product);
+
+            // Translations tablosundan ilgili çevirileri kaldır
+            var translations = await _context.Translations
+                .Where(t => t.ReferenceId == id && t.TableName == "Product")
+                .ToListAsync();
+            _context.Translations.RemoveRange(translations);
+
             await _context.SaveChangesAsync();
 
-            return Json(new { success = true, message = "Ürün başarıyla silindi!" });
+            return Json(new { success = true, message = "Ürün ve çevirileri başarıyla silindi!" });
         }
     }
 }
