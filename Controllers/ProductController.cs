@@ -180,6 +180,7 @@ namespace MyGoldenFood.Controllers
                         existingProduct.ImagePath = uploadResult;
                     }
                 }
+
                 else if (string.IsNullOrEmpty(existingProduct.ImagePath) && !string.IsNullOrEmpty(model.ImagePath))
                 {
                     existingProduct.ImagePath = model.ImagePath;
