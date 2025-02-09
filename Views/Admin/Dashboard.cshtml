@@ -28,7 +28,7 @@
         <div class="tab-pane fade show active" id="products" role="tabpanel" aria-labelledby="products-tab">
             <div class="d-flex justify-content-between align-items-center">
                 <h2>Ürün Yönetimi</h2>
-                <button class="btn btn-primary" onclick="loadCreateForm('/Product/Create')">Yeni Ürün Ekle</button>
+                <button class="btn btn-primary" onclick="openCreateProductModal()">Yeni Ürün Ekle</button>
             </div>
             <div id="productList" class="mt-4"></div>
         </div>
@@ -37,7 +37,7 @@
         <div class="tab-pane fade" id="recipes" role="tabpanel" aria-labelledby="recipes-tab">
             <div class="d-flex justify-content-between align-items-center">
                 <h2>Tarif Yönetimi</h2>
-                <button class="btn btn-primary" onclick="loadCreateForm('/Tarifler/Create')">Yeni Tarif Ekle</button>
+                <button class="btn btn-primary" onclick="openCreateRecipeModal()">Yeni Tarif Ekle</button>
             </div>
             <div id="recipeList" class="mt-4"></div>
         </div>
@@ -46,7 +46,7 @@
         <div class="tab-pane fade" id="benefits" role="tabpanel" aria-labelledby="benefits-tab">
             <div class="d-flex justify-content-between align-items-center">
                 <h2>Fayda Yönetimi</h2>
-                <button class="btn btn-primary" onclick="loadCreateForm('/Faydalari/Create')">Yeni Fayda Ekle</button>
+                <button class="btn btn-primary" onclick="openCreateBenefitModal()">Yeni Fayda Ekle</button>
             </div>
             <div id="benefitList" class="mt-4"></div>
         </div>
@@ -73,33 +73,28 @@
                 $(containerId).html(data);
             });
         }
-            $(document).ready(function () {
-            loadList('/Tarifler/RecipeList', '#recipeList');
-        }); 
 
-        function loadCreateForm(url) {
+        function loadCreateForm(url, reloadUrl, containerId) {
             $.get(url, function (data) {
                 $("#modal .modal-content").html(data);
                 $("#modal").modal('show');
             });
+
+            $("#modal").on("hidden.bs.modal", function () {
+                loadList(reloadUrl, containerId);
+            });
         }
 
-        function loadEditForm(url) {
+        function loadEditForm(url, reloadUrl, containerId) {
             $.get(url, function (data) {
                 $("#modal .modal-content").html(data);
                 $("#modal").modal('show');
             });
-        }
-         function loadEditRecipeForm(id) {
-            const url = `/Tarifler/Edit?id=${id}`;
-            $.get(url, function (data) {
-                $("#modal .modal-content").html(data);
-                $("#modal").modal('show');
-            }).fail(function () {
-                Swal.fire('Hata!', 'Tarif düzenleme yüklenemedi!', 'error');
+
+            $("#modal").on("hidden.bs.modal", function () {
+                loadList(reloadUrl, containerId);
             });
         }
-
 
         function deleteItem(url, id, reloadUrl, containerId) {
             Swal.fire({
@@ -124,5 +119,19 @@
                 }
             });
         }
+
+        // Ürün ekleme, tarif ekleme ve fayda ekleme işlemlerine uygun şekilde fonksiyonları çağır
+        function openCreateProductModal() {
+            loadCreateForm('/Product/Create', '/Product/ProductList', '#productList');
+        }
+
+        function openCreateRecipeModal() {
+            loadCreateForm('/Tarifler/Create', '/Tarifler/RecipeList', '#recipeList');
+        }
+
+        function openCreateBenefitModal() {
+            loadCreateForm('/Faydalari/Create', '/Faydalari/BenefitList', '#benefitList');
+        }
+
     </script>
 }
