@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyGoldenFood.ApplicationDbContext;
 
@@ -10,9 +11,11 @@ using MyGoldenFood.ApplicationDbContext;
 namespace MyGoldenFood.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250210173249_AddRecipeTranslations")]
+    partial class AddRecipeTranslations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -317,7 +320,7 @@ namespace MyGoldenFood.Migrations
             modelBuilder.Entity("MyGoldenFood.Models.BenefitTranslation", b =>
                 {
                     b.HasOne("MyGoldenFood.Models.Benefit", "Benefit")
-                        .WithMany("Translations")
+                        .WithMany()
                         .HasForeignKey("BenefitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -365,11 +368,6 @@ namespace MyGoldenFood.Migrations
                         .IsRequired();
 
                     b.Navigation("Recipe");
-                });
-
-            modelBuilder.Entity("MyGoldenFood.Models.Benefit", b =>
-                {
-                    b.Navigation("Translations");
                 });
 
             modelBuilder.Entity("MyGoldenFood.Models.Recipe", b =>

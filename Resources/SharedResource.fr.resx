@@ -261,6 +261,9 @@
   <data name="Tariflervefaydalari_Tarifler ve Faydaları" xml:space="preserve">
     <value>Recettes et Bienfaits</value>
   </data>
+  <data name="Tarifler_Bu kategoriye ait tarif bulunmamaktadır." xml:space="preserve">
+    <value>Catégorie introuvable</value>
+  </data>
   <data name="Tarifler_Tarif Kategorileri" xml:space="preserve">
     <value>Catégories de Recettes</value>
   </data>

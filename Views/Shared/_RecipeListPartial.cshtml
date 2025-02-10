@@ -28,7 +28,7 @@
                 </td>
                 <td>@recipe.RecipeCategory?.Name</td> <!-- RecipeCategory.Name ekrana bastırılıyor -->
                 <td>
-                    <button class="btn btn-warning" onclick="loadEditForm('@recipe.Id')">Düzenle</button>
+                    <button class="btn btn-warning" onclick="loadEditRecipeForm('@recipe.Id')">Düzenle</button>
                     <button class="btn btn-danger" onclick="deleteItem('/Tarifler/DeleteRecipe', '@recipe.Id', '/Tarifler/RecipeList', '#recipeList')">Sil</button>
 
 

@@ -1,5 +1,7 @@
 ﻿@using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResource> localizer
+@model List<MyGoldenFood.Models.Recipe>
+
 @{
     ViewData["Title"] = "Lezzetli Tarifler | My Golden Food";
     Layout = "_Layout";
@@ -13,37 +15,10 @@
     <link rel="canonical" href="https://mygoldenfood.com/Tarifler/Details" />
 </head>
 
-<!-- Schema Markup (Google SEO için) -->
-<script type="application/ld+json">
-    {
-        "@@context": "https://schema.org",
-        "@@type": "Recipe",
-        "name": "My Golden Food Tarifleri",
-        "description": "My Golden Food'un sunduğu en lezzetli dondurulmuş gıda tarifleri burada! Tatlı ve yemek tariflerini keşfet.",
-        "image": "https://mygoldenfood.com/images/tarifler.jpg",
-        "author": {
-            "@@type": "Organization",
-            "name": "My Golden Food"
-        },
-        "publisher": {
-            "@@type": "Organization",
-            "name": "My Golden Food",
-            "logo": {
-                "@@type": "ImageObject",
-                "url": "https://res.cloudinary.com/dbhogeepn/image/upload/v1738688048/logo-moonlife1_ulf0n3.png"
-            }
-        },
-        "mainEntityOfPage": {
-            "@@type": "WebPage",
-            "@@id": "https://mygoldenfood.com/Tarifler/Details"
-        }
-    }
-</script>
-
-<!-- Tarifler Sayfası -->
 <div class="margin mt-5">
     <div class="container mt-5">
-        <h1 class="text-center text-white mb-4">@localizer["TariflerDetails_Lezzetli Tarifler"]</h1> <!-- SEO İçin H1 Güncellendi -->
+        <h1 class="text-center text-white mb-4">@localizer["TariflerDetails_Lezzetli Tarifler"]</h1>
+
         @if (!string.IsNullOrEmpty(ViewBag.Message))
         {
             <div class="alert alert-success text-center text-black" role="alert">
@@ -85,6 +60,35 @@
         </div>
     </div>
 </div>
+
+<!-- Schema Markup (Google SEO için) -->
+<script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "Recipe",
+        "name": "My Golden Food Tarifleri",
+        "description": "My Golden Food'un sunduğu en lezzetli dondurulmuş gıda tarifleri burada! Tatlı ve yemek tariflerini keşfet.",
+        "image": "https://mygoldenfood.com/images/tarifler.jpg",
+        "author": {
+            "@@type": "Organization",
+            "name": "My Golden Food"
+        },
+        "publisher": {
+            "@@type": "Organization",
+            "name": "My Golden Food",
+            "logo": {
+                "@@type": "ImageObject",
+                "url": "https://res.cloudinary.com/dbhogeepn/image/upload/v1738688048/logo-moonlife1_ulf0n3.png"
+            }
+        },
+        "mainEntityOfPage": {
+            "@@type": "WebPage",
+            "@@id": "https://mygoldenfood.com/Tarifler/Details"
+        }
+    }
+</script>
+
+
 <style>
     /* Grid Layout */
     .recipe-grid {

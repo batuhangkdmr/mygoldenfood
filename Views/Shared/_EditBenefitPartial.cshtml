@@ -1,32 +1,22 @@
-﻿@model MyGoldenFood.Models.Recipe
+﻿@model MyGoldenFood.Models.Benefit
 
 <div class="modal-header bg-primary text-white">
-    <h5 class="modal-title">Tarifi Güncelle</h5>
+    <h5 class="modal-title">Faydayı Güncelle</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 
 <div class="modal-body">
-    <form id="editRecipeForm" enctype="multipart/form-data">
+    <form id="editBenefitForm" enctype="multipart/form-data">
         <input type="hidden" name="Id" value="@Model.Id" />
 
         <div class="mb-3">
-            <label for="Name" class="form-label">Tarif Adı</label>
+            <label for="Name" class="form-label">Ürün Adı</label>
             <input type="text" name="Name" id="Name" class="form-control" value="@Model.Name" required>
         </div>
 
         <div class="mb-3">
-            <label for="Content" class="form-label">Tarif İçeriği</label>
+            <label for="Content" class="form-label">Faydaları</label>
             <textarea name="Content" id="Content" class="form-control" rows="3">@Model.Content</textarea>
-        </div>
-
-        <div class="mb-3">
-            <label for="RecipeCategoryId" class="form-label">Kategori</label>
-            <select name="RecipeCategoryId" id="RecipeCategoryId" class="form-select">
-                @foreach (var category in ViewBag.Categories)
-                {
-                    <option value="@category.Id" selected="@(category.Id == Model.RecipeCategoryId ? "selected" : null)">@category.Name</option>
-                }
-            </select>
         </div>
 
         <div class="mb-3">
@@ -42,28 +32,31 @@
 
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
-    <button type="button" class="btn btn-success" onclick="submitEditRecipeForm()">Güncelle</button>
+    <button type="button" class="btn btn-success" onclick="submitEditBenefitForm()">Güncelle</button>
 </div>
 
 <script>
-    function previewImage(event) {
-        const preview = document.getElementById("preview");
+    function previewEditImage(event) {
+        const preview = document.getElementById("editPreview");
         const file = event.target.files[0];
 
         if (file) {
             const reader = new FileReader();
             reader.onload = function (e) {
                 preview.src = e.target.result;
-            }
+                preview.style.display = "block";
+            };
             reader.readAsDataURL(file);
+        } else {
+            preview.style.display = "none";
         }
     }
 
-    function submitEditForm() {
-        var formData = new FormData($("#editForm")[0]);
+    function submitEditBenefitForm() {
+        var formData = new FormData($("#editBenefitForm")[0]);
 
         $.ajax({
-            url: "/Tarifler/Edit",
+            url: "/Faydalari/Edit",
             type: "POST",
             data: formData,
             processData: false,
@@ -71,8 +64,8 @@
             success: function (response) {
                 if (response.success) {
                     Swal.fire("Başarılı", response.message, "success");
-                    $("#modal").modal('hide');
-                    loadRecipeList();
+                    $("#modal").modal("hide");
+                    loadList('/Faydalari/BenefitList', '#benefitList'); // Listeyi güncelle
                 } else {
                     Swal.fire("Hata", response.message, "error");
                 }

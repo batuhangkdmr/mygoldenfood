@@ -25,15 +25,17 @@
         "itemListElement": [
     @foreach (var benefit in Model)
     {
-        <text>
-                    {
-                        "@@type": "Product",
-                        "name": "@benefit.Name",
-                        "image": "@benefit.ImagePath",
-                        "description": "@benefit.Content"
-                    },
-        </text>
+            <div class="benefit-card" onclick="showModal('@benefit.Name', '@benefit.Content')" aria-label="@benefit.Name">
+                <div class="image-container">
+                    <img src="@benefit.ImagePath" alt="@benefit.Name | Dondurulmuş Gıda Faydaları" class="benefit-image" loading="lazy">
+                </div>
+                <div class="benefit-name-container">
+                    <h2 class="benefit-name">@benefit.Name</h2> <!-- SEO İçin H2 Başlığı Güncellendi -->
+                </div>
+            </div>
     }
+
+
         ]
     }
 </script>

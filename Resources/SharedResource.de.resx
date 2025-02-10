@@ -261,6 +261,9 @@
   <data name="Tariflervefaydalari_Tarifler ve Faydaları" xml:space="preserve">
     <value>Rezepte und Vorteile</value>
   </data>
+  <data name="Tarifler_Bu kategoriye ait tarif bulunmamaktadır." xml:space="preserve">
+    <value>Kategorie nicht gefunden</value>
+  </data>
   <data name="Tarifler_Tarif Kategorileri" xml:space="preserve">
     <value>Rezeptkategorien</value>
   </data>

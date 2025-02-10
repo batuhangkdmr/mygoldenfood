@@ -261,6 +261,9 @@
   <data name="Tariflervefaydalari_Tarifler ve Faydaları" xml:space="preserve">
     <value>レシピと利点</value>
   </data>
+  <data name="Tarifler_Bu kategoriye ait tarif bulunmamaktadır." xml:space="preserve">
+    <value>カテゴリが見つかりません</value>
+  </data>
   <data name="Tarifler_Tarif Kategorileri" xml:space="preserve">
     <value>レシピのカテゴリ</value>
   </data>
