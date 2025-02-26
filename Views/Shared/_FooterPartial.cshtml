@@ -4,19 +4,28 @@
 <footer class="text-white about-footer">
     <div class="container-fluid">
         <section class="footer-1">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0 p-4 text-center">
-                    <div class="footer-logo">
+            <div class="row align-items-center text-center">
+                <!-- Logo Alanı (Ortalanmış) -->
+                <div class="col-lg-6 col-md-6 mb-4 mb-md-0 p-4">
+                    <div class="footer-logo d-flex justify-content-center align-items-center">
+                        <!-- Mevcut Logo -->
                         <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1738687955/logo-moonL%C4%B1fe_x0pksr.jpg"
                              alt="My Golden Food - Dondurulmuş Gıda ve Tatlı Çeşitleri"
-                             class="footer-img img-fluid rounded"
+                             class="footer-img img-fluid rounded mx-3"
+                             loading="lazy"> <!-- Lazy Loading -->
+                        <!-- Yeni Eklenen Logo -->
+                        <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1740578920/Minimalist_Modern_Arka_Plan__Siyah_000000__Yaz%C4%B1__Mor_a020f0__Font__Montserrat_Bold__%C4%B0%C3%A7erik__%C3%9Cst_Sat%C4%B1r___Contact_Us__b%C3%BCy%C3%BCk_harf_ortalanm%C4%B1%C5%9F__Alt_Sat%C4%B1r____90_533_635_2458__k%C3%BC%C3%A7%C3%BCk_harf_ortalanm%C4%B1%C5%9F__Ekstra__Hafif_aohog8.jpg"
+                             alt="Eklenen Logo"
+                             class="footer-img img-fluid rounded mx-3"
                              loading="lazy"> <!-- Lazy Loading -->
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 mb-4 mb-md-0 p-4">
+
+                <!-- Adres ve Sosyal Medya Alanı -->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0 p-4">
                     <h5 class="text-uppercase">@localizer["Footer_Adres"]</h5>
                     <p>MY GOLDEN FOOD GIDA SAN.TİC A.Ş. Türkiye/Ankara</p>
-                   @*  <p><strong>Dondurulmuş meyve, sebze ve tatlı çeşitleriyle en taze lezzetleri keşfedin.</strong></p> *@
+
                     <div class="mb-4">
                         <a class="btn btn-dark btn-floating m-1" href="https://www.facebook.com/mygoldenfood" target="_blank" role="button" rel="noopener noreferrer">
                             <i class="fab fa-facebook-f"></i>
@@ -32,7 +41,9 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0 p-4">
+
+                <!-- İletişim Bilgileri -->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-5 p-4">
                     <h5 class="text-uppercase">@localizer["Iletisim_İletişim"]</h5>
                     <ul class="list-unstyled mb-0">
                         <li>
@@ -49,11 +60,15 @@
             </div>
         </section>
     </div>
+
+    <!-- Copyright Alanı -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2024 Copyright
+        © 2025 Copyright
         <a class="text-white" href="https://mygoldenfood.com">My Golden Food</a>
     </div>
 </footer>
+
+
 
 <!-- SEO İçin Yapısal Veri -->
 <script type="application/ld+json">

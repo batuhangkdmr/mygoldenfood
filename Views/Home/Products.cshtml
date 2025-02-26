@@ -59,15 +59,31 @@
 <style>
     .content {
         flex: 1;
-        padding-top: 5%;
+        padding-top: 6%;
     }
 
-    /* Responsive Grid Düzeni */
     .product-grid {
+        min-height: 600px; /* 12 ürün için gereken yükseklik */
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
+        justify-content: flex-start;
+        align-items: start;
     }
+    /* Placeholder ürünler için şeffaf bir görünüm */
+    .product-placeholder {
+        visibility: hidden; /* Görünmez olacak */
+        height: 250px;
+    }
+
+        /* Eğer ürün sayısı 3'ten azsa, ortalama yap */
+        .product-grid:has(.product-card:nth-child(1):nth-last-child(1)),
+        .product-grid:has(.product-card:nth-child(1):nth-last-child(2)) {
+            display: flex;
+            justify-content: start;
+            gap: 20px;
+        }
+
 
     .title-container {
         margin-top: 30px;
@@ -75,29 +91,7 @@
         text-align: center;
     }
 
-    /* Mobilde 2 sütun */
-    @@media (max-width: 950px) {
-        .product-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
 
-        .product-image {
-            width: 100%;
-            height: 70%;
-            object-fit: contain;
-            object-position: center;
-            transition: transform 0.3s ease;
-        }
-
-        .title-container {
-            margin-top: 30%;
-            margin-bottom: 10px;
-        }
-
-        h2.text-center {
-            font-size: 3rem;
-        }
-    }
 
     /* Kart Tasarımı */
     .product-card {
@@ -195,6 +189,65 @@
             bottom: 0;
             left: 0;
         }
+
+    /* Mobilde 2 sütun */
+    @@media (max-width: 950px) {
+        .product-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .title-container {
+            margin-top: 30%;
+            margin-bottom: 10px;
+        }
+
+        h2.text-center {
+            font-size: 3rem;
+        }
+        /* Ürün görsellerinin düzgün oranlarda olması için */
+        .image-container {
+            width: 100%;
+            height: 180px; /* Daha dengeli bir yükseklik */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        /* Resimlerin daha düzgün ve ölçeklenmiş görünmesi için */
+        .product-image {
+            width: 100%;
+            height: 100%;
+            max-height: 180px; /* Görselin fazla uzamasını önler */
+            object-fit: contain; /* Görsellerin kırpılmasını sağlar, orantıyı bozmadan doldurur */
+            object-position: center; /* Görselin ortalanmasını sağlar */
+            transition: transform 0.3s ease;
+        }
+        /* Hover (Masaüstü için) */
+        .image-container:hover .product-image {
+            transform: scale(1.1);
+        }
+        /* Mobil için tıklanınca büyüme */
+        .image-container.active .product-image {
+            transform: scale(1.1);
+        }
+        /* Ürün adını resme yaklaştır */
+        .product-name-container {
+            padding: 8px; /* Daha küçük padding */
+            margin-top: -5px; /* Üst boşluğu azaltarak resme yaklaştır */
+            background-color: transparent; /* Arka plan olmadan */
+            text-align: center;
+        }
+        /* Ürün adı yazı tipi ve boyutu */
+        .product-name {
+            margin: 13px;
+            font-size: 1.1rem; /* Fontu biraz küçült */
+            font-weight: bold;
+            color: #fff;
+            line-height: 1.2; /* Satır yüksekliğini sıkılaştır */
+        }
+    }
 </style>
 
 <script>
@@ -248,4 +301,56 @@
             });
         });
     });
+        function showPage(page) {
+        let totalProducts = allProducts.length;
+        let start = (page - 1) * pageSize;
+        let end = page * pageSize;
+        let visibleProducts = [];
+
+        // Mevcut ürünleri göster
+        allProducts.forEach((product, index) => {
+            if (index >= start && index < end) {
+                product.style.display = "block";
+                visibleProducts.push(product);
+            } else {
+                product.style.display = "none";
+            }
+        });
+
+        // Eksik ürünleri placeholder ile tamamla
+        let missingCount = pageSize - visibleProducts.length;
+        document.querySelectorAll(".product-placeholder").forEach(e => e.remove()); // Önceki placeholder'ları temizle
+
+        for (let i = 0; i < missingCount; i++) {
+            let placeholder = document.createElement("div");
+            placeholder.classList.add("product-card", "product-placeholder");
+            productGrid.appendChild(placeholder);
+        }
+
+        // Sayfa numarasını güncelle
+        document.getElementById("pageNumber").textContent = `@localizer["Product_Sayfa"] ${page}`;
+        document.getElementById("prevPage").disabled = (page === 1);
+        document.getElementById("nextPage").disabled = (page * pageSize >= totalProducts);
+    }
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const imageContainers = document.querySelectorAll(".image-container");
+
+        imageContainers.forEach(container => {
+            container.addEventListener("click", function () {
+                // Önce tüm aktif sınıfları kaldır
+                imageContainers.forEach(img => img.classList.remove("active"));
+
+                // Sadece tıklanan öğeyi büyüt
+                this.classList.add("active");
+
+                // 1 saniye sonra tekrar küçült (isteğe bağlı)
+                setTimeout(() => {
+                    this.classList.remove("active");
+                }, 1000);
+            });
+        });
+    });
+
+
 </script>

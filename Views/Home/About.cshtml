@@ -7,59 +7,196 @@
 
 <!-- SEO Meta Etiketleri -->
 <head>
-    <meta name="description" content="My Golden Food, dondurulmuş gıda sektöründe kaliteli ve lezzetli ürünler sunan öncü bir markadır. Lezzetli ve sağlıklı dondurulmuş gıdalarımız hakkında daha fazla bilgi edinin.">
-    <meta name="keywords" content="dondurulmuş gıda, kaliteli gıda, lezzetli dondurulmuş ürünler, My Golden Food, sağlıklı dondurulmuş ürünler">
+    <meta name="description" content="My Golden Food, dondurulmuş gıda sektöründe kaliteli ve lezzetli ürünler sunan öncü bir markadır.">
+    <meta name="keywords" content="dondurulmuş gıda, kaliteli gıda, lezzetli dondurulmuş ürünler, My Golden Food">
     <meta name="author" content="My Golden Food">
     <link rel="canonical" href="https://mygoldenfood.com/Home/About" />
+
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
-<!-- Schema Markup (Google SEO için) -->
-<script type="application/ld+json">
-    {
-        "@@context": "https://schema.org",
-        "@@type": "Organization",
-        "name": "My Golden Food",
-        "url": "https://mygoldenfood.com",
-        "logo": "https://res.cloudinary.com/dbhogeepn/image/upload/v1738688048/logo-moonlife1_ulf0n3.png",
-        "description": "My Golden Food, dondurulmuş gıda sektöründe kaliteli ve lezzetli ürünler sunan bir markadır.",
-        "address": {
-            "@@type": "PostalAddress",
-            "addressLocality": "Ankara, Türkiye"
-        },
-        "contactPoint": {
-            "@@type": "ContactPoint",
-            "telephone": "+90 533 635 24 58",
-            "contactType": "customer service"
-        }
+<style>
+    html, body {
+        background-color: black !important;
+        margin: 0;
+        padding: 0;
     }
-</script>
 
+    /* Swiper Carousel Genel Stil */
+    .swiper-container {
+        width: 100%;
+        height: 800px;
+        position: relative;
+    }
+
+    .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: black;
+    }
+
+        .swiper-slide img {
+            max-width: 90%;
+            margin-top: 12%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+    /* Swiper Fade Geçişi İçin Özel Stil */
+    .swiper-container-fade .swiper-slide {
+        opacity: 0;
+        visibility: hidden; /* Pasif slaytları tamamen gizle */
+        transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+    }
+
+    .swiper-container-fade .swiper-slide-active {
+        opacity: 1;
+        visibility: visible; /* Sadece aktif slayt görünsün */
+    }
+
+    /* Swiper Butonlarını Resmin Ortasına Daha İyi Hizalama */
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: white;
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 55%;
+        transform: translateY(-50%);
+        z-index: 10;
+    }
+
+    .swiper-button-prev {
+        left: 5%;
+        margin-top: 5%;
+    }
+
+    .swiper-button-next {
+        right: 5%;
+        margin-top: 5%;
+    }
+
+    /* Swiper Alt Noktalar */
+    .swiper-pagination-bullet {
+        background: white;
+    }
+
+    /* Metin Alanı İçin Siyah Arka Plan ve Beyaz Yazılar */
+    .text-section {
+        background-color: black;
+        color: white;
+        padding: 50px 0;
+        margin-top: 9%;
+        text-align: center;
+    }
+
+        .text-section h1 {
+            color: white;
+        }
+
+        .text-section p {
+            font-size: 18px;
+        }
+
+    /* Harita Animasyonu İçin Başlangıçta Gizleme */
+    .map-container {
+        opacity: 0;
+    }
+</style>
+
+<!-- Swiper.js Carousel -->
 <section class="container-fluid p-0 position-relative">
-    <!-- Harita Alanı -->
-    <div class="w-100" style="margin-top: -150px; z-index: -1; position: relative;">
-        <div class="map-container w-100">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d138524.98741767602!2d32.66520231636404!3d39.89666169506215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d347d520732db1%3A0xbdc57b0c0842b8d!2sAnkara!5e0!3m2!1str!2str!4v1734474761513!5m2!1str!2str"
-                    width="100%" height="1200" style="border:0;" allowfullscreen=""
-                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                    title="My Golden Food Konumu - Ankara, Türkiye"
-                    aria-label="My Golden Food'un harita üzerindeki konumu">
-            </iframe>
+    <div class="swiper-container swiper-container-fade">
+        <div class="swiper-wrapper">
+            <!-- 1. Slide - Google Maps -->
+            <div class="swiper-slide">
+                <iframe class="map-container"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d138524.98741767602!2d32.66520231636404!3d39.89666169506215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d347d520732db1%3A0xbdc57b0c0842b8d!2sAnkara!5e0!3m2!1str!2str!4v1734474761513!5m2!1str!2str"
+                        width="80%" height="100%" style="border:0; margin-top:15%;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+
+            <!-- 2. Slide - Alternatif Görsel -->
+            <div class="swiper-slide">
+                <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1739637250/img-513_lxxbvk.jpg" alt="Alternate Text">
+            </div>
+
+            <!-- 3. Slide - API Görseli -->
+            <div class="swiper-slide">
+                <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1739896039/mae-mu-XYa7y1Z9Fwk-unsplash_murhjx.jpg" alt="Ürün Görseli">
+            </div>
+
+            <div class="swiper-slide">
+                <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1738425662/products/beqmw7kxdg9glf44gkbx.png" alt="Ürün Görseli">
+            </div>
         </div>
+
+        <!-- Swiper Navigasyon Butonları -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+
+        <!-- Swiper Alt Noktalar -->
+        <div class="swiper-pagination"></div>
     </div>
 </section>
 
-<!-- Metin Alanı -->
-<section class="container mt-5">
-    <h1 class="text-center mb-4">@localizer["About_Biz Kimiz?"] | My Golden Food</h1> <!-- SEO için H1 etiketi -->
-    <div class="row justify-content-center">
-        <div class="col-md-8 text-center">
-            <p>
-                <strong>My Golden Food</strong>, @localizer["About_dondurulmuş gıda sektöründe **kaliteli ve lezzetli** ürünler sunan öncü bir markadır."]
-                @localizer["About_Müşterilerimize en iyi hizmeti sağlamak için sürekli **yenilikçi çözümler** üretmekteyiz."]
-            </p>
-            <p>
-                <strong>@localizer["About_Vizyonumuz"]</strong>, @localizer["About_dünya çapında lezzetimizi tanıtmak ve **sürdürülebilir üretim anlayışıyla** herkese sağlıklı ve lezzetli ürünler sunmaktır."]
-            </p>
-        </div>
+<!-- Swiper.js JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(() => {
+            document.querySelector(".map-container").classList.add("animate__animated", "animate__fadeInUp");
+            document.querySelector(".map-container").style.opacity = 1;
+        }, 500);
+    });
+
+    var swiper = new Swiper(".swiper-container", {
+        loop: true,
+        effect: "fade",
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        observer: true, // Sayfanın tamamını yeniden yüklemeyi engelle
+        observeParents: true, // Üst öğelerde değişiklik olsa bile Swiper etkilenmez
+        on: {
+            slideChangeTransitionStart: function () {
+                document.querySelectorAll(".swiper-slide").forEach(slide => {
+                    slide.style.visibility = "hidden";
+                });
+                document.querySelector(".swiper-slide-active").style.visibility = "visible";
+
+                var activeSlide = document.querySelector(".swiper-slide-active iframe");
+                if (activeSlide) {
+                    activeSlide.classList.add("animate__animated", "animate__zoomIn");
+                }
+            },
+        }
+    });
+</script>
+
+<section class="container-fluid text-section">
+    <div class="container">
+        <h1>@localizer["About_Biz Kimiz?"] | My Golden Food</h1>
+        <p>
+            <strong>My Golden Food</strong>, @localizer["About_dondurulmuş gıda sektöründe **kaliteli ve lezzetli** ürünler sunan öncü bir markadır."]
+            @localizer["About_Müşterilerimize en iyi hizmeti sağlamak için sürekli **yenilikçi çözümler** üretmekteyiz."]
+        </p>
+        <p>
+            <strong>@localizer["About_Vizyonumuz"]</strong>, @localizer["About_dünya çapında lezzetimizi tanıtmak ve **sürdürülebilir üretim anlayışıyla** herkese sağlıklı ve lezzetli ürünler sunmaktır."]
+        </p>
     </div>
 </section>

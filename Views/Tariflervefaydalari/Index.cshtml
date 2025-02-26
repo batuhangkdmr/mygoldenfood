@@ -16,23 +16,22 @@
 <meta name="robots" content="index, follow">
 
 <div class="container text-center mt-5">
-    <br <br /><br />
-    <h1 class="mb-5 text-white">@localizer["Tariflervefaydalari_Tarifler ve Faydaları"]</h1>
+    <h1 class="mb-5 colorrenk">@localizer["Tariflervefaydalari_Tarifler ve Faydaları"]</h1>
     <div class="row justify-content-center">
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-6 col-sm-12">
             <a href="/Tarifler/Index">
                 <img src="~/images/tarifler.jpg" alt="Dondurulmuş Gıda Tarifleri" class="img-fluid img-responsive" />
-                <h3 class="mt-3 text-white"><br /> <br /> <br /> <br /> <br />  </h3>
+                <h3 class="title-spacing text-white"><br/></h3>
             </a>
         </div>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-6 col-sm-12">
             <a href="/Faydalari/Index">
                 <img src="~/images/faydalar.jpg" alt="Dondurulmuş Gıdaların Faydaları" class="img-fluid img-responsive" />
-                <h3 class="mt-3 text-white"><br /></h3>
             </a>
         </div>
     </div>
 </div>
+
 
 <style>
     .content {
@@ -45,13 +44,20 @@
         overflow-x: hidden;
     }
 
+    /* İçerik ile footer arasına geniş boşluk bırak */
     .container {
         overflow-x: hidden;
         padding-top: 10%;
+        padding-bottom: 250px; /* Masaüstü için geniş boşluk */
+    }
+    /* h3 başlıklarının arasına boşluk ekle */
+    .title-spacing {
+        margin-top: 20px;
     }
 
     h1 {
         font-size: 2.5rem;
+        color: #a020f0;
     }
 
     img {
@@ -64,7 +70,7 @@
         }
 
     /* 🌟 Mobilde Yan Yana Getirme */
-    @@media (max-width: 768px) {
+    @@media (max-width: 1000px) {
         .row
 
     {
@@ -74,7 +80,7 @@
         overflow: hidden;
     }
     h1{
-       font-size: 35px;
+       font-size: 33px;
     }
 
     .col-sm-6 {
@@ -89,6 +95,15 @@
     h3 {
         font-size: 1.2rem;
     }
+
+        .container {
+            padding-bottom: 100px; /* Mobilde daha az boşluk */
+            padding-top: 20%;
+        }
+
+        .title-spacing {
+            margin-top: 10px; /* Başlıkları biraz daha yaklaştır */
+        }
 
     }
 </style>
