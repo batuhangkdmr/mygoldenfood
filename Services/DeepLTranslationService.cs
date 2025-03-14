@@ -19,22 +19,29 @@ namespace MyGoldenFood.Services
 
         public async Task<string> TranslateText(string text, string targetLanguage, string sourceLanguage = "tr")
         {
-            if (string.IsNullOrWhiteSpace(text)) return text; // Boş metinleri çevirmiyoruz
+            if (string.IsNullOrWhiteSpace(text)) return text;
 
             try
             {
-                using (var httpClient = new HttpClient()) // Her istekte yeni HttpClient açalım
-                {
-                    var requestContent = new Dictionary<string, string>
-            {
-                { "text", text },
-                { "target_lang", targetLanguage.ToUpper() },
-                { "source_lang", sourceLanguage.ToUpper() } // Kaynak dil Türkçe
-            };
+                const int maxChunkSize = 4500; // DeepL 5000 sınırı var, biraz boşluk bırakıyoruz
+                var translatedChunks = new List<string>();
+                var chunks = SplitTextIntoChunks(text, maxChunkSize);
 
-                    var content = new FormUrlEncodedContent(requestContent);
-                    httpClient.DefaultRequestHeaders.Clear();
-                    httpClient.DefaultRequestHeaders.Add("Authorization", $"DeepL-Auth-Key {_apiKey}");
+                using var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Clear();
+                httpClient.DefaultRequestHeaders.Add("Authorization", $"DeepL-Auth-Key {_apiKey}");
+
+                foreach (var chunk in chunks)
+                {
+                    var requestData = new
+                    {
+                        text = new string[] { chunk }, // DeepL diziler ile çalışıyor
+                        target_lang = targetLanguage.ToUpper(),
+                        source_lang = sourceLanguage.ToUpper()
+                    };
+
+                    var json = JsonSerializer.Serialize(requestData);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                     var response = await httpClient.PostAsync("https://api-free.deepl.com/v2/translate", content);
 
@@ -42,7 +49,7 @@ namespace MyGoldenFood.Services
                     {
                         var jsonResponse = await response.Content.ReadAsStringAsync();
                         using var jsonDoc = JsonDocument.Parse(jsonResponse);
-                        return jsonDoc.RootElement.GetProperty("translations")[0].GetProperty("text").GetString();
+                        translatedChunks.Add(jsonDoc.RootElement.GetProperty("translations")[0].GetProperty("text").GetString());
                     }
                     else
                     {
@@ -50,12 +57,25 @@ namespace MyGoldenFood.Services
                         return string.Empty;
                     }
                 }
+
+                return string.Join(" ", translatedChunks); // Parçaları birleştir
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"🔥 DeepL API çağrısında hata: {ex.Message}");
                 return string.Empty;
             }
+        }
+
+        // Metni belirli uzunluklarda bölme fonksiyonu
+        private List<string> SplitTextIntoChunks(string text, int maxChunkSize)
+        {
+            var chunks = new List<string>();
+            for (int i = 0; i < text.Length; i += maxChunkSize)
+            {
+                chunks.Add(text.Substring(i, Math.Min(maxChunkSize, text.Length - i)));
+            }
+            return chunks;
         }
 
 

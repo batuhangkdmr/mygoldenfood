@@ -50,7 +50,7 @@
             </div>
             <div class="modal-body">
                 <h6 class="modal-title-with-line">@localizer["Product_Ürün Detayı:"]</h6>
-                <p id="detailsModalDescription"></p>
+                <p id="detailsModalDescription" class="modal-text"></p>
             </div>
         </div>
     </div>
@@ -248,6 +248,17 @@
             line-height: 1.2; /* Satır yüksekliğini sıkılaştır */
         }
     }
+
+    .modal-body p {
+        font-size: 1rem;
+        line-height: 1.6;
+        text-align: left;
+        white-space: pre-line;
+        margin-bottom: 10px;
+    }
+
+
+
 </style>
 
 <script>
@@ -294,7 +305,7 @@
                 }
 
                 document.getElementById('detailsModalLabel').textContent = name;
-                document.getElementById('detailsModalDescription').textContent = description;
+               document.getElementById('detailsModalDescription').innerHTML = description.replace(/\n/g, "<br>");
 
                 var modal = new bootstrap.Modal(document.getElementById('detailsModal'));
                 modal.show();
@@ -352,5 +363,24 @@
         });
     });
 
+        document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".image-container").forEach(item => {
+            item.addEventListener("click", function () {
+                let name = this.getAttribute("data-name");
+                let description = this.getAttribute("data-description");
+
+                if (!name || !description) {
+                    alert("Ürün detayları eksik!");
+                    return;
+                }
+
+                document.getElementById('detailsModalLabel').textContent = name;
+                document.getElementById('detailsModalDescription').innerHTML = description.replace(/\n/g, "<br>"); // Yeni satırları koru
+
+                var modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+                modal.show();
+            });
+        });
+    });
 
 </script>

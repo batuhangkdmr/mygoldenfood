@@ -1,8 +1,11 @@
-﻿namespace MyGoldenFood.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MyGoldenFood.Models
 {
     public class Recipe : BaseEntity
     {
         public string Name { get; set; } // Tarif adı
+        [Column(TypeName = "NVARCHAR(MAX)")]
         public string Content { get; set; } // Tarif içeriği
         public string? ImagePath { get; set; } // Resim yolu
         public int? RecipeCategoryId { get; set; } // Kategori ID'si

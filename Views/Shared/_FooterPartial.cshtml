@@ -5,24 +5,24 @@
     <div class="container-fluid">
         <section class="footer-1">
             <div class="row align-items-center text-center">
-                <!-- Logo Alanı (Ortalanmış) -->
-                <div class="col-lg-6 col-md-6 mb-4 mb-md-0 p-4">
-                    <div class="footer-logo d-flex justify-content-center align-items-center">
+                <!-- Logo Alanı (Ortalanmış ve Mobil Uyumu) -->
+                <div class="col-lg-6 col-md-6 col-12 mb-4 mb-md-0 p-4">
+                    <div class="footer-logo d-flex justify-content-center align-items-center flex-wrap">
                         <!-- Mevcut Logo -->
                         <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1738687955/logo-moonL%C4%B1fe_x0pksr.jpg"
                              alt="My Golden Food - Dondurulmuş Gıda ve Tatlı Çeşitleri"
-                             class="footer-img img-fluid rounded mx-3"
-                             loading="lazy"> <!-- Lazy Loading -->
+                             class="footer-img img-fluid rounded mx-2"
+                             loading="lazy">
                         <!-- Yeni Eklenen Logo -->
                         <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1740578920/Minimalist_Modern_Arka_Plan__Siyah_000000__Yaz%C4%B1__Mor_a020f0__Font__Montserrat_Bold__%C4%B0%C3%A7erik__%C3%9Cst_Sat%C4%B1r___Contact_Us__b%C3%BCy%C3%BCk_harf_ortalanm%C4%B1%C5%9F__Alt_Sat%C4%B1r____90_533_635_2458__k%C3%BC%C3%A7%C3%BCk_harf_ortalanm%C4%B1%C5%9F__Ekstra__Hafif_aohog8.jpg"
                              alt="Eklenen Logo"
-                             class="footer-img img-fluid rounded mx-3"
-                             loading="lazy"> <!-- Lazy Loading -->
+                             class="footer-img img-fluid rounded mx-2"
+                             loading="lazy">
                     </div>
                 </div>
 
                 <!-- Adres ve Sosyal Medya Alanı -->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0 p-4">
+                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-0 p-4">
                     <h5 class="text-uppercase">@localizer["Footer_Adres"]</h5>
                     <p>MY GOLDEN FOOD GIDA SAN.TİC A.Ş. Türkiye/Ankara</p>
 
@@ -43,7 +43,7 @@
                 </div>
 
                 <!-- İletişim Bilgileri -->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-5 p-4">
+                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-5 p-4">
                     <h5 class="text-uppercase">@localizer["Iletisim_İletişim"]</h5>
                     <ul class="list-unstyled mb-0">
                         <li>
@@ -68,7 +68,22 @@
     </div>
 </footer>
 
+<!-- Mobilde Logoları Alt Alta Getiren CSS -->
+<style>
+    @@media (max-width: 768px) {
+        .footer-logo
 
+    {
+        flex-direction: column !important; /* Mobilde alt alta gelsin */
+    }
+
+    .footer-logo img {
+        width: 80% !important; /* Mobilde boyutunu küçült */
+        margin-bottom: 10px; /* Alt boşluk ekleyelim */
+    }
+
+    }
+</style>
 
 <!-- SEO İçin Yapısal Veri -->
 <script type="application/ld+json">

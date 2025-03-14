@@ -15,45 +15,21 @@
     <link rel="canonical" href="https://mygoldenfood.com/Faydalari/Index" />
 </head>
 
-<!-- Schema Markup (Google SEO için) -->
-<script type="application/ld+json">
-    {
-        "@@context": "https://schema.org",
-        "@@type": "ItemList",
-        "name": "Ürünlerin Faydaları",
-        "description": "My Golden Food ürünlerinin sağlık üzerindeki faydalarını keşfedin. Dondurulmuş gıdaların besleyici ve doğal yapısını öğrenin.",
-        "itemListElement": [
-    @foreach (var benefit in Model)
-    {
-            <div class="benefit-card" onclick="showModal('@benefit.Name', '@benefit.Content')" aria-label="@benefit.Name">
-                <div class="image-container">
-                    <img src="@benefit.ImagePath" alt="@benefit.Name | Dondurulmuş Gıda Faydaları" class="benefit-image" loading="lazy">
-                </div>
-                <div class="benefit-name-container">
-                    <h2 class="benefit-name">@benefit.Name</h2> <!-- SEO İçin H2 Başlığı Güncellendi -->
-                </div>
-            </div>
-    }
-
-
-        ]
-    }
-</script>
-
 <!-- Ana İçerik -->
 <div class="container">
     <div class="title-container">
-        <h2 class="text-center text-white">@localizer["Faydalari_Ürünlerin Faydaları"]</h2> <!-- SEO için H1 Güncellendi -->
+        <h1 class="text-center text-white">@localizer["Faydalari_Ürünlerin Faydaları"]</h1> <!-- SEO için H1 Kullanıldı -->
     </div>
+
     <div class="benefit-grid">
         @foreach (var benefit in Model)
         {
-            <div class="benefit-card" onclick="showModal('@benefit.Name', '@benefit.Content')" aria-label="@benefit.Name">
+            <div class="benefit-card" data-name="@benefit.Name" data-description="@benefit.Content">
                 <div class="image-container">
                     <img src="@benefit.ImagePath" alt="@benefit.Name | Dondurulmuş Gıda Faydaları" class="benefit-image" loading="lazy">
                 </div>
                 <div class="benefit-name-container">
-                    <h2 class="benefit-name">@benefit.Name</h2> <!-- SEO İçin H2 Başlığı Güncellendi -->
+                    <h2 class="benefit-name">@benefit.Name</h2> <!-- SEO İçin H2 Başlığı Kullanıldı -->
                 </div>
             </div>
         }
@@ -65,10 +41,11 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="detailsModalLabel"></h2> <!-- SEO için H2 Güncellendi -->
+                <h2 class="modal-title" id="detailsModalLabel"></h2> <!-- SEO için H2 Kullanıldı -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h3 class="modal-title-with-line">@localizer["Faydalari_Fayda Detayı:"]</h3> <!-- SEO için H3 Güncellendi -->
+                <h3 class="modal-title-with-line">@localizer["Faydalari_Fayda Detayı:"]</h3> <!-- SEO için H3 Kullanıldı -->
                 <p id="detailsModalDescription"></p>
             </div>
         </div>
@@ -81,7 +58,7 @@
         padding-top: 5%;
     }
 
-    /* Grid Düzeni */
+    /* Grid Yapısı */
     .benefit-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -94,28 +71,6 @@
         margin-bottom: 15px;
         text-align: center;
     }
-
-    /* Mobilde 2 Sütun */
-    /* Mobilde Başlık Konumlandırma */
-    @@media (max-width: 768px) {
-        .title-container {
-            margin-top: 7pc; /* Başlığı aşağı kaydır */
-        }
-
-        h2.text-center {
-            font-size: 2rem; /* Başlığı büyüt */
-        }
-
-        .benefit-grid {
-            grid-template-columns: repeat(2, 1fr); /* Mobilde 2 sütun */
-        }
-
-        .image-container {
-            height: 180px; /* Mobilde daha küçük resimler */
-            overflow-x: hidden;
-        }
-    }
-
 
     /* Kart Tasarımı */
     .benefit-card {
@@ -159,7 +114,7 @@
 
     /* Fayda Adı */
     .benefit-name-container {
-        padding: 0;
+        padding: 10px;
         background-color: rgba(0, 0, 0, 0);
         border-radius: 0 0 15px 15px;
         color: #fff;
@@ -205,13 +160,56 @@
             bottom: 0;
             left: 0;
         }
+
+    /* 📌 Mobil Görünüm İyileştirmesi */
+    @@media (max-width: 768px) {
+        .title-container
+
+    {
+        margin-top: 7pc;
+    }
+
+    h2.text-center {
+        font-size: 2rem;
+    }
+
+    .benefit-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .image-container {
+        height: 180px;
+    }
+
+    .modal-body p {
+        font-size: 1rem;
+        line-height: 1.6;
+        text-align: left;
+        white-space: pre-line;
+        margin-bottom: 10px;
+    }
+
+    }
 </style>
 
 <script>
-    function showModal(name, description) {
-        document.getElementById('detailsModalLabel').textContent = name;
-        document.getElementById('detailsModalDescription').textContent = description;
-        var modal = new bootstrap.Modal(document.getElementById('detailsModal'));
-        modal.show();
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".benefit-card").forEach(card => {
+            card.addEventListener("click", function () {
+                let name = this.getAttribute("data-name");
+                let description = this.getAttribute("data-description");
+
+                if (!name || !description) {
+                    alert("Fayda detayları eksik!");
+                    return;
+                }
+
+                document.getElementById('detailsModalLabel').textContent = name;
+                document.getElementById('detailsModalDescription').innerHTML = description.replace(/\n/g, "<br>");
+
+                var modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+                modal.show();
+            });
+        });
+    });
 </script>

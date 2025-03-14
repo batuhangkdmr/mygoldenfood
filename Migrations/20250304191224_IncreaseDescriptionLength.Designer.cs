@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyGoldenFood.ApplicationDbContext;
 
@@ -10,9 +11,11 @@ using MyGoldenFood.ApplicationDbContext;
 namespace MyGoldenFood.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250304191224_IncreaseDescriptionLength")]
+    partial class IncreaseDescriptionLength
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,7 +35,7 @@ namespace MyGoldenFood.Migrations
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("NVARCHAR(MAX)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("ImagePath")
                         .HasMaxLength(255)
@@ -62,7 +65,7 @@ namespace MyGoldenFood.Migrations
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("NVARCHAR(MAX)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("LanguageCode")
                         .IsRequired()
@@ -117,7 +120,7 @@ namespace MyGoldenFood.Migrations
 
                     b.Property<string>("Description")
                         .HasMaxLength(255)
-                        .HasColumnType("NVARCHAR(MAX)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("LanguageCode")
                         .IsRequired()
@@ -150,7 +153,7 @@ namespace MyGoldenFood.Migrations
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("NVARCHAR(MAX)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("ImagePath")
                         .HasMaxLength(255)
@@ -233,7 +236,7 @@ namespace MyGoldenFood.Migrations
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("NVARCHAR(MAX)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("LanguageCode")
                         .IsRequired()
@@ -284,7 +287,7 @@ namespace MyGoldenFood.Migrations
                     b.Property<string>("TranslatedValue")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("NVARCHAR(MAX)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 

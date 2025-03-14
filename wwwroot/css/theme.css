@@ -326,7 +326,7 @@ footer {
         font-size: 3vw;
         text-align: left;
         position: absolute;
-        left: 52%;
+        left: 60%;
         top: 40%;
         font-weight: 800;
     }
@@ -380,7 +380,7 @@ footer {
     }
 
     .section-2 .yaprak-img img {
-        width: 50%;
+        width: 100%;
     }
 
 /* Section 2 */
@@ -766,7 +766,7 @@ footer {
     }
 
     .section-2 .yaprak-img img {
-        width: 100%;
+        width: 125px;
     }
 
     .section-2 .kup-derece {
