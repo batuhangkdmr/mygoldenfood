@@ -1,72 +1,70 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Localization;
+﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using MyGoldenFood.ApplicationDbContext;
 using MyGoldenFood.Models;
 using MyGoldenFood.Services;
+using System.Globalization;
 
 namespace MyGoldenFood.Controllers
 {
-    
     public class TariflerController : Controller
     {
         private readonly AppDbContext _context;
         private readonly CloudinaryService _cloudinaryService;
+        private readonly DeepLTranslationService _translationService;
 
-        public TariflerController(AppDbContext context, CloudinaryService cloudinaryService)
+        public TariflerController(AppDbContext context, CloudinaryService cloudinaryService, DeepLTranslationService translationService)
         {
             _context = context;
             _cloudinaryService = cloudinaryService;
+            _translationService = translationService;
         }
+
+        // 📌 Tarif Kategorilerini Listele
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            string selectedLanguage = "tr"; // Varsayılan dil
-
-            // Kullanıcının seçtiği dili çerezlerden al
-            var userCulture = Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
-            if (!string.IsNullOrEmpty(userCulture))
-            {
-                selectedLanguage = userCulture.Split('|')[0].Replace("c=", "");
-            }
+            string selectedLanguage = GetSelectedLanguage();
 
             var categories = await _context.RecipeCategories
-                .Include(c => c.Translations) // Çevirileri dahil et
+                .Include(c => c.Translations)
                 .ToListAsync();
 
             foreach (var category in categories)
             {
-                var translation = category.Translations.FirstOrDefault(t => t.Language == selectedLanguage);
+                var translation = category.Translations
+                    .FirstOrDefault(t => t.Language == selectedLanguage);
                 if (translation != null)
                 {
-                    category.Name = translation.Name; // Çeviriyi uygula
+                    category.Name = translation.Name;
                 }
             }
 
             return View(categories);
         }
 
-
-
-        // Tarif Kategorileri Listeleme
         [HttpGet]
-        public async Task<IActionResult> RecipeCategoryList()
+        public async Task<IActionResult> RecipeList()
         {
-            var categories = await _context.RecipeCategories.ToListAsync();
-            return PartialView("_RecipeListPartial", categories);
+            var recipes = await _context.Recipes
+                .Include(r => r.RecipeCategory) // Tarifin kategorisini de çekiyoruz
+                .ToListAsync();
+
+            return PartialView("_RecipeListPartial", recipes);
         }
 
-        // Yeni Tarif Ekle - GET
+
+        // 📌 Yeni Tarif Ekle - GET
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Categories = _context.RecipeCategories.ToList(); // Kategorileri ViewBag ile gönderiyoruz
+            ViewBag.Categories = _context.RecipeCategories.ToList();
             return PartialView("_CreateRecipePartial");
         }
 
-        // Yeni Tarif Ekle - POST
+        // 📌 Yeni Tarif Ekle - POST (DeepL Çeviri Dahil)
         [HttpPost]
         public async Task<IActionResult> Create(Recipe model, IFormFile ImageFile, [FromServices] DeepLTranslationService translationService)
         {
@@ -115,12 +113,20 @@ namespace MyGoldenFood.Controllers
                 // 📌 4️⃣ Çevirileri veritabanına kaydet
                 await _context.SaveChangesAsync();
 
+
                 return Json(new { success = true, message = "Tarif başarıyla eklendi ve çevrildi!" });
+
+                // 🌍 7 dilde çeviri yap ve ekle
+                await AddRecipeTranslations(model);
+
+                return Json(new { success = true, message = "Tarif başarıyla eklendi!" });
+
             }
 
             ViewBag.Categories = _context.RecipeCategories.ToList();
             return PartialView("_CreateRecipePartial", model);
         }
+
 
 
 
@@ -157,16 +163,11 @@ namespace MyGoldenFood.Controllers
 
 
 
+
         [HttpGet]
         public async Task<IActionResult> Details(int id, [FromServices] IStringLocalizer<SharedResource> localizer)
         {
-            string selectedLanguage = "tr"; // Varsayılan dil
-
-            var userCulture = Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
-            if (!string.IsNullOrEmpty(userCulture))
-            {
-                selectedLanguage = userCulture.Split('|')[0].Replace("c=", "");
-            }
+            string selectedLanguage = GetSelectedLanguage();
 
             var recipes = await _context.Recipes
                 .Include(r => r.RecipeCategory)
@@ -186,6 +187,7 @@ namespace MyGoldenFood.Controllers
                 }
             }
 
+
             var category = await _context.RecipeCategories
                 .Include(c => c.Translations)
                 .FirstOrDefaultAsync(c => c.Id == id);
@@ -202,6 +204,12 @@ namespace MyGoldenFood.Controllers
                 ViewBag.CategoryName = localizer["Tarifler_TariflerDetails_Kategori Bulunamadı"];
             }
 
+            ViewBag.CategoryName = _context.RecipeCategories
+                .Where(c => c.Id == id)
+                .Select(c => c.Name)
+                .FirstOrDefault();
+
+
             if (!recipes.Any())
             {
                 ViewBag.Message = localizer["Tarifler_Bu kategoriye ait tarif bulunmamaktadır."];
@@ -209,6 +217,9 @@ namespace MyGoldenFood.Controllers
 
             return View(recipes);
         }
+
+
+        // 📌 Tarif Düzenleme (GET)
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
@@ -240,9 +251,11 @@ namespace MyGoldenFood.Controllers
             }
 
             ViewBag.Categories = await _context.RecipeCategories.ToListAsync();
-
             return PartialView("_EditRecipePartial", recipe);
         }
+
+
+        // 📌 Tarif Düzenleme (POST)
 
         [HttpPost]
         public async Task<IActionResult> Edit(Recipe model, IFormFile? ImageFile, [FromServices] DeepLTranslationService translationService)
@@ -280,6 +293,7 @@ namespace MyGoldenFood.Controllers
 
             await _context.SaveChangesAsync();
             Console.WriteLine($"✔ Tarif güncellendi: {existingRecipe.Name} - ID: {existingRecipe.Id}");
+
 
             // 🌍 3️⃣ 7 Dilde Çeviri Yap ve Güncelle/Kaydet
             string[] languages = { "en", "de", "fr", "ru", "ja", "ko" };
@@ -327,6 +341,15 @@ namespace MyGoldenFood.Controllers
         }
 
 
+
+            // 🌍 Çeviri güncelle veya ekle
+            await UpdateRecipeTranslations(model);
+
+            return Json(new { success = true, message = "Tarif başarıyla güncellendi!" });
+        }
+
+        // 📌 Tarif Silme (Bağlı Çevirileri de Sil)
+
         [HttpPost]
         public async Task<IActionResult> DeleteRecipe(int id)
         {
@@ -341,12 +364,75 @@ namespace MyGoldenFood.Controllers
                 await _cloudinaryService.DeleteImageAsync(recipe.ImagePath);
             }
 
+            // 🔥 Tarif çevirilerini de sil
+            var translations = _context.RecipeTranslations.Where(t => t.RecipeId == id);
+            _context.RecipeTranslations.RemoveRange(translations);
+
             _context.Recipes.Remove(recipe);
             await _context.SaveChangesAsync();
 
             return Json(new { success = true, message = "Tarif başarıyla silindi!" });
         }
 
+        // 🔄 **Helper Fonksiyonlar**
+        private async Task AddRecipeTranslations(Recipe model)
+        {
+            string[] languages = { "en", "fr", "de", "ru", "ja", "ko", "es" };
 
+            foreach (var lang in languages)
+            {
+                var translatedName = await _translationService.TranslateText(model.Name, lang);
+                var translatedContent = await _translationService.TranslateText(model.Content, lang);
+
+                var translation = new RecipeTranslation
+                {
+                    RecipeId = model.Id,
+                    LanguageCode = lang,
+                    Name = translatedName,
+                    Content = translatedContent
+                };
+
+                _context.RecipeTranslations.Add(translation);
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
+        private async Task UpdateRecipeTranslations(Recipe model)
+        {
+            string[] languages = { "en", "fr", "de", "ru", "ja", "ko", "es" };
+
+            foreach (var lang in languages)
+            {
+                var translation = await _context.RecipeTranslations
+                    .FirstOrDefaultAsync(t => t.RecipeId == model.Id && t.LanguageCode == lang);
+
+                if (translation != null)
+                {
+                    translation.Name = await _translationService.TranslateText(model.Name, lang);
+                    translation.Content = await _translationService.TranslateText(model.Content, lang);
+                }
+                else
+                {
+                    var newTranslation = new RecipeTranslation
+                    {
+                        RecipeId = model.Id,
+                        LanguageCode = lang,
+                        Name = await _translationService.TranslateText(model.Name, lang),
+                        Content = await _translationService.TranslateText(model.Content, lang)
+                    };
+
+                    _context.RecipeTranslations.Add(newTranslation);
+                }
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
+        private string GetSelectedLanguage()
+        {
+            var userCulture = Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
+            return string.IsNullOrEmpty(userCulture) ? "tr" : userCulture.Split('|')[0].Replace("c=", "");
+        }
     }
 }
