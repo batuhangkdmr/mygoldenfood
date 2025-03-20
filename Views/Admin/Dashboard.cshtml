@@ -61,6 +61,7 @@
 </div>
 
 @section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
     <script>
         $(document).ready(function () {
             loadList('/Product/ProductList', '#productList');
@@ -233,5 +234,17 @@
                 }
             });
         }
+            const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/productHub")
+            .build();
+
+        connection.start()
+            .then(() => console.log("✅ SignalR bağlantısı başarılı"))
+            .catch(err => console.error("❌ SignalR bağlantı hatası:", err));
+
+        connection.on("ProductUpdated", function () {
+            console.log("🔄 Admin panel: Ürünler güncellendi");
+            location.reload(); // Admin panel sayfasını otomatik yenile
+        });
     </script>
 }

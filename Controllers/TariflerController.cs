@@ -1,24 +1,27 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using MyGoldenFood.ApplicationDbContext;
+using MyGoldenFood.Hubs;
 using MyGoldenFood.Models;
 using MyGoldenFood.Services;
 
 namespace MyGoldenFood.Controllers
 {
-    
+
     public class TariflerController : Controller
     {
         private readonly AppDbContext _context;
         private readonly CloudinaryService _cloudinaryService;
-
-        public TariflerController(AppDbContext context, CloudinaryService cloudinaryService)
+        private readonly IHubContext<TariflerHub> _tariflerHubContext;
+        public TariflerController(AppDbContext context, CloudinaryService cloudinaryService, IHubContext<TariflerHub> tariflerHubContext)
         {
             _context = context;
             _cloudinaryService = cloudinaryService;
+            _tariflerHubContext = tariflerHubContext;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -88,7 +91,7 @@ namespace MyGoldenFood.Controllers
                 Console.WriteLine($"✔ Tarif eklendi: {model.Name} - ID: {model.Id}");
 
                 // 🌍 3️⃣ 7 dilde çeviri yap ve kaydet
-                string[] languages = { "en", "de", "fr", "ru", "ja", "ko" };
+                string[] languages = { "en", "de", "fr", "ru", "ja", "ko", "ar" };
 
                 foreach (var lang in languages)
                 {
@@ -114,7 +117,7 @@ namespace MyGoldenFood.Controllers
 
                 // 📌 4️⃣ Çevirileri veritabanına kaydet
                 await _context.SaveChangesAsync();
-
+                await _tariflerHubContext.Clients.All.SendAsync("TarifUpdated");
                 return Json(new { success = true, message = "Tarif başarıyla eklendi ve çevrildi!" });
             }
 
@@ -282,7 +285,7 @@ namespace MyGoldenFood.Controllers
             Console.WriteLine($"✔ Tarif güncellendi: {existingRecipe.Name} - ID: {existingRecipe.Id}");
 
             // 🌍 3️⃣ 7 Dilde Çeviri Yap ve Güncelle/Kaydet
-            string[] languages = { "en", "de", "fr", "ru", "ja", "ko" };
+            string[] languages = { "en", "de", "fr", "ru", "ja", "ko", "ar" };
 
             foreach (var lang in languages)
             {
@@ -322,7 +325,7 @@ namespace MyGoldenFood.Controllers
 
             // 📌 4️⃣ Çevirileri Veritabanına Kaydet
             await _context.SaveChangesAsync();
-
+            await _tariflerHubContext.Clients.All.SendAsync("TarifUpdated");
             return Json(new { success = true, message = "Tarif başarıyla güncellendi ve çeviriler güncellendi!" });
         }
 
@@ -343,7 +346,7 @@ namespace MyGoldenFood.Controllers
 
             _context.Recipes.Remove(recipe);
             await _context.SaveChangesAsync();
-
+            await _tariflerHubContext.Clients.All.SendAsync("TarifUpdated");
             return Json(new { success = true, message = "Tarif başarıyla silindi!" });
         }
 

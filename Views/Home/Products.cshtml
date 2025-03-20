@@ -1,12 +1,9 @@
 ﻿@using Microsoft.Extensions.Localization
-@using System.Globalization
 @inject IStringLocalizer<SharedResource> localizer
-@inject MyGoldenFood.Services.TranslationService translationService
 @model IEnumerable<MyGoldenFood.Models.Product>
 
 @{
     ViewData["Title"] = "Ürünlerimiz";
-    var currentLang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 }
 
 <div class="container">
@@ -19,26 +16,23 @@
         {
             <div class="product-card">
                 <div class="image-container"
-                     data-name="@translationService.GetTranslation("Name", "Product", product.Id, currentLang)"
-                     data-description="@translationService.GetTranslation("Description", "Product", product.Id, currentLang)">
-                    <img src="@product.ImagePath" alt="@translationService.GetTranslation("Name", "Product", product.Id, currentLang)" class="product-image">
+                     data-name="@product.Name"
+                     data-description="@product.Description">
+                    <img src="@product.ImagePath" alt="@product.Name" class="product-image">
                 </div>
                 <div class="product-name-container">
-                    <h5 class="product-name">@translationService.GetTranslation("Name", "Product", product.Id, currentLang)</h5>
+                    <h5 class="product-name">@product.Name</h5>
                 </div>
             </div>
         }
     </div>
 </div>
 
-
-
-    <!-- Sayfalama Butonları -->
-    <div class="pagination">
-        <button id="prevPage" class="btn btn-primary" disabled>@localizer["Product_Önceki"]</button>
-        <span id="pageNumber">@localizer["Product_Sayfa"]</span>
-        <button id="nextPage" class="btn btn-primary">@localizer["Product_Sonraki"]</button>
-    </div>
+<!-- Sayfalama Butonları -->
+<div class="pagination">
+    <button id="prevPage" class="btn btn-primary" disabled>@localizer["Product_Önceki"]</button>
+    <span id="pageNumber">@localizer["Product_Sayfa"]</span>
+    <button id="nextPage" class="btn btn-primary">@localizer["Product_Sonraki"]</button>
 </div>
 
 <!-- Modal -->
@@ -55,7 +49,6 @@
         </div>
     </div>
 </div>
-
 <style>
     .content {
         flex: 1;
@@ -257,8 +250,6 @@
         margin-bottom: 10px;
     }
 
-
-
 </style>
 
 <script>
@@ -383,4 +374,21 @@
         });
     });
 
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/productHub")
+        .build();
+
+    connection.start().then(() => {
+        console.log("✅ SignalR bağlantısı başarılı (Product Sayfası)");
+    }).catch(err => console.error("SignalR bağlantı hatası:", err));
+
+    // Admin ekleyince tetiklenecek
+    connection.on("ProductUpdated", function () {
+        console.log("🟢 Ürün listesi güncellendi. Sayfa yenileniyor...");
+        location.reload(); // Otomatik olarak ürünleri günceller
+    });
 </script>
