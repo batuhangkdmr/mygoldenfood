@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using MyGoldenFood.ApplicationDbContext;
 using MyGoldenFood.Models;
 using MyGoldenFood.Services;
+using Microsoft.AspNetCore.SignalR;
+using MyGoldenFood.Hubs;
+
 
 namespace MyGoldenFood.Controllers
 {
@@ -14,42 +17,52 @@ namespace MyGoldenFood.Controllers
         private readonly AppDbContext _context;
         private readonly CloudinaryService _cloudinaryService;
         private readonly DeepLTranslationService _translationService;
+        private readonly IHubContext<ProductHub> _hubContext;
 
-        public ProductController(AppDbContext context, CloudinaryService cloudinaryService, DeepLTranslationService translationService)
+        public ProductController(AppDbContext context, CloudinaryService cloudinaryService, DeepLTranslationService translationService, IHubContext<ProductHub> hubContext)
         {
             _context = context;
             _cloudinaryService = cloudinaryService;
             _translationService = translationService;
+            _hubContext = hubContext;
         }
 
         // Ürün Listeleme
         [HttpGet]
         public async Task<IActionResult> ProductList()
         {
-            // Kullanıcının seçtiği dili al
             var userCulture = Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
-            string selectedLanguage = "tr"; // Varsayılan olarak Türkçe gösterelim
+            string selectedLanguage = "tr"; // Varsayılan
 
             if (!string.IsNullOrEmpty(userCulture))
             {
-                selectedLanguage = userCulture.Split('|')[0].Replace("c=", ""); // Cookie formatını düzenle
+                selectedLanguage = userCulture.Split('|')[0].Replace("c=", "");
             }
 
             var products = await _context.Products.ToListAsync();
 
             foreach (var product in products)
             {
-                var translation = await _context.Translations
-                    .FirstOrDefaultAsync(t => t.ReferenceId == product.Id && t.TableName == "Product" && t.Language == selectedLanguage);
-
-                if (translation != null)
+                if (selectedLanguage != "tr")
                 {
-                    product.Name = translation.TranslatedValue; // Çevrilen metni göster
+                    var nameTranslation = await _context.Translations
+                        .FirstOrDefaultAsync(t => t.ReferenceId == product.Id && t.TableName == "Product" && t.FieldName == "Name" && t.Language == selectedLanguage);
+                    if (nameTranslation != null)
+                        product.Name = nameTranslation.TranslatedValue;
+
+                    var descTranslation = await _context.Translations
+                        .FirstOrDefaultAsync(t => t.ReferenceId == product.Id && t.TableName == "Product" && t.FieldName == "Description" && t.Language == selectedLanguage);
+                    if (descTranslation != null)
+                        product.Description = descTranslation.TranslatedValue;
                 }
+                // Eğer Türkçe ise zaten Product tablosundan geliyor, ekstra işlem yapmana gerek yok
             }
+
 
             return PartialView("_ProductListPartial", products);
         }
+
+
 
 
         // Yeni Ürün Ekle - GET
@@ -81,8 +94,8 @@ namespace MyGoldenFood.Controllers
                 // 🌍 7 dilde çeviri yap ve kaydet
                 // 7 dilde çeviri yap ve kaydet
                 // Çeviri yapılacak diller (Name ve Description için ayrı tanımlandı)
-                string[] languagesForName = { "en", "de", "fr", "ru", "ja", "ko" };
-                string[] languagesForDescription = { "en", "de", "fr", "ru", "ja", "ko" };
+                string[] languagesForName = { "en", "de", "fr", "ru", "ja", "ko", "ar" };
+                string[] languagesForDescription = { "en", "de", "fr", "ru", "ja", "ko", "ar" };
 
                 // 🟢 1️⃣ Önce Name çevirisini yapalım
                 foreach (var lang in languagesForName)
@@ -138,9 +151,10 @@ namespace MyGoldenFood.Controllers
                     }
                 }
 
-                // Çevirileri kaydet
                 await _context.SaveChangesAsync();
+                await _hubContext.Clients.All.SendAsync("ProductUpdated"); // SignalR ile istemcilere haber ver
                 return Json(new { success = true, message = "Ürün başarıyla eklendi!" });
+
             }
 
             return PartialView("_CreateProductPartial", model);
@@ -185,21 +199,21 @@ namespace MyGoldenFood.Controllers
                     existingProduct.ImagePath = model.ImagePath;
                 }
 
-                // Eski çevirileri kaldır
-                var existingTranslations = await _context.Translations
-                    .Where(t => t.ReferenceId == model.Id && t.TableName == "Product")
-                    .ToListAsync();
-                _context.Translations.RemoveRange(existingTranslations);
-
-                // Yeni çevirileri oluştur
-                string[] languages = { "en", "de", "fr", "ru", "ja", "ko" };
+                // 📌 Çevirileri güncelle
+                string[] languages = { "en", "de", "fr", "ru", "ja", "ko", "ar" };
 
                 foreach (var lang in languages)
                 {
+                    // ✅ Name Çevirisi
                     var translatedName = await _translationService.TranslateText(model.Name, lang, "tr");
-                    var translatedDescription = await _translationService.TranslateText(model.Description, lang, "tr");
+                    var nameTranslation = await _context.Translations.FirstOrDefaultAsync(t =>
+                        t.ReferenceId == model.Id && t.TableName == "Product" && t.FieldName == "Name" && t.Language == lang);
 
-                    if (!string.IsNullOrEmpty(translatedName))
+                    if (nameTranslation != null)
+                    {
+                        nameTranslation.TranslatedValue = !string.IsNullOrEmpty(translatedName) ? translatedName : nameTranslation.TranslatedValue;
+                    }
+                    else if (!string.IsNullOrEmpty(translatedName))
                     {
                         _context.Translations.Add(new Translation
                         {
@@ -211,7 +225,16 @@ namespace MyGoldenFood.Controllers
                         });
                     }
 
-                    if (!string.IsNullOrEmpty(translatedDescription))
+                    // ✅ Description Çevirisi
+                    var translatedDescription = await _translationService.TranslateText(model.Description, lang, "tr");
+                    var descTranslation = await _context.Translations.FirstOrDefaultAsync(t =>
+                        t.ReferenceId == model.Id && t.TableName == "Product" && t.FieldName == "Description" && t.Language == lang);
+
+                    if (descTranslation != null)
+                    {
+                        descTranslation.TranslatedValue = !string.IsNullOrEmpty(translatedDescription) ? translatedDescription : descTranslation.TranslatedValue;
+                    }
+                    else if (!string.IsNullOrEmpty(translatedDescription))
                     {
                         _context.Translations.Add(new Translation
                         {
@@ -225,6 +248,7 @@ namespace MyGoldenFood.Controllers
                 }
 
                 await _context.SaveChangesAsync();
+                await _hubContext.Clients.All.SendAsync("ProductUpdated"); // SignalR ile bildir
                 return Json(new { success = true, message = "Ürün başarıyla güncellendi!" });
             }
 
@@ -254,8 +278,9 @@ namespace MyGoldenFood.Controllers
             _context.Translations.RemoveRange(translations);
 
             await _context.SaveChangesAsync();
+            await _hubContext.Clients.All.SendAsync("ProductUpdated"); // SignalR ile istemcilere haber ver
+            return Json(new { success = true, message = "Ürün başarıyla silindi!" });
 
-            return Json(new { success = true, message = "Ürün ve çevirileri başarıyla silindi!" });
         }
     }
 }

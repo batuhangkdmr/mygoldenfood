@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using MyGoldenFood.ApplicationDbContext;
+using MyGoldenFood.Hubs;
 using MyGoldenFood.Models;
 using MyGoldenFood.Services;
 
@@ -11,11 +13,13 @@ namespace MyGoldenFood.Controllers
     {
         private readonly AppDbContext _context;
         private readonly CloudinaryService _cloudinaryService;
+        private readonly IHubContext<FaydalariHub> _faydalariHubContext;
 
-        public FaydalariController(AppDbContext context, CloudinaryService cloudinaryService)
+        public FaydalariController(AppDbContext context, CloudinaryService cloudinaryService, IHubContext<FaydalariHub> faydalariHubContext)
         {
             _context = context;
             _cloudinaryService = cloudinaryService;
+            _faydalariHubContext = faydalariHubContext;
         }
 
         [HttpGet]
@@ -84,7 +88,7 @@ namespace MyGoldenFood.Controllers
                 Console.WriteLine($"✔ Fayda eklendi: {model.Name} - ID: {model.Id}");
 
                 // 🌍 3️⃣ 7 dilde çeviri yap ve kaydet
-                string[] languages = { "en", "de", "fr", "ru", "ja", "ko" };
+                string[] languages = { "en", "de", "fr", "ru", "ja", "ko", "ar" };
 
                 foreach (var lang in languages)
                 {
@@ -110,7 +114,7 @@ namespace MyGoldenFood.Controllers
 
                 // 📌 4️⃣ Çevirileri veritabanına kaydet
                 await _context.SaveChangesAsync();
-
+                await _faydalariHubContext.Clients.All.SendAsync("BenefitUpdated");
                 return Json(new { success = true, message = "Fayda başarıyla eklendi ve çevrildi!" });
             }
 
@@ -184,7 +188,7 @@ namespace MyGoldenFood.Controllers
             Console.WriteLine($"✔ Fayda güncellendi: {existingBenefit.Name} - ID: {existingBenefit.Id}");
 
             // 🌍 3️⃣ 7 Dilde Çeviri Yap ve Güncelle/Kaydet
-            string[] languages = { "en", "de", "fr", "ru", "ja", "ko" };
+            string[] languages = { "en", "de", "fr", "ru", "ja", "ko","ar" };
 
             foreach (var lang in languages)
             {
@@ -224,7 +228,7 @@ namespace MyGoldenFood.Controllers
 
             // 📌 4️⃣ Çevirileri Veritabanına Kaydet
             await _context.SaveChangesAsync();
-
+            await _faydalariHubContext.Clients.All.SendAsync("BenefitUpdated");
             return Json(new { success = true, message = "Fayda başarıyla güncellendi ve çeviriler güncellendi!" });
         }
 
@@ -265,7 +269,7 @@ namespace MyGoldenFood.Controllers
 
             // 📌 6️⃣ Veritabanına kaydet
             await _context.SaveChangesAsync();
-
+            await _faydalariHubContext.Clients.All.SendAsync("BenefitUpdated");
             Console.WriteLine($"✅ Silme işlemi tamamlandı! ID: {id}");
             return Json(new { success = true, message = "Fayda ve çevirileri başarıyla silindi!" });
         }

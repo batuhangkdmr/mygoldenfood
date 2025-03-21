@@ -213,3 +213,18 @@
         });
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/faydalariHub")
+        .build();
+
+    connection.start().then(() => {
+        console.log("✔ FaydalariHub bağlantısı başarılı");
+    }).catch(err => console.error("Bağlantı hatası:", err));
+
+    connection.on("BenefitUpdated", function () {
+        console.log("🔄 BenefitUpdated tetiklendi, sayfa yenileniyor...");
+        location.reload(); // ✅ Otomatik yenile
+    });
+</script>

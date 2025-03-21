@@ -1,4 +1,10 @@
-﻿@model IEnumerable<MyGoldenFood.Models.Product>
+﻿@using System.Globalization
+@inject MyGoldenFood.Services.TranslationService translationService
+@model IEnumerable<MyGoldenFood.Models.Product>
+
+@{
+    var currentLang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+}
 
 <table class="table table-bordered">
     <thead>
@@ -12,9 +18,27 @@
     <tbody>
         @foreach (var product in Model)
         {
-            <tr>    
-                <td>@product.Name</td>
-                <td>@product.Description</td>
+            <tr>
+                <td>
+                    @if (currentLang == "tr")
+                    {
+                        @product.Name
+                    }
+                    else
+                    {
+                        @translationService.GetTranslation("Name", "Product", product.Id, currentLang)
+                    }
+                </td>
+                <td>
+                    @if (currentLang == "tr")
+                    {
+                        @product.Description
+                    }
+                    else
+                    {
+                        @translationService.GetTranslation("Description", "Product", product.Id, currentLang)
+                    }
+                </td>
                 <td>
                     @if (!string.IsNullOrEmpty(product.ImagePath))
                     {
@@ -33,3 +57,21 @@
         }
     </tbody>
 </table>
+
+<!-- ✅ SignalR Bağlantısı -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/productHub")
+        .configureLogging(signalR.LogLevel.Information)
+        .build();
+
+    connection.start().then(() => {
+        console.log("✅ SignalR bağlantısı kuruldu!");
+    }).catch(err => console.error("❌ SignalR bağlantı hatası:", err));
+
+    connection.on("ProductUpdated", function () {
+        console.log("🟢 Ürün güncellemesi alındı, tablo yenileniyor...");
+        location.reload();
+    });
+</script>
