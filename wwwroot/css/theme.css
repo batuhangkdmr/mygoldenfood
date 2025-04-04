@@ -263,7 +263,7 @@ footer {
     .section-1 .pasta-4 {
         width: 25%;
         position: absolute;
-        top: 15%;
+        top: 16%;
         right: 30%;
         animation: rotation 20s infinite linear;
     }
@@ -729,6 +729,7 @@ footer {
 
     .section-1 img {
         width: 100%;
+        overflow: hidden;
     }
 
     .section-1 .kahve-1 img {
@@ -737,6 +738,7 @@ footer {
         bottom: 0;
         left: 0;
     }
+
 
     .content .metin-1 p {
         font-size: 80%;
@@ -1145,7 +1147,7 @@ footer {
     }
 
     .section-1 .kahve-1 {
-        width: 35%;
+        width: 40%;
         position: absolute;
         bottom: 0;
         left: 0;
@@ -1161,37 +1163,37 @@ footer {
     .section-1 .pasta-1 {
         width: 40%;
         position: absolute;
-        bottom: 0;
-        left: 45%;
+        top: 50%;
+        left: 0;
     }
 
     .section-1 .pasta-2 {
         width: 40%;
         position: absolute;
         top: 20%;
-        left: 5%;
+        left: 2%;
     }
 
     .section-1 .pasta-3 {
-        width: 40%;
+        width: 70%;
         position: absolute;
-        bottom: 20%;
+        bottom: 0;
         right: 0;
     }
 
     .section-1 .pasta-4 {
-        width: 55%;
+        width: 57%;
         position: absolute;
         top: 10%;
-        right: 5%;
+        right: 2%;
         animation: rotation 20s infinite linear;
     }
 
     .section-1 .pasta-5 {
-        width: 45%;
+        width: 65%;
         position: absolute;
-        bottom: 30%;
-        right: 30%;
+        top: 25%;
+        right: 0;
     }
 
     .section-4 {
@@ -1262,7 +1264,7 @@ footer {
             .section-4 .pasta-1 .baslik {
                 position: absolute;
                 top: 45%;
-                right: 60%;
+                right: 55%;
             }
 
             .section-4 .pasta-1 .pasta-derece {
