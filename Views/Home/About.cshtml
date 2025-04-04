@@ -1,202 +1,212 @@
-﻿@using Microsoft.Extensions.Localization
+﻿﻿@using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResource> localizer
-@{
-    ViewData["Title"] = "Hakkımızda | My Golden Food - Kaliteli Dondurulmuş Gıda";
-    Layout = "_Layout";
-}
+<!DOCTYPE html>
+<html lang="tr">
 
-<!-- SEO Meta Etiketleri -->
 <head>
-    <meta name="description" content="My Golden Food, dondurulmuş gıda sektöründe kaliteli ve lezzetli ürünler sunan öncü bir markadır.">
-    <meta name="keywords" content="dondurulmuş gıda, kaliteli gıda, lezzetli dondurulmuş ürünler, My Golden Food">
-    <meta name="author" content="My Golden Food">
-    <link rel="canonical" href="https://mygoldenfood.com/Home/About" />
-
-    <!-- Swiper.js CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
-
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-</head>
-
-<style>
-    html, body {
-        background-color: black !important;
-        margin: 0;
-        padding: 0;
-    }
-
-    /* Swiper Carousel Genel Stil */
-    .swiper-container {
-        width: 100%;
-        height: 800px;
-        position: relative;
-    }
-
-    .swiper-slide {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: black;
-    }
-
-        .swiper-slide img {
-            max-width: 90%;
-            margin-top: 12%;
-            max-height: 100%;
-            object-fit: contain;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakkımızda | My Golden Food</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: #333;
         }
 
-    /* Swiper Fade Geçişi İçin Özel Stil */
-    .swiper-container-fade .swiper-slide {
-        opacity: 0;
-        visibility: hidden; /* Pasif slaytları tamamen gizle */
-        transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
-    }
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 500px; /* Burayı 450px'den 600px'e veya istediğin değere artır */
+            overflow: hidden;
+        }
 
-    .swiper-container-fade .swiper-slide-active {
-        opacity: 1;
-        visibility: visible; /* Sadece aktif slayt görünsün */
-    }
+        .hero-bg {
+            width: 100%;
+            height: 180%;
+            object-fit: cover;
+            filter: brightness(0.5); /* Karanlık efekt */
+        }
 
-    /* Swiper Butonlarını Resmin Ortasına Daha İyi Hizalama */
-    .swiper-button-next,
-    .swiper-button-prev {
-        color: white;
-        width: 50px;
-        height: 50px;
-        position: absolute;
-        top: 55%;
-        transform: translateY(-50%);
-        z-index: 10;
-    }
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #D8A43A;
+            font-size: 48px;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px #000;
+        }
 
-    .swiper-button-prev {
-        left: 5%;
-        margin-top: 5%;
-    }
 
-    .swiper-button-next {
-        right: 5%;
-        margin-top: 5%;
-    }
+        /* Info Cards */
+        .info-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 50px 220px;
+            background-color: black;
+        }
 
-    /* Swiper Alt Noktalar */
-    .swiper-pagination-bullet {
-        background: white;
-    }
+        .info-card {
+            background-color: whitesmoke;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            padding: 20px;
+            margin: 10px;
+            text-align: center;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
 
-    /* Metin Alanı İçin Siyah Arka Plan ve Beyaz Yazılar */
-    .text-section {
-        background-color: black;
-        color: white;
-        padding: 50px 0;
-        margin-top: 9%;
-        text-align: center;
-    }
+            .info-card:hover {
+                transform: translateY(-10px);
+            }
 
-        .text-section h1 {
+            .info-card img {
+                width: 100%;
+                height: 160px;
+                object-fit: cover;
+                border-radius: 6px;
+                margin-bottom: 15px;
+            }
+
+        /* Metin Alanı */
+        .text-section {
+            background-color: black;
             color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+            .text-section h1 {
+                color: #D8A43A;
+                margin-bottom: 20px;
+            }
+
+            .text-section p {
+                font-size: 18px;
+                line-height: 1.6;
+            }
+        @@media (max-width: 768px) {
+            .info-section
+
+        {
+            padding: 30px 20px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .info-card {
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .hero {
+            height: 300px;
+        }
+
+        .hero-bg {
+            height: 100%;
+        }
+
+        .hero-content {
+            font-size: 28px;
+            text-align: center;
         }
 
         .text-section p {
-            font-size: 18px;
+            font-size: 16px;
         }
 
-    /* Harita Animasyonu İçin Başlangıçta Gizleme */
-    .map-container {
-        opacity: 0;
-    }
-</style>
+        }
 
-<!-- Swiper.js Carousel -->
-<section class="container-fluid p-0 position-relative">
-    <div class="swiper-container swiper-container-fade">
-        <div class="swiper-wrapper">
-            <!-- 1. Slide - Google Maps -->
-            <div class="swiper-slide">
-                <iframe class="map-container"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d138524.98741767602!2d32.66520231636404!3d39.89666169506215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d347d520732db1%3A0xbdc57b0c0842b8d!2sAnkara!5e0!3m2!1str!2str!4v1734474761513!5m2!1str!2str"
-                        width="80%" height="100%" style="border:0; margin-top:15%;" allowfullscreen="" loading="lazy">
-                </iframe>
-            </div>
+    </style>
+</head>
 
-            <!-- 2. Slide - Alternatif Görsel -->
-            <div class="swiper-slide">
-                <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1740762420/WhatsApp_Image_2025-02-28_at_20.06.44_wrim5k.jpg" style="width: 100%;" alt="Alternate Text">
-            </div>
+<body>
 
-            <!-- 3. Slide - API Görseli -->
-            <div class="swiper-slide">
-                <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1739364914/mygoldenfood-logo1_iyqhfc.png" alt="Ürün Görseli">
-            </div>
-
-            <div class="swiper-slide">
-                <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1738425662/products/beqmw7kxdg9glf44gkbx.png" alt="Ürün Görseli">
-            </div>
+    <!-- Hero Banner -->
+    <div class="hero">
+        <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_auto,c_fill,w_1920,h_600/v1742671296/fabrika_zb186p.jpg"
+             alt="Hero"
+             class="hero-bg"
+             loading="lazy">
+        @* <div class="hero-content">My Golden Food</div> *@
+    </div>
+    <section class="container-fluid text-section">
+        <div class="container">
+            <h1>@localizer["About_Biz Kimiz?"] | My Golden Food</h1>
+            <p>
+                <strong>My Golden Food</strong>, @localizer["About_dondurulmuş gıda sektöründe **kaliteli ve lezzetli** ürünler sunan öncü bir markadır."]
+                @localizer["About_Müşterilerimize en iyi hizmeti sağlamak için sürekli **yenilikçi çözümler** üretmekteyiz."]
+            </p>
+            <p>
+                <strong>@localizer["About_Vizyonumuz"]</strong>, @localizer["About_dünya çapında lezzetimizi tanıtmak ve **sürdürülebilir üretim anlayışıyla** herkese sağlıklı ve lezzetli ürünler sunmaktır."]
+            </p>
+        </div>
+    </section>
+    <!-- Bilgi Kartları -->
+    <section class="info-section">
+        <div class="info-card">
+            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_auto,c_fill,w_500,h_300/v1742671296/fabrika_zb186p.jpg"
+                 alt="Ürün Kalitesi"
+                 loading="lazy">
+            <h3>Kaliteli Ürünler</h3>
+            <p>En kaliteli ve lezzetli dondurulmuş ürünleri sizlerle buluşturuyoruz.</p>
         </div>
 
-        <!-- Swiper Navigasyon Butonları -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+        <div class="info-card">
+            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_auto,c_fill,w_500,h_300/v1740762420/WhatsApp_Image_2025-02-28_at_20.06.44_wrim5k.jpg"
+                 alt="Güvenli Üretim"
+                 loading="lazy">
+            <h3>Güvenli Üretim</h3>
+            <p>Modern tesislerimizde hijyen ve kalite standartlarına uygun üretim yapıyoruz.</p>
+        </div>
 
-        <!-- Swiper Alt Noktalar -->
-        <div class="swiper-pagination"></div>
-    </div>
-</section>
+        <div class="info-card">
+            <img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?fit=crop&w=500&q=80"
+                 alt="Müşteri Memnuniyeti"
+                 loading="lazy">
+            <h3>Müşteri Memnuniyeti</h3>
+            <p>Önceliğimiz her zaman müşterilerimizin memnuniyeti ve güvenidir.</p>
+        </div>
 
-<!-- Swiper.js JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        setTimeout(() => {
-            document.querySelector(".map-container").classList.add("animate__animated", "animate__fadeInUp");
-            document.querySelector(".map-container").style.opacity = 1;
-        }, 500);
-    });
+        <div class="info-card">
+            <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?fit=crop&w=500&q=80"
+                 alt="Sürdürülebilirlik"
+                 loading="lazy">
+            <h3>Sürdürülebilirlik</h3>
+            <p>Doğaya saygılı, sürdürülebilir üretim anlayışıyla çalışıyoruz.</p>
+        </div>
 
-    var swiper = new Swiper(".swiper-container", {
-        loop: true,
-        effect: "fade",
-        autoplay: {
-            delay: 5000,
-            disableOnInteraction: false,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        observer: true, // Sayfanın tamamını yeniden yüklemeyi engelle
-        observeParents: true, // Üst öğelerde değişiklik olsa bile Swiper etkilenmez
-        on: {
-            slideChangeTransitionStart: function () {
-                document.querySelectorAll(".swiper-slide").forEach(slide => {
-                    slide.style.visibility = "hidden";
-                });
-                document.querySelector(".swiper-slide-active").style.visibility = "visible";
+        <!-- ✅ Eklenen 5. Kart -->
+        <div class="info-card">
+            <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?fit=crop&w=500&q=80"
+                 alt="Ar-Ge ve Yenilik"
+                 loading="lazy">
+            <h3>Ar-Ge ve Yenilik</h3>
+            <p>Ar-Ge çalışmalarımızla sürekli gelişiyor, yenilikçi çözümler üretiyoruz.</p>
+        </div>
+    </section>
 
-                var activeSlide = document.querySelector(".swiper-slide-active iframe");
-                if (activeSlide) {
-                    activeSlide.classList.add("animate__animated", "animate__zoomIn");
-                }
-            },
-        }
-    });
-</script>
+    <!-- Senin Gönderdiğin Metin Alanı (Aynen KORUNDU) -->
+@*     <section class="container-fluid text-section">
+        <div class="container">
+            <h1>Biz Kimiz? | My Golden Food</h1>
+            <p>
+                <strong>My Golden Food</strong>, dondurulmuş gıda sektöründe <strong>kaliteli ve lezzetli</strong> ürünler sunan öncü bir markadır.
+                Müşterilerimize en iyi hizmeti sağlamak için sürekli <strong>yenilikçi çözümler</strong> üretmekteyiz.
+            </p>
+            <p>
+                <strong>Vizyonumuz</strong>, dünya çapında lezzetimizi tanıtmak ve <strong>sürdürülebilir üretim anlayışıyla</strong> herkese sağlıklı ve lezzetli ürünler sunmaktır.
+            </p>
+        </div>
+    </section> *@
 
-<section class="container-fluid text-section">
-    <div class="container">
-        <h1>@localizer["About_Biz Kimiz?"] | My Golden Food</h1>
-        <p>
-            <strong>My Golden Food</strong>, @localizer["About_dondurulmuş gıda sektöründe **kaliteli ve lezzetli** ürünler sunan öncü bir markadır."]
-            @localizer["About_Müşterilerimize en iyi hizmeti sağlamak için sürekli **yenilikçi çözümler** üretmekteyiz."]
-        </p>
-        <p>
-            <strong>@localizer["About_Vizyonumuz"]</strong>, @localizer["About_dünya çapında lezzetimizi tanıtmak ve **sürdürülebilir üretim anlayışıyla** herkese sağlıklı ve lezzetli ürünler sunmaktır."]
-        </p>
-    </div>
-</section>
+</body>
+
+</html>

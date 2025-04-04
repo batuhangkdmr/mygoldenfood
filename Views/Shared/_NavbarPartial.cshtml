@@ -87,21 +87,104 @@
         }
         lastScrollTop = scrollTop;
     });
+      // Navbar scroll hide özelliği (mevcut kodun aynısı)
+    let lastScrollTop = 0;
+    const navbar = document.getElementById("dynamicNavbar");
+
+    window.addEventListener("scroll", function () {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) {
+            navbar.style.top = `-${navbar.offsetHeight}px`;
+        } else {
+            navbar.style.top = "0";
+        }
+        lastScrollTop = scrollTop;
+    });
+
+    // ❗ Mobil menü dışına tıklanınca kapanmasını sağla
+    document.addEventListener('click', function (event) {
+        const navbarCollapse = document.getElementById('navbarCollapse');
+        const toggleButton = document.querySelector('.navbar-toggler');
+
+        // Eğer menü açıksa ve tıklanan yer menünün dışındaysa
+        const isClickInsideMenu = navbarCollapse.contains(event.target);
+        const isToggleButton = toggleButton.contains(event.target);
+
+        if (navbarCollapse.classList.contains('show') && !isClickInsideMenu && !isToggleButton) {
+            toggleButton.click(); // Menü kapanır
+        }
+    });
 </script>
 
 <!-- Navbar için CSS -->
 <style>
+    /* Ana Navbar Sabit Yapı */
     .main-menu {
-        position: fixed;
+        position: absolute;
         width: 100%;
         top: 0;
         left: 0;
         z-index: 1000;
-        transition: top 0.3s ease-in-out; /* Yumuşak geçiş */
+        transition: top 0.3s ease-in-out;
+        background-color: #000; /* Arka plan netleştirildi */
+    }
+
+    /* Navbar içeriği için padding */
+    .navbar-nav .nav-item {
+        margin-left: 10px;
+        margin-right: 10px;
     }
 
     .navbar .nav-link img {
         margin-right: 5px;
         vertical-align: middle;
+    }
+
+    /* Mobilde menü açıldığında görünüm düzeltmesi */
+    @@media (max-width: 768px) {
+        .navbar-collapse
+
+    {
+        background-color: #000; /* Menü açıldığında arka plan siyah */
+        padding: 10px 15px;
+    }
+
+    .navbar-nav .nav-item {
+        margin: 5px 0;
+        text-align: center;
+    }
+
+    .navbar .nav-link {
+        color: #fff !important;
+        font-size: 16px;
+    }
+
+    .navbar-brand img {
+        width: 120px; /* Küçük ekran için logo boyutu */
+    }
+
+    .dropdown-menu {
+        background-color: #222;
+        border: none;
+    }
+
+    .dropdown-item {
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+
+        .dropdown-item:hover {
+            background-color: #444;
+        }
+
+    .navbar-toggler {
+        border-color: #fff;
+    }
+
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+
     }
 </style>
