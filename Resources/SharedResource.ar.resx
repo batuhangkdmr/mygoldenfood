@@ -232,7 +232,7 @@
     <value>الوصفات والفوائد</value>
   </data>
   <data name="Product_Sayfa" xml:space="preserve">
-    <value>الصفحة</value>
+    <value>Page</value>
   </data>
   <data name="Product_Sonraki" xml:space="preserve">
     <value>التالي</value>
@@ -257,6 +257,9 @@
   </data>
   <data name="Tariflervefaydalari_Tarifler" xml:space="preserve">
     <value>الوصفات</value>
+  </data>
+  <data name="Tariflervefaydalari_Tarifler ve Faydaları" xml:space="preserve">
+    <value>الوصفات والفوائد</value>
   </data>
   <data name="Tarifler_Bu kategoriye ait tarif bulunmamaktadır." xml:space="preserve">
     <value>لم يتم العثور على الفئة</value>
