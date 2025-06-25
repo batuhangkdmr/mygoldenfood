@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MyGoldenFood.Models.Recipe>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tarif Adı</th>
+            <th>İçerik</th>
+            <th>Resim</th>
+            <th>Kategori</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var recipe in Model)
+        {
+            <tr>
+                <td>@recipe.Name</td>
+                <td>@recipe.Content</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(recipe.ImagePath))
+                    {
+                        <img src="@recipe.ImagePath" alt="Tarif Resmi" style="max-width: 100px; max-height: 100px;" />
+                    }
+                    else
+                    {
+                        <span>Resim Yok</span>
+                    }
+                </td>
+                <td>@recipe.RecipeCategory?.Name</td> <!-- RecipeCategory.Name ekrana bastırılıyor -->
+                <td>
+                    <button class="btn btn-warning" onclick="loadEditRecipeForm('@recipe.Id')">Düzenle</button>
+                    <button class="btn btn-danger" onclick="deleteItem('/Tarifler/DeleteRecipe', '@recipe.Id', '/Tarifler/RecipeList', '#recipeList')">Sil</button>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

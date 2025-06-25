@@ -858,7 +858,7 @@ footer {
     .section-1 .pasta-3 {
         width: 45%;
         position: absolute;
-        bottom: 25%;
+        bottom: 75%;
         right: 0;
     }
 
@@ -1020,7 +1020,7 @@ footer {
     /* Section 4 */
 }
 
-@media screen and (min-width: 385px) and (max-width: 1024px) {
+@media screen and (min-width: 360px) and (max-width: 1024px) {
     .section-2 .slide-section {
         position: relative;
         height: 100%;
@@ -1158,10 +1158,10 @@ footer {
     }
 
     .section-1 .pasta-1 {
-        width: 40%;
+        width: 60%;
         position: absolute;
         bottom: 0;
-        left: 45%;
+        left:40%;
     }
 
     .section-1 .pasta-2 {
@@ -1172,9 +1172,9 @@ footer {
     }
 
     .section-1 .pasta-3 {
-        width: 40%;
+        width: 47%;
         position: absolute;
-        bottom: 20%;
+        bottom: 30%;
         right: 0;
     }
 
@@ -1182,15 +1182,15 @@ footer {
         width: 55%;
         position: absolute;
         top: 10%;
-        right: 5%;
+        right: 2%;
         animation: rotation 20s infinite linear;
     }
 
     .section-1 .pasta-5 {
         width: 45%;
         position: absolute;
-        bottom: 30%;
-        right: 30%;
+        bottom: 26%;
+        right: 50%;
     }
 
     .section-4 {

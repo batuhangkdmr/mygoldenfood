@@ -1,0 +1,230 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> localizer
+@model IEnumerable<MyGoldenFood.Models.Benefit>
+
+@{
+    ViewData["Title"] = "Ürünlerin Faydaları | My Golden Food - Dondurulmuş Gıda Ürünleri";
+    Layout = "_Layout";
+}
+
+<!-- SEO Meta Etiketleri -->
+<head>
+    <meta name="description" content="My Golden Food ürünlerinin sağlık üzerindeki faydalarını keşfedin. Dondurulmuş gıdaların sağlıklı, besleyici ve doğal yapısını öğrenin.">
+    <meta name="keywords" content="Dondurulmuş gıda faydaları, My Golden Food ürünleri, sağlıklı dondurulmuş gıda">
+    <meta name="author" content="My Golden Food">
+    <link rel="canonical" href="https://mygoldenfood.com/Faydalari/Index" />
+</head>
+
+<!-- Ana İçerik -->
+<div class="container">
+    <div class="title-container">
+        <h1 class="text-center text-white">@localizer["Faydalari_Ürünlerin Faydaları"]</h1> <!-- SEO için H1 Kullanıldı -->
+    </div>
+
+    <div class="benefit-grid">
+        @foreach (var benefit in Model)
+        {
+            <div class="benefit-card" data-name="@benefit.Name" data-description="@benefit.Content">
+                <div class="image-container">
+                    <img src="@benefit.ImagePath" alt="@benefit.Name | Dondurulmuş Gıda Faydaları" class="benefit-image" loading="lazy">
+                </div>
+                <div class="benefit-name-container">
+                    <h2 class="benefit-name">@benefit.Name</h2> <!-- SEO İçin H2 Başlığı Kullanıldı -->
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="detailsModalLabel"></h2> <!-- SEO için H2 Kullanıldı -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="modal-title-with-line">@localizer["Faydalari_Fayda Detayı:"]</h3> <!-- SEO için H3 Kullanıldı -->
+                <p id="detailsModalDescription"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .content {
+        flex: 1;
+        padding-top: 5%;
+    }
+
+    /* Grid Yapısı */
+    .benefit-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    /* Başlık Konumu */
+    .title-container {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    /* Kart Tasarımı */
+    .benefit-card {
+        overflow: hidden;
+        text-align: center;
+        border-radius: 15px;
+        background-color: rgba(0, 0, 0, 0);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+    /* Görseller */
+    .image-container {
+        width: 100%;
+        height: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000;
+        overflow: hidden;
+        border-radius: 15px;
+    }
+
+    .benefit-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        transition: transform 0.3s ease;
+    }
+
+    .image-container:hover .benefit-image {
+        transform: scale(1.1);
+    }
+
+    /* Fayda Adı */
+    .benefit-name-container {
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0);
+        border-radius: 0 0 15px 15px;
+        color: #fff;
+    }
+
+    .benefit-name {
+        margin: 0;
+        font-size: 1.2rem;
+        color: #fff;
+    }
+
+    /* 🔥 Modal Yapısı (Açılır Pencere) */
+    .modal-content {
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        transform: scale(0.7);
+        transition: transform 0.3s ease-out;
+    }
+
+    .modal.show .modal-content {
+        transform: scale(1);
+    }
+
+    /* Başlık Stili */
+    .modal-title-with-line {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 10px;
+        font-size: 1.2rem;
+        color: #FFD700;
+        margin-bottom: 15px;
+    }
+
+        .modal-title-with-line::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+    /* 📌 Mobil Görünüm İyileştirmesi */
+    @@media (max-width: 768px) {
+        .title-container
+
+    {
+        margin-top: 7pc;
+    }
+
+    h2.text-center {
+        font-size: 2rem;
+    }
+
+    .benefit-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .image-container {
+        height: 180px;
+    }
+
+    .modal-body p {
+        font-size: 1rem;
+        line-height: 1.6;
+        text-align: left;
+        white-space: pre-line;
+        margin-bottom: 10px;
+    }
+
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".benefit-card").forEach(card => {
+            card.addEventListener("click", function () {
+                let name = this.getAttribute("data-name");
+                let description = this.getAttribute("data-description");
+
+                if (!name || !description) {
+                    alert("Fayda detayları eksik!");
+                    return;
+                }
+
+                document.getElementById('detailsModalLabel').textContent = name;
+                document.getElementById('detailsModalDescription').innerHTML = description.replace(/\n/g, "<br>");
+
+                var modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+                modal.show();
+            });
+        });
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/faydalariHub")
+        .build();
+
+    connection.start().then(() => {
+        console.log("✔ FaydalariHub bağlantısı başarılı");
+    }).catch(err => console.error("Bağlantı hatası:", err));
+
+    connection.on("BenefitUpdated", function () {
+        console.log("🔄 BenefitUpdated tetiklendi, sayfa yenileniyor...");
+        location.reload(); // ✅ Otomatik yenile
+    });
+</script>

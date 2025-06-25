@@ -1,0 +1,115 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> localizer
+
+<footer class="text-white about-footer">
+    <div class="container-fluid">
+        <section class="footer-1">
+            <div class="row align-items-center text-center">
+                <!-- Logo Alanı (Ortalanmış ve Mobil Uyumu) -->
+                <div class="col-lg-6 col-md-6 col-12 mb-4 mb-md-0 p-4">
+                    <div class="footer-logo d-flex justify-content-center align-items-center flex-wrap">
+                        <!-- Mevcut Logo -->
+                        <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_500/v1738687955/logo-moonL%C4%B1fe_x0pksr.jpg"
+                             alt="My Golden Food - Dondurulmuş Gıda ve Tatlı Çeşitleri"
+                             class="footer-img img-fluid rounded mx-2"
+                             loading="lazy">
+                        <!-- Yeni Eklenen Logo -->
+                        <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_500/v1743864409/contact1_e7yiqh.png"
+                             alt="Eklenen Logo"
+                             class="footer-img img-fluid rounded mx-2"
+                             loading="lazy">
+                    </div>
+                </div>
+
+                <!-- Adres ve Sosyal Medya Alanı -->
+                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-0 p-4">
+                    <h5 class="text-uppercase">@localizer["Footer_Adres"]</h5>
+                    <p>MY GOLDEN FOOD GIDA SAN.TİC A.Ş. Türkiye/Ankara</p>
+
+                    <div class="mb-4">
+                        <a class="btn btn-dark btn-floating m-1" href="https://www.facebook.com/mygoldenfood" target="_blank" role="button" rel="noopener noreferrer">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="btn btn-dark btn-floating m-1" href="https://twitter.com/mygoldenfood" target="_blank" role="button" rel="noopener noreferrer">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="btn btn-dark btn-floating m-1" href="https://www.linkedin.com/company/mygoldenfood" target="_blank" role="button" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a class="btn btn-dark btn-floating m-1" href="https://www.instagram.com/mygoldenfood" target="_blank" role="button" rel="noopener noreferrer">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- İletişim Bilgileri -->
+                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-5 p-4">
+                    <h5 class="text-uppercase">@localizer["Iletisim_İletişim"]</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="#" class="text-white">Gökhan GÖKDEMİR</a>
+                        </li>
+                        <li>
+                            <a href="tel:+90 533 635 24 58" class="text-white">T: +90 533 635 24 58</a>
+                        </li>
+                        <li>
+                            <a href="mailto:gokhangokdemir@mygoldenfood.com" class="text-white">gokhangokdemir@mygoldenfood.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Copyright Alanı -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2025 Copyright
+        <a class="text-white" href="https://mygoldenfood.com">My Golden Food</a>
+    </div>
+</footer>
+
+<!-- Mobilde Logoları Alt Alta Getiren CSS -->
+<style>
+    @@media (max-width: 768px) {
+        .footer-logo
+
+    {
+        flex-direction: column !important; /* Mobilde alt alta gelsin */
+    }
+
+    .footer-logo img {
+        width: 80% !important; /* Mobilde boyutunu küçült */
+        margin-bottom: 10px; /* Alt boşluk ekleyelim */
+    }
+
+    }
+</style>
+
+<!-- SEO İçin Yapısal Veri -->
+<script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "LocalBusiness",
+      "name": "My Golden Food",
+      "url": "https://mygoldenfood.com/",
+      "logo": "https://res.cloudinary.com/dbhogeepn/image/upload/v1738687955/logo-moonL%C4%B1fe_x0pksr.jpg",
+      "description": "Dondurulmuş gıda, meyve ve tatlı çeşitleriyle en taze lezzetleri keşfedin. Sağlıklı ve doğal ürünler My Golden Food'da!",
+      "address": {
+        "@@type": "PostalAddress",
+        "streetAddress": "MY GOLDEN FOOD GIDA SAN.TİC A.Ş.",
+        "addressLocality": "Ankara",
+        "addressCountry": "TR"
+      },
+      "contactPoint": {
+        "@@type": "ContactPoint",
+        "telephone": "+90 533 635 24 58",
+        "contactType": "customer service"
+      },
+      "sameAs": [
+        "https://www.facebook.com/mygoldenfood",
+        "https://www.instagram.com/mygoldenfood",
+        "https://twitter.com/mygoldenfood",
+        "https://www.linkedin.com/company/mygoldenfood"
+      ]
+    }
+</script>

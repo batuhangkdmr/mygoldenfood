@@ -15,7 +15,7 @@ using MyGoldenFood.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// **Localization (Çoklu Dil) Servisini Ekle**
+// **Localization (Çoklu Dil) Servisini Ekledim**
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
 // **Desteklenen Kültürler (Diller)**
