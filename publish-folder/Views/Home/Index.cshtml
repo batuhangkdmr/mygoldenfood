@@ -1,0 +1,358 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> localizer
+
+
+
+<div id="index" class="capa">
+    <span class="ro-text">
+        <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1738684104/paylasilamayan-lezzet_s42zgv.png" alt="Paylaşılamayan Lezzet">
+    </span>
+    <span class="fixed-icon">
+        <a href="#urunler">
+            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/v1738684150/ok_fl4goj.png" alt="Aşağı İkonu">
+        </a>
+    </span>
+</div>
+
+<div id="index" class="capa">
+    <span class="ro-text">
+        <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_600/paylasilamayan-lezzet_s42zgv.png"
+             alt="Paylaşılamayan Lezzet"
+             loading="lazy"
+             width="600" height="auto">
+    </span>
+    <span class="fixed-icon">
+        <a href="#urunler">
+            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_100/ok_fl4goj.png"
+                 alt="Aşağı İkonu"
+                 loading="lazy"
+                 width="100" height="auto">
+        </a>
+    </span>
+</div>
+
+<section class="section-1">
+    <div class="metin-1 animate__animated animate__fadeInDown animate__slow animate__delay-1s">
+        <p>@localizer["Home_SİTEMİZ"]</p>
+        <p>@localizer["Home_YAPIM"]</p>
+        <p>@localizer["Home_AŞAMASINDADIR"]</p>
+    </div>
+
+    <div class="kahve-1 animate__animated animate__fadeInUp animate__slow">
+        <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_400/v1738684197/img-507_y6sjv2.png" alt="Ay görseli"
+             alt="Mantar Görseli"
+             loading="lazy"
+             width="600" height="auto" />
+    </div>
+    <div class="yaprak-1 animate__animated animate__fadeInDown animate__slow">
+        <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_400/v1738684255/moon9_w9pw6h.png" alt="Kiraz"
+             alt="Kiraz"
+             loading="lazy"
+             width="400" height="auto" />
+    </div>
+    <div class="pasta-1 animate__animated animate__rotateIn animate__slow">
+        <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_400/v1743859767/mygolden_foood_a25y69.png" alt="mygoldenfood"
+             alt="mygoldenfood"
+             loading="lazy"
+             width="400" height="auto" />
+    </div>
+    <div class="pasta-3 animate__animated animate__fadeInUp animate__slow">
+        <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_400/v1743854645/img-514-min_11zon_lbahma.png" alt="Böğürtlen"
+             alt="Böğürtlen"
+             loading="lazy"
+             width="400" height="auto" />
+    </div>
+    <div class="pasta-4">
+        <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_400/v1738684924/baton-bogurtlen1_pkmsfc.png" alt="Baton Böğürtlen"
+             alt="Baton Böğürtlen"
+             loading="lazy"
+             width="400" height="auto" />
+    </div>
+    <div class="pasta-5 animate__animated animate__rotateIn animate__slow">
+        <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_400/v1738684957/img-500_mpnue3.png" alt="Pastalar"
+             alt="Pastalar"
+             loading="lazy"
+             width="400" height="auto" />
+    </div>
+</section>
+
+
+
+
+<section class="section-2">
+    <div class="space-holder">
+        <div class="sticky">
+            <div class="horizontal-section">
+                <section role="feed" class="slide-section">
+
+                    <!-- Slide 1 -->
+                    <article id="slide-1" class="slide">
+                        <img class="kup"
+                             src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_600/bogurtlen-2_yzdoxd.png"
+                             alt="Böğürtlen"
+                             loading="lazy"
+                             width="600" height="auto">
+                        <span class="kup-baslik">@localizer["Home_Böğürtlen"]</span>
+                        <span class="kup-icerik"></span>
+
+                        <!-- Yaprak Görselleri -->
+                        <div class="yaprak1 yaprak-img">
+                            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_300/bogurtlen12_p0ydgh.png"
+                                 alt="Ahududu"
+                                 loading="lazy"
+                                 width="300" height="auto">
+                        </div>
+                        <div class="yaprak2 yaprak-img">
+                            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_300/bogurtlen12_p0ydgh.png"
+                                 alt="Ahududu"
+                                 loading="lazy"
+                                 width="300" height="auto">
+                        </div>
+                    </article>
+
+                    <!-- Slide 2 -->
+                    <article id="slide-2" class="slide">
+                        <img class="kup"
+                             src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_600/strawberry-1_tcnfcy.png"
+                             alt="Çilek"
+                             loading="lazy"
+                             width="600" height="auto">
+                        <span class="kup-baslik">@localizer["Home_Çilek"]</span>
+                        @* <span class="kup-icon">
+                            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_100/ok-ikon_jvppvl.png" alt="Ok İkonu" loading="lazy">
+                        </span> *@
+                    </article>
+
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section-4">
+    <div class="metin-3">
+        <p>MOON LIFE</p>
+        <p>ICE LIVE</p>
+    </div>
+
+    <div class="pasta-1">
+        <div class="pasta">
+            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_600/meyveli-pasta_d6u4ye.png"
+                 alt="Meyveli Pasta"
+                 loading="lazy"
+                 width="600" height="auto">
+        </div>
+        <div class="baslik">
+            <p>@localizer["Home_Çilek"]</p>
+            <p>@localizer["Home_Ahududu"]</p>
+            <p>@localizer["Home_Böğürtlen"]</p>
+            <p>@localizer["Home_Yaban mersini"]</p>
+        </div>
+    </div>
+
+    <div class="pasta-2">
+        <div class="pasta">
+            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_600/meyveli-turta_ekskkb.png"
+                 alt="Meyveli Turta"
+                 loading="lazy"
+                 width="600" height="auto">
+        </div>
+        <div class="baslik">
+            <p>@localizer["Home_Limonlu Tart"]</p>
+            <p>@localizer["Home_Ahududu ve Böğürtlen"]</p>
+        </div>
+    </div>
+
+    @* İstenirse yeniden aktif edilebilir şekilde yorumda tutuldu *@
+    @* <div class="pasta-3">
+        <div class="pasta">
+            <img 
+                src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_600/moon-yaspasta-min_jsxzam.png" 
+                alt="Moon Yaş Pasta"
+                loading="lazy"
+                width="600" height="auto"
+            >
+        </div>
+        <div class="baslik">
+            <p>LEZZET</p>
+        </div>
+    </div> *@
+
+    <div class="metin-4">
+        <p>@localizer["Home_TAZE"]</p>
+        <p>@localizer["Home_KULLANIŞLI"]</p>
+        <p>@localizer["Home_GÜVENİLİR"]</p>
+    </div>
+</section>
+<section id="urunler" class="section-5">
+    <div class="space-holder">
+        <div class="sticky">
+            <div class="horizontal">
+                <section role="feed" class="cards">
+
+                    <article class="sample-card">
+                        <h2>🌿 Doğadan Gelen Yeşilik</h2>
+                        <div class="kategori-gorsel">
+                            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_500/img-512_qctdaz.png"
+                                 width="250" height="400"
+                                 loading="lazy"
+                                 alt="DONDURULMUŞ TAZELİĞİN EN İYİSİ">
+                        </div>
+                        <div class="kategori-urunler">
+                            <ul>
+                                <li>🧊 Şok dondurma yöntemiyle tüm vitamin ve mineraller korunur.</li>
+                                <li>💪 Sabah enerjiniz, ara öğün desteğiniz ya da sağlıklı tarifleriniz için mükemmel bir seçim!</li>
+                                <li>🍃 Katkısız, koruyucusuz, sadece doğanın kendisi!</li>
+                                <li>Her yudumda tazeliği hissedin. Doğal beslenmenin keyfini çıkarın!</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="sample-card">
+                        <h2>🎂 Tatlı Kutlamalar İçin</h2>
+                        <div class="kategori-gorsel">
+                            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_500/moon6-min-min_q9napq.png"
+                                 width="250" height="400"
+                                 loading="lazy"
+                                 alt="Dondurulmuş Meyvelerle Limonlu Kek">
+                        </div>
+                        <div class="kategori-urunler">
+                            <ul>
+                                <li>Her dilimde mutluluk, her lokmada kutlama!</li>
+                                <li>🧊 Şok dondurma yöntemiyle tazeliğini uzun süre korur.</li>
+                                <li>🍒 Vişne aromalı kremasıyla hem çocukların hem büyüklerin favorisi!</li>
+                                <li>✨ Renkli süslemeleriyle pastanın yıldızı siz olun.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="sample-card">
+                        <h2>🫐 Doğadan Renkler</h2>
+                        <div class="kategori-gorsel">
+                            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_500/img16_upc2dg.png"
+                                 width="250" height="400"
+                                 loading="lazy"
+                                 alt="Dondurulmuş Meyveyle Zenginleştirilmiş Ekler">
+                        </div>
+                        <div class="kategori-urunler">
+                            <ul>
+                                <li>
+                                    Doğanın renkleri sofranıza taşınıyor!
+                                </li>
+                                <li>🧊 Her bir meyve, mevsiminde toplanıp şoklanarak tüm tazeliğini korur.</li>
+                                <li>🎨 Estetik sunumlar, doğal tatlar ve yüksek besin değeri bir arada.</li>
+                                <li>🍇 Tatlılarınıza sadece lezzet değil, aynı zamanda renk de katın.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="sample-card">
+                        <h2>
+                            💍 En Özel Günlere
+                        </h2>
+                        <div class="kategori-gorsel">
+                            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_500/pasta-1551-min_csmro1.png"
+                                 width="250" height="400"
+                                 loading="lazy"
+                                 alt="Dondurulmuş Meyvelerle Çikolata Pastası">
+                        </div>
+                        <div class="kategori-urunler">
+                            <ul>
+                                <li> Unutulmaz anlara taptaze bir lezzet katın.
+                                             Her lokmada doğa, her dilimde sevgi!
+                                </li>
+                                <li>🌿 Doğadan gelen meyvelerle hazırlanmış, tamamen katkısız ve doğal.</li>
+                                <li>🧊 Özenle dondurularak meyvelerin tüm aroması ve tazeliği korunur.</li>
+                                <li>🌸 Romantik bir görünüm, lezzetli bir dokunuş!</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="sample-card">
+                        <h2>🍍 Dondurulmuş Tropik</h2>
+                        <div class="kategori-gorsel">
+                            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_500/v1743861743/ananas_saydam_yx0uq7.png"
+                                 width="250" height="400"
+                                 loading="lazy"
+                                 alt="Dondurulmuş Meyvelerle Çikolata Şöleni">
+                        </div>
+                        <div class="kategori-urunler">
+                            <ul>
+                                <li>
+                                    En lezzetli haliyle hasat edilen ananaslarımız,
+                                    anında şoklanarak doğal tat, koku ve vitaminiyle korunur.
+                                </li>
+                                <li>🧊 Mevsim beklemeden tropik bir tat arayanlara!</li>
+                                <li>🍍 Smoothie, tatlı, salata ya da sağlıklı atıştırmalıklar için ideal.</li>
+                                <li>💛 Katkısız, dilimlenmiş ve kullanıma hazır dondurulmuş ananaslar.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="sample-card">
+                        <h2>🍓 Enerji Dolu Lezzetler</h2>
+                        <div class="kategori-gorsel">
+                            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_500/img-513_lxxbvk.jpg"
+                                 width="250" height="400"
+                                 loading="lazy"
+                                 alt="Dondurulmuş Meyvelerle Çikolata Keyfi">
+                        </div>
+                        <div class="kategori-urunler">
+                            <ul>
+                                <li>En sevilen dondurulmuş meyvelerimiz;
+                                      çilek, muz, böğürtlen ve yaban mersiniyle hazırlanan bu karışım,
+                                      sana enerjiyi, doğallığı ve tazeliği aynı anda sunar!</li>
+                                <li>🧊 Taptaze toplanır, vitamin ve mineral değeri korunarak anında dondurulur.</li>
+                                <li>🥤 Smoothie, bowl ya da sağlıklı ara öğünler için mükemmel bir temel.</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="sample-card">
+                        <h2>🍄 Dondurulmuş Mantar</h2>
+                        <div class="kategori-gorsel">
+                            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_500/v1743862249/mashroom2_11zon_jcmeaw.png"
+                                 width="250" height="400"
+                                 loading="lazy"
+                                 alt="Dondurulmuş Meyvelerle Çikolata Keyfi">
+                        </div>
+                        <div class="kategori-urunler">
+                            <ul>
+                                <li>
+                                    Mevsiminde toplanan en taze mantarlar,
+                                    doğal yapısı korunarak şoklanır ve sofralarınıza taşınır.
+                                </li>
+                                <li>👨‍🍳 Çorbalardan sotelere, pizzadan makarnalara kadar her tarife hazır.</li>
+                                <li>⏱️ Hazırlaması kolay, pişirmesi pratik!</li>
+                                <li>Doğadan gelen tazelikle yemeklerinize fark katın!</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="sample-card">
+                        <h2>
+                            🥦 Brokolinin Taze Gücü
+
+                        </h2>
+                        <div class="kategori-gorsel">
+                            <img src="https://res.cloudinary.com/dbhogeepn/image/upload/f_auto,q_70,w_500/v1743862232/brokoli_1_bua9zd.png"
+                                 width="250" height="400"
+                                 loading="lazy"
+                                 alt="Dondurulmuş Meyvelerle Çikolata Keyfi">
+                        </div>
+                        <div class="kategori-urunler">
+                            <ul>
+                                <li>🧊 Şok dondurma teknolojisiyle vitaminler korunur.</li>
+                                <li>💪 Bağışıklık dostu, lif ve C vitamini deposu.</li>
+                                <li>👩‍🍳 Buharda, fırında ya da sote... Her haliyle sofralarınızda!</li>
+                                <li>
+                                    Her pakette doğanın taptaze gücü!
+                                    Sağlıklı yaşam, dondurulmuşla artık çok daha kolay.
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>

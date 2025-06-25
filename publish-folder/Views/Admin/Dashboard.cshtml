@@ -1,0 +1,250 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container mt-4">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <!-- Tablar -->
+    <ul class="nav nav-tabs" id="adminTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products" type="button" role="tab" aria-controls="products" aria-selected="true">Ürünler</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="recipes-tab" data-bs-toggle="tab" data-bs-target="#recipes" type="button" role="tab" aria-controls="recipes" aria-selected="false">Tarifler</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="benefits-tab" data-bs-toggle="tab" data-bs-target="#benefits" type="button" role="tab" aria-controls="benefits" aria-selected="false">Faydalar</button>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-4" id="adminTabsContent">
+        <!-- Ürünler Tab -->
+        <div class="tab-pane fade show active" id="products" role="tabpanel" aria-labelledby="products-tab">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Ürün Yönetimi</h2>
+                <button class="btn btn-primary" onclick="loadCreateForm('/Product/Create')">Yeni Ürün Ekle</button>
+            </div>
+            <div id="productList" class="mt-4"></div>
+        </div>
+
+        <!-- Tarifler Tab -->
+        <div class="tab-pane fade" id="recipes" role="tabpanel" aria-labelledby="recipes-tab">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Tarif Yönetimi</h2>
+                <button class="btn btn-primary" onclick="loadCreateForm('/Tarifler/Create')">Yeni Tarif Ekle</button>
+            </div>
+            <div id="recipeList" class="mt-4"></div>
+        </div>
+
+        <!-- Faydalar Tab -->
+        <div class="tab-pane fade" id="benefits" role="tabpanel" aria-labelledby="benefits-tab">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Fayda Yönetimi</h2>
+                <button class="btn btn-primary" onclick="loadCreateForm('/Faydalari/Create')">Yeni Fayda Ekle</button>
+            </div>
+            <div id="benefitList" class="mt-4"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Yapısı -->
+<div id="modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            loadList('/Product/ProductList', '#productList');
+            loadList('/Tarifler/RecipeList', '#recipeList');
+            loadList('/Faydalari/BenefitList', '#benefitList');
+        });
+
+        function loadList(url, containerId) {
+            $.get(url, function (data) {
+                $(containerId).html(data);
+            });
+        }
+            $(document).ready(function () {
+            loadList('/Tarifler/RecipeList', '#recipeList');
+        }); 
+
+        function loadCreateForm(url) {
+            $.get(url, function (data) {
+                $("#modal .modal-content").html(data);
+                $("#modal").modal('show');
+            });
+        }
+
+        function loadEditForm(url) {
+            $.get(url, function (data) {
+                $("#modal .modal-content").html(data);
+                $("#modal").modal('show');
+            });
+        }
+         function loadEditRecipeForm(id) {
+            const url = `/Tarifler/Edit?id=${id}`;
+            $.get(url, function (data) {
+                $("#modal .modal-content").html(data);
+                $("#modal").modal('show');
+            }).fail(function () {
+                Swal.fire('Hata!', 'Tarif düzenleme yüklenemedi!', 'error');
+            });
+        }
+
+
+        function deleteItem(url, id, reloadUrl, containerId) {
+            Swal.fire({
+                title: 'Emin misiniz?',
+                text: "Bu öğeyi silmek istediğinizden emin misiniz?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet, Sil!',
+                cancelButtonText: 'İptal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post(url, { id: id }, function (response) {
+                        if (response.success) {
+                            Swal.fire('Silindi!', response.message, 'success');
+                            loadList(reloadUrl, containerId);
+                        } else {
+                            Swal.fire('Hata!', response.message, 'error');
+                        }
+                    });
+                }
+            });
+        }
+                function deleteBenefit(id) {
+            Swal.fire({
+                title: "Emin misiniz?",
+                text: "Bu faydayı ve tüm çevirilerini silmek istediğinizden emin misiniz?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Evet, Sil!",
+                cancelButtonText: "İptal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "/Faydalari/DeleteBenefit",
+                        type: "POST",
+                        data: { id: id },
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire("Silindi!", response.message, "success");
+                                location.reload(); // Sayfayı yenileyerek listeyi güncelle
+                            } else {
+                                Swal.fire("Hata!", response.message, "error");
+                            }
+                        },
+                        error: function () {
+                            Swal.fire("Hata!", "Fayda silinirken bir hata oluştu.", "error");
+                        }
+                    });
+                }
+            });
+        }
+             function loadEditBenefitForm(id) {
+            console.log("Güncelleme butonuna tıklandı, ID:", id); // Debugging için
+            $.ajax({
+                url: "/Faydalari/Edit", // Controller'daki Edit GET metoduna gider
+                type: "GET",
+                data: { id: id },
+                success: function (response) {
+                    $("#modal .modal-content").html(response);
+                    $("#modal").modal("show");
+                },
+                error: function () {
+                    Swal.fire("Hata!", "Düzenleme ekranı yüklenirken bir hata oluştu.", "error");
+                }
+            });
+        }
+
+        function submitEditBenefitForm() {
+            var formData = new FormData($("#editBenefitForm")[0]);
+
+            $.ajax({
+                url: "/Faydalari/Edit",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire("Başarılı", response.message, "success");
+                        $("#modal").modal("hide");
+                        location.reload();
+                    } else {
+                        Swal.fire("Hata!", response.message, "error");
+                    }
+                },
+                error: function () {
+                    Swal.fire("Hata!", "Bir hata oluştu!", "error");
+                }
+            });
+        }
+              function loadEditRecipeForm(id) {  // değişecek
+            console.log("Tarif Güncelleme butonuna tıklandı, ID:", id); // Debugging için
+            $.ajax({
+                url: "/Tarifler/Edit", // Controller'daki GET Edit metoduna gider
+                type: "GET",
+                data: { id: id },
+                success: function (response) {
+                    $("#modal .modal-content").html(response);
+                    $("#modal").modal("show");
+                },
+                error: function () {
+                    Swal.fire("Hata!", "Düzenleme ekranı yüklenirken bir hata oluştu.", "error");
+                }
+            });
+        }
+
+        function submitEditRecipeForm() {
+            var formData = new FormData($("#editRecipeForm")[0]);
+
+            $.ajax({
+                url: "/Tarifler/Edit",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire("Başarılı", response.message, "success");
+                        $("#modal").modal("hide");
+                        location.reload();
+                    } else {
+                        Swal.fire("Hata!", response.message, "error");
+                    }
+                },
+                error: function () {
+                    Swal.fire("Hata!", "Bir hata oluştu!", "error");
+                }
+            });
+        }
+            const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/productHub")
+            .build();
+
+        connection.start()
+            .then(() => console.log("✅ SignalR bağlantısı başarılı"))
+            .catch(err => console.error("❌ SignalR bağlantı hatası:", err));
+
+        connection.on("ProductUpdated", function () {
+            console.log("🔄 Admin panel: Ürünler güncellendi");
+            location.reload(); // Admin panel sayfasını otomatik yenile
+        });
+    </script>
+}
